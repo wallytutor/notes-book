@@ -1,0 +1,1041 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Julia 101 &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia/julia101';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Introduction to Julia" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/mpc/intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Introduction to Julia</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Julia 101</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fjulia/julia101.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/julia/julia101.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Julia 101</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repl-basics">REPL basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-as-a-calculator">Julia as a calculator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-matrices">Vectors and matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-text">Representing text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-and-dictionaries">Tuples and dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-function">A first function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-modules">Using modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-python">Calling Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-things-to-learn">Other things to learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pluto-environment">Pluto environment</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="julia-101">
+<h1>Julia 101<a class="headerlink" href="#julia-101" title="Link to this heading">#</a></h1>
+<p>Welcome to Julia 101! Julia from zero to hero (for Scientific Computing)!</p>
+<p><strong>Important:</strong> the following course may assume you are using a redistributable version of Julia packaged as described <a class="reference external" href="https://github.com/wallytutor/julia101/tree/main">here</a>. This might be useful for instructors willing to work without internet access.</p>
+<p>In this first course you will be introduced to the <a class="reference external" href="https://julialang.org/">Julia programming languange</a>. By the end of the working session (~4h) you will be able to:</p>
+<ul class="simple">
+<li><p>understand what is Julia and its context of usage for Scientific Computing</p></li>
+<li><p>the difference between an interpreted and a compiled programming language</p></li>
+<li><p>use Julia as a calculator and program some simple functions</p></li>
+<li><p>read tabular data, perform some basic operations, and plot results</p></li>
+<li><p>learn the path towards searching information and package documentation</p></li>
+</ul>
+<p>Our goal in this course is not to master Julia or even pretend you have learned it; we will open the gates so that you can go out there and solve problems by yourself (or maybe open Pandora’s box…).</p>
+<p>This is probably your first time learning Julia. If you got here by other means than the main index, please consider reading the introduction of this document. Next, you can launch a terminal and try running Julia by simply typing <code class="docutils literal notranslate"><span class="pre">julia</span></code> and pressing return. For this introductory course I assume you are using <a class="reference external" href="https://code.visualstudio.com/">VS Code</a> for which you might also wish to install the recommended extensions.</p>
+<section id="repl-basics">
+<h2>REPL basics<a class="headerlink" href="#repl-basics" title="Link to this heading">#</a></h2>
+<p>Julia’s REPL (read-eval-print loop) is an interactive environment where you execute code as you write. It’s main goal is to manage Julia, test code snippets, get help, and launch larger chunks of code.</p>
+<p>To enter the package manager mode press <code class="docutils literal notranslate"><span class="pre">]</span></code>m to get help for a function or module press <code class="docutils literal notranslate"><span class="pre">?</span></code>. Shell mode (system dependent) is accessed through <code class="docutils literal notranslate"><span class="pre">;</span></code>, but you are discouraged to do so here. To get back to Julia interpreted simply press backspace.</p>
+<ul class="simple">
+<li><p>Below we inspect the status of our environment from the package manager:</p></li>
+</ul>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="go">(101) pkg&gt; status</span>
+<span class="go">Status `D:\julia101\src\101\Project.toml`</span>
+<span class="go">  [13f3f980] CairoMakie v0.12.16</span>
+<span class="go">  [a93c6f00] DataFrames v1.7.0</span>
+<span class="go">  [c3e4b0f8] Pluto v0.20.3</span>
+<span class="go">  [6099a3de] PythonCall v0.9.23</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In help mode you can check how to use the <code class="docutils literal notranslate"><span class="pre">methods</span></code> function:</p></li>
+</ul>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">help?&gt;</span> methods
+<span class="go">search: methods Method methodswith hasmethod</span>
+
+<span class="go">  methods(f, [types], [module])</span>
+
+<span class="go">  Return the method table for f.</span>
+
+<span class="go">  If types is specified, return an array of methods whose types match. If module is specified, return an</span>
+<span class="go">  array of methods defined in that module. A list of modules can also be specified as an array.</span>
+
+<span class="go">  │ Julia 1.4</span>
+<span class="go">  │</span>
+<span class="go">  │  At least Julia 1.4 is required for specifying a module.</span>
+
+<span class="go">  See also: which, @which and methodswith.</span>
+</pre></div>
+</div>
+<p>Try by yourself and run <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">Polynomials</span></code> from package manager mode (we will need it later); what do you get if you check the <code class="docutils literal notranslate"><span class="pre">status</span></code> again?</p>
+</section>
+<section id="julia-as-a-calculator">
+<h2>Julia as a calculator<a class="headerlink" href="#julia-as-a-calculator" title="Link to this heading">#</a></h2>
+<p>The following example should speak by itself:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="go">2</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span>
+<span class="go">6</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span>
+<span class="go">0.75</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">4</span>
+<span class="go">3//4</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">3</span><span class="o">^</span><span class="mi">3</span>
+<span class="go">27</span>
+</pre></div>
+</div>
+<p>The representation of numbers in the computer is not perfect and round-off may be a problem in some cases. The most common numeric types in Julia are illustrated below with help of <code class="docutils literal notranslate"><span class="pre">typeof</span></code>.</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Int64</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">Float64</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">Float64</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="mi">3</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">Rational{Int64}</span>
+</pre></div>
+</div>
+<p>Being a language conceived for numerical purposes, Julia has built-in support to complex numbers:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span>
+<span class="go">1 + 1im</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<span class="go">Complex{Int64}</span>
+</pre></div>
+</div>
+<p>Some transcendental constants are also available:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="nb">pi</span>
+<span class="go">π = 3.1415926535897...</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="nb">π</span>
+<span class="go">π = 3.1415926535897...</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="nb">pi</span><span class="p">)</span>
+<span class="go">Irrational{:π}</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">MathConstants</span><span class="o">.</span>
+
+<span class="go">catalan     e           eulergamma</span>
+<span class="go">eval        golden      include</span>
+<span class="go">pi          γ           π</span>
+<span class="go">φ           ℯ</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">MathConstants</span><span class="o">.</span><span class="n">e</span>
+<span class="go">ℯ = 2.7182818284590...</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">MathConstants</span><span class="p">)</span>
+<span class="go">10-element Vector{Symbol}:</span>
+<span class="go"> :MathConstants</span>
+<span class="go"> :catalan</span>
+<span class="go"> :e</span>
+<span class="go"> :eulergamma</span>
+<span class="go"> :golden</span>
+<span class="go"> :pi</span>
+<span class="go"> :γ</span>
+<span class="go"> :π</span>
+<span class="go"> :φ</span>
+<span class="go"> :ℯ</span>
+</pre></div>
+</div>
+<p>In some cases type conversion is handled automatically:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2.0</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+<p>Trigonometric functions are also supported:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">1.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">6.123233995736766e-17</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">tan</span><span class="p">(</span><span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">1.633123935319537e16</span>
+</pre></div>
+</div>
+<p>And also inverse trigonometric functions:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">asin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">acos</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1.5707963267948966</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="nb">Inf</span><span class="p">)</span>
+<span class="go">1.5707963267948966</span>
+</pre></div>
+</div>
+<p>Hyperbolic functions are not surprisingly built-in:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sinh</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1.1752011936438014</span>
+</pre></div>
+</div>
+<p>Because of how floating point representation works, one must take care when performing equality comparisons:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">acos</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">true</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">√</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="go">false</span>
+</pre></div>
+</div>
+<p>Testing for <em>approximately equal</em> is a better practice here:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="o">√</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="go">true</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">isapprox</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="o">√</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="go">true</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">isapprox</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="o">√</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">atol</span><span class="o">=</span><span class="mf">1.0e-16</span><span class="p">)</span>
+<span class="go">false</span>
+</pre></div>
+</div>
+<p>The smallest number you can <em>add to 1 and get a different result</em> is often called the <a class="reference external" href="https://en.wikipedia.org/wiki/Machine_epsilon">machine epsilon</a> (although there are more formal definitions). It is a direct consequence of floating point representation and is somewhat related to the above:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">1.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="p">()</span>
+<span class="go">1.0000000000000002</span>
+</pre></div>
+</div>
+</section>
+<section id="vectors-and-matrices">
+<h2>Vectors and matrices<a class="headerlink" href="#vectors-and-matrices" title="Link to this heading">#</a></h2>
+<p>Let’s start once again with no words:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<span class="go">2-element Vector{Int64}:</span>
+<span class="go"> 5</span>
+<span class="go"> 6</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span><span class="w"> </span><span class="mf">3.0</span><span class="w"> </span><span class="mf">4.0</span><span class="p">]</span>
+<span class="go">2×2 Matrix{Float64}:</span>
+<span class="go"> 1.0  2.0</span>
+<span class="go"> 3.0  4.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">b</span>
+<span class="go">2-element Vector{Float64}:</span>
+<span class="go"> -3.9999999999999987</span>
+<span class="go">  4.499999999999999</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">b</span>
+<span class="go">true</span>
+</pre></div>
+</div>
+<p>If you try to perform vector-vector multiplication you get an error:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<span class="gr">ERROR: MethodError: no method matching *(::Vector{Int64}, ::Vector{Int64})</span>
+<span class="gr">The function `*` exists, but no method is defined for this combination of argument types.</span>
+</pre></div>
+</div>
+<p>That should be obvious because multiplying a pair of row-vectors makes no sense (in Python NumPy would allow that mathematical horror); in Julia we make things more formally by transposing the first vector to get a column-row pair:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<span class="go">61</span>
+</pre></div>
+</div>
+<p>Element-wise multiplication can also be achieved with <code class="docutils literal notranslate"><span class="pre">.*</span></code> (same is valid for other operators):</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">b</span>
+<span class="go">2-element Vector{Int64}:</span>
+<span class="go"> 25</span>
+<span class="go"> 36</span>
+</pre></div>
+</div>
+<p>There are a few ways to create equally spaced vectors that might be useful:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mf">1.0</span><span class="o">:</span><span class="mi">100</span>
+<span class="go">0.0:1.0:100.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mf">1.0</span><span class="o">:</span><span class="mi">100</span><span class="p">)</span><span class="o">&#39;</span>
+<span class="go">1×101 adjoint(::Vector{Float64}) with eltype Float64:</span>
+<span class="go"> 0.0  1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0  10.0  …  93.0  94.0  95.0  96.0  97.0  98.0  99.0  100.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">)</span>
+<span class="go">101-element LinRange{Float64, Int64}:</span>
+<span class="go"> 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, …, 93.0, 94.0, 95.0, 96.0, 97.0, 98.0, 99.0, 100.0</span>
+</pre></div>
+</div>
+</section>
+<section id="representing-text">
+<h2>Representing text<a class="headerlink" href="#representing-text" title="Link to this heading">#</a></h2>
+<p>The uninformed think the numerical people need not to know how to manipulate text; that is completely wrong. An important amount of time in the conception of a simulation code or data analysis is simply <em>string</em> manipulation.</p>
+<p>In Julia we use double quotes to enclose strings and single quotes for characters. Let’s see a few examples:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="s">&quot;Some text here&quot;</span>
+<span class="go">&quot;Some text here&quot;</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Some text here&quot;</span><span class="p">)</span>
+<span class="go">Some text here</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Some text here&quot;</span><span class="p">)</span>
+<span class="go">Some text here</span>
+<span class="gp">julia&gt;</span>
+</pre></div>
+</div>
+<p>During a calculation, to write the value of a variable to the standard output one might do the following:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.3</span>
+<span class="go">2.3</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;The value of x = </span><span class="si">$</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="go">The value of x = 2.3</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="nd">@info</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="w">      </span><span class="s">       Strings may be composed of several lines!</span>
+
+<span class="go">             You can also display the value of x = $(x)</span>
+<span class="go">             &quot;&quot;&quot;)</span>
+<span class="go">┌ Info: Strings may be composed of several lines!</span>
+<span class="go">│</span>
+<span class="go">└ You can also display the value of x = 2.3</span>
+</pre></div>
+</div>
+</section>
+<section id="tuples-and-dictionaries">
+<h2>Tuples and dictionaries<a class="headerlink" href="#tuples-and-dictionaries" title="Link to this heading">#</a></h2>
+<p>Tuples are immutable data containers; they consist <em>their own type</em>.</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(&quot;x&quot;, 1)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">Tuple{String, Int64}</span>
+</pre></div>
+</div>
+<p>A <em>variant</em> called <code class="docutils literal notranslate"><span class="pre">NamedTuple</span></code> is also available in Julia:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(&quot;x&quot;, 1)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">@NamedTuple{variable::String, value::Int64}</span>
+</pre></div>
+</div>
+<p>On the other hand, dictionaries are mutable mappings:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="s">&quot;CH4&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CO2&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mf">0.03</span><span class="p">)</span>
+<span class="go">Dict{String, Float64} with 2 entries:</span>
+<span class="go">  &quot;CH4&quot; =&gt; 0.95</span>
+<span class="go">  &quot;CO2&quot; =&gt; 0.03</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="go">0.98</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="s">&quot;N2&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="go">0.020000000000000018</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span>
+<span class="go">Dict{String, Float64} with 3 entries:</span>
+<span class="go">  &quot;CH4&quot; =&gt; 0.95</span>
+<span class="go">  &quot;CO2&quot; =&gt; 0.03</span>
+<span class="go">  &quot;N2&quot;  =&gt; 0.02</span>
+</pre></div>
+</div>
+</section>
+<section id="a-first-function">
+<h2>A first function<a class="headerlink" href="#a-first-function" title="Link to this heading">#</a></h2>
+<p>A function can be created in a single line:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="nb">pi</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">normal (generic function with 1 method)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0.24197072451914337</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0.0044318484119380075</span>
+</pre></div>
+</div>
+<p>The same name can be used to create different interfaces thanks to <a class="reference external" href="https://en.wikipedia.org/wiki/Multiple_dispatch">multiple dispatch</a>:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">           </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mu</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span>
+<span class="w">           </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span>
+<span class="go">normal (generic function with 2 methods)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0.0044318484119380075</span>
+</pre></div>
+</div>
+<p>For larger functions using the keyword <code class="docutils literal notranslate"><span class="pre">function</span></code> is the way to go; notice below the introduction of optional keyword arguments after the semicolon:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mu</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span>
+<span class="w">       </span><span class="k">end</span>
+<span class="go">normal (generic function with 2 methods)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0.0044318484119380075</span>
+</pre></div>
+</div>
+<p>Notice that a better alternative in this case would be to wrap the 3-argument version of <code class="docutils literal notranslate"><span class="pre">normal</span></code> in the key-word interface as follows:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span>
+<span class="go">normal (generic function with 2 methods)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0.0044318484119380075</span>
+</pre></div>
+</div>
+<p>To identify the possible interfaces of a given function, one can inspect its <code class="docutils literal notranslate"><span class="pre">methods</span></code>:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">methods</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
+<span class="go"># 2 methods for generic function &quot;normal&quot; from Main:</span>
+<span class="go"> [1] normal(x; mu, sigma)</span>
+<span class="go">     @ REPL[108]:1</span>
+<span class="go"> [2] normal(x, mu, sigma)</span>
+<span class="go">     @ REPL[106]:1</span>
+</pre></div>
+</div>
+<p>The <em>macro</em> <code class="docutils literal notranslate"><span class="pre">&#64;which</span></code> provides the functionality for a given function call:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="nd">@which</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">normal(x; mu, sigma)</span>
+<span class="go">     @ Main REPL[108]:1</span>
+</pre></div>
+</div>
+</section>
+<section id="using-modules">
+<h2>Using modules<a class="headerlink" href="#using-modules" title="Link to this heading">#</a></h2>
+<p>One can import all functionalities from a given module with <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">ModuleName</span></code>; that is generally not what we want in complex programs (because of name clashes). If only a few functionalities of a given module will be used, then proceed as follows:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Statistics</span><span class="o">:</span><span class="w"> </span><span class="n">mean</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">0.4922029043061601</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="go">0.5081883767210799</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="go">0.5176285712019737</span>
+</pre></div>
+</div>
+<p>Alias imports are also supported:</p>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="n">Statistics</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">ST</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ST</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="go">0.5123135802316784</span>
+</pre></div>
+</div>
+<p>By the way, we used built-in random number generation in the above example.</p>
+</section>
+<section id="calling-python">
+<h2>Calling Python<a class="headerlink" href="#calling-python" title="Link to this heading">#</a></h2>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">PythonCall</span>
+<span class="go">    CondaPkg Found dependencies: D:\julia101\src\101\CondaPkg.toml</span>
+<span class="go">    CondaPkg Found dependencies: D:\julia101\bin\julia-1.11.1-win64\depot\packages\PythonCall\Nr75f\CondaPkg.toml</span>
+<span class="go">    CondaPkg Dependencies already up to date</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyimport</span><span class="p">(</span><span class="s">&quot;cantera&quot;</span><span class="p">)</span>
+<span class="go">Python: &lt;module &#39;cantera&#39; from &#39;D:\\julia101\\bin\\julia-1.11.1-win64\\CondaPkg\\Lib\\site-packages\\cantera\\__init__.py&#39;&gt;</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">gas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s">&quot;gri30.yaml&quot;</span><span class="p">)</span>
+<span class="go">Python: &lt;cantera.composite.Solution object at 0x000001659DFC4510&gt;</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">gas</span><span class="o">.</span><span class="n">TPX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CH4: 1.0, O2: 2.0&quot;</span>
+<span class="go">(1000, &lt;py 101325.0&gt;, &quot;CH4: 1.0, O2: 2.0&quot;)</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">gas</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s">&quot;HP&quot;</span><span class="p">)</span>
+<span class="go">Python: None</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">gas</span><span class="o">.</span><span class="n">report</span><span class="p">())</span>
+
+<span class="go">  gri30:</span>
+
+<span class="go">       temperature   3126.8 K</span>
+<span class="go">          pressure   1.0132e+05 Pa</span>
+<span class="go">           density   0.080809 kg/m^3</span>
+<span class="go">  mean mol. weight   20.734 kg/kmol</span>
+<span class="go">   phase of matter   gas</span>
+
+<span class="go">                          1 kg             1 kmol</span>
+<span class="go">                     ---------------   ---------------</span>
+<span class="go">          enthalpy        1.1826e+05        2.4519e+06  J</span>
+<span class="go">   internal energy       -1.1356e+06       -2.3546e+07  J</span>
+<span class="go">           entropy             13721         2.845e+05  J/K</span>
+<span class="go">    Gibbs function       -4.2786e+07       -8.8711e+08  J</span>
+<span class="go"> heat capacity c_p            2171.8             45029  J/K</span>
+<span class="go"> heat capacity c_v            1770.8             36715  J/K</span>
+
+<span class="go">                      mass frac. Y      mole frac. X     chem. pot. / RT</span>
+<span class="go">                     ---------------   ---------------   ---------------</span>
+<span class="go">                H2         0.0078306          0.080534           -23.513</span>
+<span class="go">                 H         0.0031683          0.065169           -11.757</span>
+<span class="go">                 O          0.039194          0.050793           -16.443</span>
+<span class="go">                O2           0.13498          0.087465           -32.886</span>
+<span class="go">                OH          0.085304             0.104             -28.2</span>
+<span class="go">               H2O           0.30666           0.35294           -39.956</span>
+<span class="go">               HO2        8.2121e-05        5.1586e-05           -44.643</span>
+<span class="go">              H2O2        3.5871e-06        2.1865e-06           -56.399</span>
+<span class="go">                 C        2.5216e-11        4.3529e-11           -18.927</span>
+<span class="go">                CH        2.8497e-12        4.5383e-12           -30.684</span>
+<span class="go">               CH2        1.5294e-12        2.2607e-12            -42.44</span>
+<span class="go">            CH2(S)        1.6465e-13        2.4338e-13            -42.44</span>
+<span class="go">               CH3         1.086e-12        1.4977e-12           -54.197</span>
+<span class="go">               CH4         9.411e-14        1.2163e-13           -65.953</span>
+<span class="go">                CO           0.22248           0.16468            -35.37</span>
+<span class="go">               CO2           0.20029          0.094361           -51.813</span>
+<span class="go">               HCO        1.0254e-06        7.3267e-07           -47.127</span>
+<span class="go">              CH2O        7.9233e-09        5.4713e-09           -58.883</span>
+<span class="go">             CH2OH        5.3103e-13        3.5478e-13            -70.64</span>
+<span class="go">              HCCO        2.3319e-14        1.1784e-14           -66.054</span>
+<span class="go">     [  +33 minor]        3.0931e-14        1.9711e-14</span>
+</pre></div>
+</div>
+</section>
+<section id="other-things-to-learn">
+<h2>Other things to learn<a class="headerlink" href="#other-things-to-learn" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Regular expressions and text parsing</p></li>
+<li><p>Annotating types in functions</p></li>
+<li><p>Defining <a class="reference external" href="https://www.youtube.com/watch?v=e5_PUNZdDsQ&amp;amp;list=PLhQ2JMBcfAsiu2BjeDuj0OXxD1Or_FjID&amp;amp;index=16">structures</a> and type-based dispatch</p></li>
+<li><p>Flow control (loops, if-else statements, etc.)</p>
+<ul>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=6d8YheLvO-I&amp;amp;list=PLhQ2JMBcfAsiu2BjeDuj0OXxD1Or_FjID&amp;amp;index=17">if Expression (if…elseif…else…end)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=6ujWpbQZX4s&amp;amp;list=PLhQ2JMBcfAsiu2BjeDuj0OXxD1Or_FjID&amp;amp;index=20">While Loop (while…end)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=4cg9UuG2G4g&amp;amp;list=PLhQ2JMBcfAsiu2BjeDuj0OXxD1Or_FjID&amp;amp;index=20">For Loop (for…end)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=2ixUMtFttsI&amp;amp;list=PLhQ2JMBcfAsiu2BjeDuj0OXxD1Or_FjID&amp;amp;index=21">For Loop over collection</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pluto-environment">
+<h2>Pluto environment<a class="headerlink" href="#pluto-environment" title="Link to this heading">#</a></h2>
+<p>Before going further, learn some Markdown! Please notice that Markdown has no standard and not all of GitHub’s markdown works in Pluto (although most of it will be just fine). Here you find some recommendations:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">GitHub Markdown</a></p></li>
+<li><p><a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Markdown/">Julia Markdown</a></p></li>
+</ul>
+<p>For entering equations, Julia Markdown supports LaTeX typesetting; you can learn some of it <a class="reference external" href="https://www.overleaf.com/learn/latex/Mathematical_expressions">here</a> but we won’t enter in the details during this session.</p>
+<p>Also notice that you can enter variable names in <a class="reference external" href="https://docs.julialang.org/en/v1/manual/unicode-input/">Unicode</a>. This helps keeping consistency between mathematical formulation and code, what is pretty interesting. Please do not use Unicode mixed with LaTeX (only Pluto supports that), otherwise you won’t be able to copy your equations directly to reports. Partial support of autocompletion works in Pluto for Unicode, simply write a backslash and press tab, a list of available names will be shown.</p>
+<p>Generally speaking, you should follow its <a class="reference external" href="https://plutojl.org/">documentation</a> to run Pluto, <em>i.e.</em> <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">Pluto;</span> <span class="pre">Pluto.run()</span></code>. In some cases because of local system configuration that might fail. Some corporate browsers will not be able to access <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and <a class="reference external" href="https://plutojl.org/en/docs/configuration/">configuring</a> Pluto might be required. The following snippet provides a <code class="docutils literal notranslate"><span class="pre">pluto</span></code> function that could be useful in those cases:</p>
+<!-- #region -->
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pluto</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">pluto</span><span class="p">(;</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2505</span><span class="p">)</span>
+<span class="w">    </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pluto</span><span class="o">.</span><span class="n">ServerSession</span><span class="p">()</span>
+<span class="w">    </span><span class="n">session</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">launch_browser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span><span class="n">session</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port</span>
+<span class="w">    </span><span class="n">session</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">root_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:</span><span class="si">$</span><span class="p">(</span><span class="n">port</span><span class="p">)</span><span class="s">/&quot;</span>
+<span class="w">    </span><span class="n">Pluto</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+<p>Your task:</p>
+<ul class="simple">
+<li><p>Read <code class="docutils literal notranslate"><span class="pre">media/newton_cooling.dat</span></code> as a data frame</p></li>
+<li><p>Clean data as required and establish a proper visualization</p></li>
+<li><p>Propose a model to fit the data and identify a package to find its parameters</p></li>
+</ul>
+<p>Your tools:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://dataframes.juliadata.org/stable/">DataFrames</a></p></li>
+<li><p><a class="reference external" href="https://docs.makie.org/v0.21/">Makie</a></p></li>
+<li><p>What else do you need?</p></li>
+</ul>
+<p>Your goal:</p>
+<center>
+    <img src="media/newton_cooling.png" alt="Newton cooling" width="50%"/>
+</center>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./julia"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Julia</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repl-basics">REPL basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-as-a-calculator">Julia as a calculator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-matrices">Vectors and matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representing-text">Representing text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-and-dictionaries">Tuples and dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-function">A first function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-modules">Using modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-python">Calling Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-things-to-learn">Other things to learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pluto-environment">Pluto environment</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
