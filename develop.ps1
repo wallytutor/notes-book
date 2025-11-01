@@ -39,6 +39,8 @@ $PROJECT_PATH = "$PSScriptRoot"
 $PROJECT_VENV = "$PROJECT_PATH\.venv"
 $PYTHON_MIN   = 12
 
+$env:BOOK_DATA = "$PROJECT_PATH\data"
+
 ##############################################################################
 # Handles Python version
 ##############################################################################

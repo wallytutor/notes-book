@@ -1,10 +1,15 @@
 # https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: root/intro
+
+root: index
+
 chapters:
-- file: root/markdown
-- file: root/notebooks
-- file: root/markdown-notebooks
-- file: python/intro
+
+- file: python/mpc/intro
+  sections:
+  - file: python/mpc/part-a
+  - file: python/mpc/part-b
+  - file: python/mpc/part-c
+
 - file: julia/intro

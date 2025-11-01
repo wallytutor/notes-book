@@ -1,5 +1,14 @@
+# Virtual environment and build directories
+.venv/
+_build/
+
+# Python cache files
 __pycache__/
 *.pyc
 
-_build/
-venv/
+# Jupyter Notebooks and checkpoints
+*.ipynb_checkpoints/
+*.ipynb
+
+# Any sandbox
+sandbox*
