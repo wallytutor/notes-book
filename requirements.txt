@@ -3,12 +3,15 @@ jupyter-book
 jupyterlab
 jupytext
 nbconvert
+ghp-import
 
 # Scientific dependencies
 cantera
-numpy
-scipy
-pandas
+casadi
 matplotlib
-sympy
 numba
+numpy
+pandas
+pyvista
+scipy
+sympy

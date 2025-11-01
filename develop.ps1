@@ -1,9 +1,34 @@
-# develop.ps1
+<#
+.SYNOPSIS
+Provides building and publishing capabilities for the Jupyter Book project.
+
+.DESCRIPTION
+This script sets up a development environment for the Jupyter Book project, including
+creating a virtual environment, installing dependencies, and building the project. It also
+supports publishing the built documentation to GitHub Pages.
+
+.PARAMETER Build
+Builds the Jupyter Book documentation.
+.PARAMETER Rebuild
+Cleans and rebuilds the Jupyter Book documentation.
+.PARAMETER Clean
+Cleans the build directory.
+.PARAMETER Publish
+Publishes the built documentation to GitHub Pages.
+
+.EXAMPLE
+.\develop.ps1 -Build -Publish
+
+.NOTES
+Author: Walter Dal'Maz Silva
+Date: November 2025
+#>
 
 param (
     [switch]$Build,
     [switch]$Rebuild,
-    [switch]$Clean
+    [switch]$Clean,
+    [switch]$Publish
 )
 
 ##############################################################################
@@ -83,6 +108,10 @@ function New-DevEnvironment() {
     Start-PipInstall @("-r", "requirements.txt")
 }
 
+##############################################################################
+# Main
+##############################################################################
+
 function Main() {
     if (-not (Check-HasValidPython)) {
         Write-Error "Python >= 3.$PYTHON_MIN is required but not found"
@@ -97,16 +126,25 @@ function Main() {
         Enable-DevelVenv
     }
 
-    $build = "$PROJECT_PATH\_build"
+    $buildDir = "$PROJECT_PATH\_build"
 
-    if ((Test-Path $build) -and ($Rebuild -or $Clean)) {
-        Remove-Item -Path $build -Recurse -Force
+    if ((Test-Path $buildDir) -and ($Rebuild -or $Clean)) {
+        Remove-Item -Path $buildDir -Recurse -Force
     }
 
     if ($Build -or $Rebuild) {
-        $options = @("build", ".")
+        $options = @("build", "$PROJECT_PATH", "--builder", "html")
         Start-Process -FilePath jupyter-book -ArgumentList $options -NoNewWindow -Wait
+    }
+
+    if ((Test-Path $buildDir) -and $Publish) {
+        $options = @("-n", "-p", "-f", "$buildDir/html")
+        Start-Process -FilePath ghp-import -ArgumentList $options -NoNewWindow -Wait
     }
 }
 
 Main
+
+##############################################################################
+# EOF
+##############################################################################
