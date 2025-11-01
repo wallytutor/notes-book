@@ -1,0 +1,31 @@
+# https://jupyterbook.org/customize/config.html
+
+title: Notes Book
+author: Walter Dal'Maz Silva
+logo: media/logo.png
+
+execute:
+  execute_notebooks: cache
+
+# https://stackoverflow.com/questions/79298043
+exclude_patterns:
+  - .venv
+  - _build
+  - sandbox
+  - README.md
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - references.bib
+
+repository:
+  url: https://github.com/wallytutor/notes-book
+  path_to_book: .
+  branch: main
+
+html:
+  use_issues_button: true
+  use_repository_button: true

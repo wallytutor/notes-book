@@ -1,0 +1,10 @@
+# https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: root/intro
+chapters:
+- file: root/markdown
+- file: root/notebooks
+- file: root/markdown-notebooks
+- file: python/intro
+- file: julia/intro

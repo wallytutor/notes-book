@@ -1,0 +1,14 @@
+# Jupyter Book
+jupyter-book
+jupyterlab
+jupytext
+nbconvert
+
+# Scientific dependencies
+cantera
+numpy
+scipy
+pandas
+matplotlib
+sympy
+numba
