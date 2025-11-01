@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Wrapping up &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc/part-c';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Julia" href="../../julia/intro.html" />
+    <link rel="prev" title="Refactoring" href="part-b.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Fundamentals of MPC</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part-b.html">Refactoring</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Wrapping up</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../julia/intro.html">Introduction to Julia</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/mpc/part-c.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/python/mpc/part-c.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Wrapping up</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-tools">Import tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-models">Create models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-workflow">Solution workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-dynamics">Create dynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#provide-parameters">Provide parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-controller">Setup controller</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-and-retrieve-results">Optimize and retrieve results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#display-results">Display results</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="wrapping-up">
+<h1>Wrapping up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h1>
+<section id="import-tools">
+<h2>Import tools<a class="headerlink" href="#import-tools" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">SX</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">DM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">nlpsol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">vertcat</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-models">
+<h2>Create models<a class="headerlink" href="#create-models" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PlantModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Minimal implementation of system dynamics. &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Concentrations</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Rate constant</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># System size</span>
+
+        <span class="c1"># Total flow rate.</span>
+        <span class="n">Ndot</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;Ndot&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Feed flow rates.</span>
+        <span class="n">ndot</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;ndot&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">ndot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Ndot</span> <span class="o">-</span> <span class="n">ndot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ndot</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Production rates of species.</span>
+        <span class="n">vdot</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">DM</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Symbolic balance equation.</span>
+        <span class="n">xdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndot</span> <span class="o">-</span> <span class="n">Ndot</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">vdot</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+
+        <span class="c1"># Functional balance equation.</span>
+        <span class="n">xrhs</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span>
+            <span class="s2">&quot;xdot&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">ndot</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ndot</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">xdot</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;ndot_A&quot;</span><span class="p">,</span> <span class="s2">&quot;Ndot&quot;</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;xdot&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_states</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance_eqns_sym</span> <span class="o">=</span> <span class="n">xdot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance_eqns_fun</span> <span class="o">=</span> <span class="n">xrhs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">balance_eqns_sym</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance_eqns_sym</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">balance_eqns_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance_eqns_fun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InstantiatedPlant</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Instantiation of dynamics with fixed parameters. &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Ndot</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_states</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rhs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">balance_eqns_fun</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pars</span> <span class="o">=</span> <span class="p">[</span><span class="n">Ndot</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tau</span> <span class="o">=</span> <span class="n">tau</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">step_euler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">xn</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tau</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rhs</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_pars</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControlsMPC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A simple MPC for a given plant. &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plant</span><span class="p">,</span> <span class="n">Np</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plant</span> <span class="o">=</span> <span class="n">plant</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span> <span class="o">=</span> <span class="n">Np</span>
+
+        <span class="c1"># TODO instead of computing cost directly in _integrate</span>
+        <span class="c1"># just store the values in arrays and provide these</span>
+        <span class="c1"># in optimize so that we can play for parametrization.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_R</span> <span class="o">=</span> <span class="n">R</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_S</span> <span class="o">=</span> <span class="n">S</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xp</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;xp&quot;</span><span class="p">,</span> <span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x0</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;x0&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xt</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;xt&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x0</span>
+
+        <span class="n">J</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_integrate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cost</span> <span class="o">=</span> <span class="n">J</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span> <span class="o">=</span> <span class="n">F</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial call to MPC: symbolic integration&quot;</span><span class="p">)</span>
+
+        <span class="n">J</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plant</span><span class="o">.</span><span class="n">step_euler</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">[</span><span class="n">ts</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xt</span><span class="p">[:,</span> <span class="n">ts</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+
+            <span class="c1"># TODO: implement an actual scaling so that both have</span>
+            <span class="c1"># the same magnitude and Q, R become scale-independent!</span>
+            <span class="n">scale_error</span>  <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xp</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span>
+            <span class="n">scale_change</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># scale_error /= (x[2] + 1.0e-15)</span>
+            <span class="c1"># scale_change /= (self._p[ts] + 1.0e-15)</span>
+
+            <span class="n">cost_error</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">scale_error</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">cost_change</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_R</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">scale_change</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">J</span> <span class="o">+=</span> <span class="n">cost_error</span> <span class="o">+</span> <span class="n">cost_change</span>
+
+        <span class="n">J</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_S</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;sim&quot;</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_x0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_xt</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="n">F</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">xsp</span><span class="p">,</span> <span class="n">pmax</span><span class="p">):</span>
+        <span class="c1"># Constraint *negative time* command to the current value.</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0</span><span class="p">]</span>
+
+        <span class="c1"># XXX: abuse of notation! Notice below that the dictionary</span>
+        <span class="c1"># *unknowns* &quot;x&quot; are set to `self._p`, while *parameters*</span>
+        <span class="c1"># &quot;p&quot; are given the *x&#39;s*. This is because we are finding</span>
+        <span class="c1"># the optimal controls here and already know the target</span>
+        <span class="c1"># profile and initial states for concentrations *x*!</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">nlpsol</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="s2">&quot;ipopt&quot;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cost</span><span class="p">,</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span><span class="p">,</span>
+            <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">vertcat</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">),</span>
+            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">vertcat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x0</span><span class="p">)</span>
+        <span class="p">})</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">xsp</span><span class="p">,</span> <span class="o">*</span><span class="n">x0</span><span class="p">]</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">guess</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">lbx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ubx</span><span class="o">=</span><span class="n">pmax</span><span class="p">,</span> <span class="n">lbg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ubg</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">popt</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">xt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="n">popt</span><span class="p">,</span> <span class="n">xt</span><span class="p">,</span> <span class="n">solution</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solution-workflow">
+<h2>Solution workflow<a class="headerlink" href="#solution-workflow" title="Link to this heading">#</a></h2>
+<section id="create-dynamics">
+<h3>Create dynamics<a class="headerlink" href="#create-dynamics" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">PlantModel</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">balance_eqns_fun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Function(xdot:(x[3],ndot_A,Ndot,N,k)-&gt;(xdot[3]) SXFunction)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="provide-parameters">
+<h3>Provide parameters<a class="headerlink" href="#provide-parameters" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mf">500.0</span>
+<span class="n">Ndot</span> <span class="o">=</span> <span class="mf">3.0</span>
+
+<span class="n">ndot_A_max</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">Ndot</span>
+<span class="n">ndot_A_ini</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">Ndot</span>
+
+<span class="n">Np</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">S</span> <span class="o">=</span> <span class="mf">100.0</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+
+<span class="n">xsp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xsp</span><span class="p">[:</span><span class="mi">3</span><span class="o">*</span><span class="n">Np</span><span class="o">//</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">xsp</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">Np</span><span class="o">//</span><span class="mi">5</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-controller">
+<h3>Setup controller<a class="headerlink" href="#setup-controller" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plant</span> <span class="o">=</span> <span class="n">InstantiatedPlant</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Ndot</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+
+<span class="n">mpc</span> <span class="o">=</span> <span class="n">ControlsMPC</span><span class="p">(</span><span class="n">plant</span><span class="p">,</span> <span class="n">Np</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial call to MPC: symbolic integration
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimize-and-retrieve-results">
+<h3>Optimize and retrieve results<a class="headerlink" href="#optimize-and-retrieve-results" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">popt</span><span class="p">,</span> <span class="n">xt</span><span class="p">,</span> <span class="n">solution</span> <span class="o">=</span> <span class="n">mpc</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ndot_A_ini</span><span class="p">,</span> <span class="n">xsp</span><span class="p">,</span> <span class="n">ndot_A_max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.11, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:        1
+Number of nonzeros in inequality constraint Jacobian.:        0
+Number of nonzeros in Lagrangian Hessian.............:    19904
+
+Total number of variables............................:      201
+                     variables with only lower bounds:        0
+                variables with lower and upper bounds:      201
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:        1
+Total number of inequality constraints...............:        0
+        inequality constraints with only lower bounds:        0
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        0
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  1.1289480e+01 5.00e-01 5.43e-01  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  7.8535959e+00 0.00e+00 2.21e-01  -1.0 5.00e-01    -  7.07e-01 1.00e+00f  1
+   2  3.6890341e+00 0.00e+00 1.19e-01  -1.7 4.83e-01    -  7.75e-01 1.00e+00f  1
+   3  1.2029735e+00 0.00e+00 3.97e-02  -2.5 4.59e-01    -  7.70e-01 1.00e+00f  1
+   4  5.4417451e-01 0.00e+00 6.69e-03  -2.5 4.00e-01    -  9.27e-01 1.00e+00f  1
+   5  4.1843093e-01 0.00e+00 1.16e-03  -3.8 2.60e-01    -  9.31e-01 1.00e+00f  1
+   6  3.9726342e-01 0.00e+00 5.56e-16  -3.8 1.69e-01    -  1.00e+00 1.00e+00f  1
+   7  3.9147600e-01 0.00e+00 1.46e-04  -5.7 1.02e-01    -  9.58e-01 1.00e+00f  1
+   8  3.9034658e-01 0.00e+00 1.77e-04  -5.7 4.13e-02    -  1.00e+00 9.11e-01f  1
+   9  3.9018244e-01 0.00e+00 5.13e-05  -5.7 1.78e-02    -  1.00e+00 9.72e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  3.9016625e-01 0.00e+00 2.24e-16  -5.7 5.31e-03    -  1.00e+00 1.00e+00f  1
+  11  3.9015738e-01 0.00e+00 3.42e-05  -8.6 2.57e-03    -  1.00e+00 9.43e-01f  1
+  12  3.9015662e-01 0.00e+00 1.33e-16  -8.6 1.28e-03    -  1.00e+00 1.00e+00f  1
+  13  3.9015655e-01 0.00e+00 1.50e-16  -8.6 5.36e-04    -  1.00e+00 1.00e+00f  1
+  14  3.9015655e-01 0.00e+00 1.86e-16  -8.6 1.69e-04    -  1.00e+00 1.00e+00f  1
+
+Number of Iterations....: 14
+
+                                   (scaled)                 (unscaled)
+Objective...............:   3.9015654580404924e-01    3.9015654580404924e-01
+Dual infeasibility......:   1.8607716730850261e-16    1.8607716730850261e-16
+Constraint violation....:   0.0000000000000000e+00    0.0000000000000000e+00
+Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
+Complementarity.........:   9.6345181304803798e-09    9.6345181304803798e-09
+Overall NLP error.......:   9.6345181304803798e-09    9.6345181304803798e-09
+
+
+Number of objective function evaluations             = 15
+Number of objective gradient evaluations             = 15
+Number of equality constraint evaluations            = 15
+Number of inequality constraint evaluations          = 0
+Number of equality constraint Jacobian evaluations   = 15
+Number of inequality constraint Jacobian evaluations = 0
+Number of Lagrangian Hessian evaluations             = 14
+Total seconds in IPOPT                               = 0.044
+
+EXIT: Optimal Solution Found.
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |        0 (       0) 155.00us ( 10.33us)        15
+       nlp_g  |        0 (       0)  21.00us (  1.40us)        15
+  nlp_grad_f  |        0 (       0) 427.00us ( 26.69us)        16
+  nlp_hess_l  |  16.00ms (  1.14ms)  12.88ms (920.07us)        14
+   nlp_jac_g  |        0 (       0)  11.00us (687.50ns)        16
+       total  |  34.00ms ( 34.00ms)  44.06ms ( 44.06ms)         1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="display-results">
+<h3>Display results<a class="headerlink" href="#display-results" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xsp_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">xsp</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">xsp_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">xsp</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">good</span> <span class="o">=</span> <span class="p">(</span><span class="n">xt</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">xsp_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xt</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">xsp_max</span><span class="p">)</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">quality</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">good</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;u8&quot;</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">)</span>
+
+<span class="n">cmd</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">popt</span> <span class="o">/</span> <span class="n">Ndot</span><span class="p">)</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_A$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_B$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_C$&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xsp_max</span><span class="p">,</span> <span class="s2">&quot;m--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_none_&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xsp_min</span><span class="p">,</span> <span class="s2">&quot;m--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_none_&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xsp</span><span class="p">,</span> <span class="s2">&quot;m-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_C$ (target)&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xsp_min</span><span class="p">,</span> <span class="n">xsp_max</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">good</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">steps</span><span class="p">],</span> <span class="n">cmd</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$Q_A$ (relative)&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected quality level at </span><span class="si">{</span><span class="n">quality</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mole fractions and relative flow rate of A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Action step number over prediction horizon&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">Np</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6914475ab529afaf95f86e833d94be2b558a5089cf5605cb41c159edddd0e87a.png" src="../../_images/6914475ab529afaf95f86e833d94be2b558a5089cf5605cb41c159edddd0e87a.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python\mpc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="part-b.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Refactoring</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../julia/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Julia</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-tools">Import tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-models">Create models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-workflow">Solution workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-dynamics">Create dynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#provide-parameters">Provide parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-controller">Setup controller</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-and-retrieve-results">Optimize and retrieve results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#display-results">Display results</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

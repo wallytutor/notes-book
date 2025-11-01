@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basics &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc/part-a';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Refactoring" href="part-b.html" />
+    <link rel="prev" title="Fundamentals of MPC" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Fundamentals of MPC</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../julia/intro.html">Introduction to Julia</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/mpc/part-a.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/python/mpc/part-a.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basics">
+<h1>Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h1>
+<p>In this study we implement a model predictive control (MPC) for a dummy chemical reactor. This notebook guides you through the different steps of the implementation using the powerful package <a class="reference external" href="https://web.casadi.org/">CasADi</a> in its Python programming interface.</p>
+<p>Our goal is to provide controlled concentration output, which may be required to change in time, <em>i.e.</em> a costumer order required different concentratio, in a continuous stirred tank reactor.</p>
+<hr class="docutils" />
+<p>In our dummy production, reagent <span class="math notranslate nohighlight">\(A\)</span> is fed to the system with a carrier <span class="math notranslate nohighlight">\(B\)</span> to produce <span class="math notranslate nohighlight">\(C\)</span>, whose concentration is the target. The chemical process is illustrated as the irreversible reaction happening at a known rate <span class="math notranslate nohighlight">\(k_1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+A + B \rightarrow B + C
+\]</div>
+<p>To control the molar fraction of <span class="math notranslate nohighlight">\(C\)</span>, denoted <span class="math notranslate nohighlight">\(x_C\)</span>, we play with flow rates of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> given by <span class="math notranslate nohighlight">\(\dot{n}_A\)</span> and <span class="math notranslate nohighlight">\(\dot{n}_B\)</span>. For smooth functioning of the system, the total flow rate is required to remain constant at <span class="math notranslate nohighlight">\(\dot{n}_t\)</span> so that <span class="math notranslate nohighlight">\(\dot{n}_B=\dot{n}_t-\dot{n}_A\)</span>, <em>i.e.</em> a compensation valve is the action we control. That implies we have a single degree of freedom in the actions we can take to pilot this simple system.</p>
+<p>The reactor volume is kept constant at <span class="math notranslate nohighlight">\(n_t\)</span> moles. The following differential equation applies to each chemical species <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+n_t\dot{x}_i = \dot{n}_i - \dot{n}_t x_i + \dot{n}_{gen,i}
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\dot{n}_{gen,B}\)</span> is zero for <span class="math notranslate nohighlight">\(B\)</span> and is computed as a first order kinetic term <span class="math notranslate nohighlight">\(\dot{n}_{gen,A}=-\dot{n}_{gen,C}=-k_1 x_A\)</span> for other species.</p>
+<hr class="docutils" />
+<p>Our tools:</p>
+<ul class="simple">
+<li><p>To create the optimization routine we will make use of <code class="docutils literal notranslate"><span class="pre">SX</span></code> symbolic class of <code class="docutils literal notranslate"><span class="pre">casadi</span></code>.</p></li>
+<li><p>That will be used to compose right-hand side derivative <code class="docutils literal notranslate"><span class="pre">Function</span></code> objects for later integrating the problem.</p></li>
+<li><p>Optimization of controls is done though solver <a class="reference external" href="https://github.com/coin-or/Ipopt">Ipopt</a> which can be accessed though interface <code class="docutils literal notranslate"><span class="pre">nlpsol</span></code>.</p></li>
+<li><p>The reminder of imports are utilities that will be invoked at the right moment.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">SX</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">nlpsol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">vertcat</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>As stated in the introduction, some quantities are fixed/known. That includes the reaction rate <span class="math notranslate nohighlight">\(k_1=10.0\:\mathrm{mol\cdotp{}s^{-1}}\)</span>, the size of reactor <span class="math notranslate nohighlight">\(n_t=500.0\:\mathrm{mol}\)</span> and the total flow rate of <span class="math notranslate nohighlight">\(\dot{n}_t=3.0\:\mathrm{mol\cdotp{}s^{-1}}\)</span>. We declare them here so that we can focus on symbolic manipulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_1</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">n_t</span> <span class="o">=</span> <span class="mf">500.0</span>
+<span class="n">ndot_t</span> <span class="o">=</span> <span class="mf">3.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 3 chemical species being modeled in the fictional system.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">SX</span></code> we create their symbolic variables so that we can profit from <code class="docutils literal notranslate"><span class="pre">casadi</span></code> automatic differentiation.</p>
+<p>This is helpful for computation of jacobian and hessian matrices required by the optimizer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_A</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;x_A&quot;</span><span class="p">)</span>
+<span class="n">x_B</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;x_B&quot;</span><span class="p">)</span>
+<span class="n">x_C</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;x_C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same is done for flow rate <span class="math notranslate nohighlight">\(\dot{n}_A\)</span> and restriction on total flow is applied.</p>
+<p>Notice here that we can use numerical <code class="docutils literal notranslate"><span class="pre">ndot_t</span></code> and symbolic <code class="docutils literal notranslate"><span class="pre">ndot_A</span></code> in the same expression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndot_A</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;ndot_A&quot;</span><span class="p">)</span>
+<span class="n">ndot_B</span> <span class="o">=</span> <span class="n">ndot_t</span> <span class="o">-</span> <span class="n">ndot_A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Source terms are then computed as previously described.</p>
+<p>Again we illustrate simultaneous use of symbolics and numerics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rate</span> <span class="o">=</span> <span class="n">k_1</span> <span class="o">*</span> <span class="n">x_A</span>
+<span class="n">ndot_gen_A</span> <span class="o">=</span> <span class="o">-</span><span class="n">rate</span>
+<span class="n">ndot_gen_B</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">ndot_gen_C</span> <span class="o">=</span> <span class="o">+</span><span class="n">rate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With these elements we are ready to perform the molar balances describing the time-evolution of the system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xdot_A</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndot_A</span> <span class="o">-</span> <span class="n">ndot_t</span> <span class="o">*</span> <span class="n">x_A</span> <span class="o">+</span> <span class="n">ndot_gen_A</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_t</span>
+<span class="n">xdot_B</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndot_B</span> <span class="o">-</span> <span class="n">ndot_t</span> <span class="o">*</span> <span class="n">x_B</span> <span class="o">+</span> <span class="n">ndot_gen_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_t</span>
+<span class="n">xdot_C</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span>    <span class="o">-</span> <span class="n">ndot_t</span> <span class="o">*</span> <span class="n">x_C</span> <span class="o">+</span> <span class="n">ndot_gen_C</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To create nice interfaces we group the variables in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<p>It is common to use these names for the unknowns and control parameters is optimal control problem statements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">vertcat</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">x_B</span><span class="p">,</span> <span class="n">x_C</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">ndot_A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">Function</span></code> we wrap-up the above expressions.</p>
+<p>Each function is provided a name, a list of inputs and a list of outputs.</p>
+<p>Optional arguments are not used here to name the inputs and outputs and you can check their usage in the <a class="reference external" href="https://web.casadi.org/docs/">documentation</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F_xdot_A</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;F_xdot_A&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="n">xdot_A</span><span class="p">])</span>
+<span class="n">F_xdot_B</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;F_xdot_B&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="n">xdot_B</span><span class="p">])</span>
+<span class="n">F_xdot_C</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;F_xdot_C&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="n">xdot_C</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is interesting to check the string representation of a <code class="docutils literal notranslate"><span class="pre">Function</span></code>.</p>
+<p>Here we see that it receives a first input <code class="docutils literal notranslate"><span class="pre">i0</span></code> which is an array of 3 elements and a second number <code class="docutils literal notranslate"><span class="pre">i1</span></code> for the returning a single value <code class="docutils literal notranslate"><span class="pre">o0</span></code>. As stated before, you can name these I/O using the more complete interface of <code class="docutils literal notranslate"><span class="pre">Function</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F_xdot_A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Function(F_xdot_A:(i0[3],i1)-&gt;(o0) SXFunction)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check the proper functioning of these functions as simple Python objects.</p>
+<p>It shows that although we have symbolically built the system but numerical evaluation is possible.</p>
+<p>Return values are of type <code class="docutils literal notranslate"><span class="pre">DM</span></code>, CasADi’s way of representing dense matrices (here an order zero matrix, a single number).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F_xdot_A</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">),</span>\
+<span class="n">F_xdot_B</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">),</span>\
+<span class="n">F_xdot_C</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(DM(0.007), DM(-0.017), DM(0.01))
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model being ready we can start the conception of our controller.</p>
+<p>The numbers we need to choose here require <em>domain-specific knowledge</em>:</p>
+<ul class="simple">
+<li><p>The first is the prediction horizon <span class="math notranslate nohighlight">\(N_p\)</span>. It must be long enough so that the optimization routine foresees the dynamics of the system to apply corrections in time.</p></li>
+<li><p>The horizon size alone has no sense without the definition of the time-step <span class="math notranslate nohighlight">\(\tau\)</span> between consective corrective actions. This again must take into consideration the delays system response and the valve itself in this specific case.</p></li>
+</ul>
+<p>Here we chose to take into account the next 2000 s of the dynamics through 200 steps of 10 s.</p>
+<blockquote>
+<div><p>You can check that given the aforementioned reactor size and flow rate, the characteristic time of the system is of the order of <span class="math notranslate nohighlight">\(n_t/\dot{n}_t = 500\:\mathrm{mol} / 3\:\mathrm{mol\cdotp{}s^{-1}} \approx 170\:\mathrm{s}\)</span>, so the process window seems large enough to describe the <em>full dilution</em> of the system and the time step is less 10% of that time, what seems reasonable here.</p>
+</div></blockquote>
+<p><strong>Note:</strong> the time-step <span class="math notranslate nohighlight">\(\tau\)</span> may be the same used for integration of the problem, but you may use a smaller value if during each length <span class="math notranslate nohighlight">\(\tau\)</span> you keep the control action constant. This might be required when dealing with stiff differential equations of system model, <em>i.e.</em> a combustion process or complex gas pressure control.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Np</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">10.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The composition of the cost function in MPC also requires domain knowledge.</p>
+<ul class="simple">
+<li><p>The scale of the problem is usually selected to be one of deviation of main controlled variable so the mutiplier of quadratic term <span class="math notranslate nohighlight">\(Q\)</span> is set to unity (or identity matrix in more complex multidimensional formulations).</p></li>
+<li><p>We should also pay attention to the change in command, so another quadratic term penalizing important changes is added to cost function. Its scaling <span class="math notranslate nohighlight">\(R\)</span> has to be chosen so that is remains in a good order of magnitude compared to target variable cost and still perform its function.</p></li>
+<li><p>The last parameter <span class="math notranslate nohighlight">\(S\)</span> is the terminal penalization, generally set to a high value so that we enforce the last point in prediction horizon to match the set-point.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">S</span> <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because of limitations of our compensation valve, the fraction of <span class="math notranslate nohighlight">\(A\)</span> in the total flow is limited to 90% of total feed rate.</p>
+<p>Initially it is found to be at 50% of the total capacity and that will impact the first command change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndot_A_max</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">ndot_t</span>
+<span class="n">ndot_A_ini</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">ndot_t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we create our cost function <code class="docutils literal notranslate"><span class="pre">J</span></code> set initially to zero and the list of constraints <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">J</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The production planning already knows the target concentration (set-point) over the prediction horizon so that we can construct our cost function. It is symbolically declared in <code class="docutils literal notranslate"><span class="pre">xs_C</span></code> and contains one extra point over <code class="docutils literal notranslate"><span class="pre">Np</span></code> representing the current state of the reactor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs_C</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;xs_C&quot;</span><span class="p">,</span> <span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also need lower and upper boundaries, <code class="docutils literal notranslate"><span class="pre">lbx</span></code> and <code class="docutils literal notranslate"><span class="pre">ubx</span></code>, of our solution variable, here the controller command for the flow rate of <span class="math notranslate nohighlight">\(A\)</span>. It can be set from zero up to the maximum amount it can be set, here 90% of total flow rate.</p>
+<blockquote>
+<div><p>Note that constant numeric values could have been provided here, but for generality we will use a list here and feed it along with the integration so that you can see how one could implement a possibly <em>varying</em> control boundaries.</p>
+</div></blockquote>
+<p>Same is done for the commands at each step sent to the valve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lbx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ubx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v_ndot_A</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial state of the system is set to the symbols we already know (later we will replace them by numeric <em>measurements</em>). Notice that in this tutorial case we are handling the variables individually, but in a real-world problem you would probably use a vector with all variables as we edd in <code class="docutils literal notranslate"><span class="pre">x</span></code> before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xt_A</span><span class="p">,</span> <span class="n">xt_B</span><span class="p">,</span> <span class="n">xt_C</span> <span class="o">=</span> <span class="n">x_A</span><span class="p">,</span> <span class="n">x_B</span><span class="p">,</span> <span class="n">x_C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we integrate the problem over time. The loop is composed of a few characteristic steps:</p>
+<ul class="simple">
+<li><p>Creation of a command variable <code class="docutils literal notranslate"><span class="pre">v_ndot_a_ts</span></code> for the current step.</p></li>
+<li><p>Bounding the values of control variable throughs <code class="docutils literal notranslate"><span class="pre">lbx</span></code> and <code class="docutils literal notranslate"><span class="pre">ubx</span></code>.</p></li>
+<li><p>Stacking of current system state in <code class="docutils literal notranslate"><span class="pre">xn</span></code> and current commands in <code class="docutils literal notranslate"><span class="pre">pn</span></code>.</p></li>
+<li><p>Actual time integration of the system dynamics.</p></li>
+<li><p>Increment of cost function with current deviations.</p></li>
+<li><p>Add constraints (not done here) to the states and controls.</p></li>
+</ul>
+<p>Below you will recognize a simple Euler time-stepping.</p>
+<blockquote>
+<div><p>Again, in real-world problems you would at least use a Runge-Kutta order 4 integration. As it was said before, you might need to use an internal (smaller) time-step for very stiff problems, situation where the states <code class="docutils literal notranslate"><span class="pre">xn</span></code> would be internally updated but the command <code class="docutils literal notranslate"><span class="pre">pn</span></code> would be held constant.</p>
+</div></blockquote>
+<blockquote>
+<div><p>In real-world you would probably use a multiple-shooting approach to simultaneously simulate and optimize the problem, if that is required. That comes with an additional computational cost because the optimization problem becomes larger. For keeping this tutorial focused on the main ideas it was chosen to exploit this simpler approach (from the implementation standpoint).</p>
+</div></blockquote>
+<p>Since initial flow rate of <span class="math notranslate nohighlight">\(A\)</span> is already known and we are using <code class="docutils literal notranslate"><span class="pre">R</span></code> to avoid abrupt changes in the flow command, we make use of that value here to compute the initial step accordingly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span>
+    <span class="n">v_ndot_A_ts</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v_qdot_A_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">v_ndot_A</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v_ndot_A_ts</span><span class="p">)</span>
+
+    <span class="n">lbx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">ubx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ndot_A_max</span><span class="p">)</span>
+
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">vertcat</span><span class="p">(</span><span class="n">xt_A</span><span class="p">,</span> <span class="n">xt_B</span><span class="p">,</span> <span class="n">xt_C</span><span class="p">)</span>
+    <span class="n">pn</span> <span class="o">=</span> <span class="n">v_ndot_A_ts</span>
+
+    <span class="n">xt_A</span> <span class="o">=</span> <span class="n">xt_A</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_A</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+    <span class="n">xt_B</span> <span class="o">=</span> <span class="n">xt_B</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_B</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+    <span class="n">xt_C</span> <span class="o">=</span> <span class="n">xt_C</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_C</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+
+    <span class="n">v_prev</span> <span class="o">=</span> <span class="n">ndot_A_ini</span> <span class="k">if</span> <span class="n">ts</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">v_ndot_A</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># scale_error  = (xt_C - xs_C[ts]) / (xt_C + 1.0e-09)</span>
+    <span class="c1"># scale_change = (v_prev - v_ndot_A_ts) / (v_prev + 1.0e-09)</span>
+
+    <span class="n">scale_error</span>  <span class="o">=</span> <span class="n">xt_C</span> <span class="o">-</span> <span class="n">xs_C</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span>
+    <span class="n">scale_change</span> <span class="o">=</span> <span class="n">v_prev</span> <span class="o">-</span> <span class="n">v_ndot_A_ts</span>
+
+    <span class="n">cost_error</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">scale_error</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cost_change</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">scale_change</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">J</span> <span class="o">+=</span> <span class="n">cost_error</span> <span class="o">+</span> <span class="n">cost_change</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To complete the cost function, the terminal cost is added with scale <code class="docutils literal notranslate"><span class="pre">S</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">J</span> <span class="o">+=</span> <span class="n">S</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">xt_C</span> <span class="o">-</span> <span class="n">xs_C</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The assembly of the system to be solved made below. Here we have chosen to optimize the problem with Ipopt as a nonlinear problem. In some cases you might wish to use a quadratic solver, but it imposes some limitations in problem formulation. You should do that when solving as a NLP is too slow for your problem. In CasADi’s representation <code class="docutils literal notranslate"><span class="pre">f</span></code> denotes the cost, <code class="docutils literal notranslate"><span class="pre">x</span></code> the free variables (the commands here), <code class="docutils literal notranslate"><span class="pre">g</span></code> the constraints list, and <code class="docutils literal notranslate"><span class="pre">p</span></code> the parameters, values that were left in symbolic form and we need to provide numerically. Here <code class="docutils literal notranslate"><span class="pre">p</span></code> is the array of set-points and the system initial state. Interface <code class="docutils literal notranslate"><span class="pre">nlpsol</span></code> allows for creating a solver, which may be used many times later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nlp</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="n">J</span><span class="p">,</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">vertcat</span><span class="p">(</span><span class="o">*</span><span class="n">v_ndot_A</span><span class="p">),</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">vertcat</span><span class="p">(</span><span class="o">*</span><span class="n">g</span><span class="p">),</span>
+    <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">vertcat</span><span class="p">(</span><span class="n">xs_C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">nlpsol</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="s2">&quot;ipopt&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below we see the interface of the solver with the sizes of the arrays we must provide.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Function(solver:(x0[200],p[204],lbx[200],ubx[200],lbg[0],ubg[0],lam_x0[200],lam_g0[0])-&gt;(x[200],f,g[0],lam_x[200],lam_g[0],lam_p[204]) IpoptInterface)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now compose the parameters array. For the set-point <code class="docutils literal notranslate"><span class="pre">xs_C_num</span></code> consider that you need the solution to be delivered with a concentration of 30% in the first 75 steps (3/4 of prediction horizon) of <span class="math notranslate nohighlight">\(C\)</span> and for the next lot the concetration must be increased to 60%. Below we create and array with that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs_C_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xs_C_num</span><span class="p">[:</span><span class="mi">3</span><span class="o">*</span><span class="n">Np</span><span class="o">//</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">xs_C_num</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">Np</span><span class="o">//</span><span class="mi">5</span><span class="p">:]</span> <span class="o">=</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At the initial time the system is composed only of <span class="math notranslate nohighlight">\(B\)</span>, the second element in our composition array. With that we can merge the arrays in the format expected by the solver (as declared above) to provide <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0_num</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">xs_C_num</span><span class="p">,</span> <span class="o">*</span><span class="n">x0_num</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Call of the solver is mostly trivial. If this is the first call to the solver, normally provide an initial guess composed of a fixed value that makes sense to your system. Here an array of ones was chosen. When using the solver in an actual control loop, generally the results of last call are provided. Since we have a single constraint in <code class="docutils literal notranslate"><span class="pre">g</span></code>, it suffices to provide <code class="docutils literal notranslate"><span class="pre">lbg=ubg=0.0</span></code> to enforce the initial flow rate to the prescribed value. Call can be a bit verbose and you might want to log it in a production environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">Np</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">lbx</span><span class="o">=</span><span class="n">lbx</span><span class="p">,</span> <span class="n">ubx</span><span class="o">=</span><span class="n">ubx</span><span class="p">,</span> <span class="n">lbg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ubg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.11, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:        0
+Number of nonzeros in Lagrangian Hessian.............:    19902
+
+Total number of variables............................:      200
+                     variables with only lower bounds:        0
+                variables with lower and upper bounds:      200
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:        0
+        inequality constraints with only lower bounds:        0
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        0
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  1.1258206e+01 0.00e+00 5.43e-01  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  7.8092583e+00 0.00e+00 7.04e-02  -1.0 2.90e-01    -  8.32e-01 1.00e+00f  1
+   2  2.8059021e+00 0.00e+00 2.75e-02  -1.7 6.10e-01    -  8.56e-01 1.00e+00f  1
+   3  7.9735197e-01 0.00e+00 2.56e-02  -2.5 5.86e-01    -  8.30e-01 1.00e+00f  1
+   4  4.6957248e-01 0.00e+00 3.89e-16  -2.5 3.47e-01    -  1.00e+00 1.00e+00f  1
+   5  4.0610971e-01 0.00e+00 5.07e-04  -3.8 2.30e-01    -  9.51e-01 1.00e+00f  1
+   6  3.9418705e-01 0.00e+00 4.22e-16  -3.8 1.36e-01    -  1.00e+00 1.00e+00f  1
+   7  3.9075820e-01 0.00e+00 7.22e-05  -5.7 7.49e-02    -  9.74e-01 1.00e+00f  1
+   8  3.9027053e-01 0.00e+00 3.03e-04  -5.7 2.86e-02    -  1.00e+00 8.39e-01f  1
+   9  3.9017046e-01 0.00e+00 1.22e-06  -5.7 1.36e-02    -  1.00e+00 9.99e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  3.9015880e-01 0.00e+00 5.91e-05  -8.6 4.00e-03    -  1.00e+00 9.35e-01f  1
+  11  3.9015679e-01 0.00e+00 1.11e-16  -8.6 1.96e-03    -  1.00e+00 1.00e+00f  1
+  12  3.9015656e-01 0.00e+00 1.52e-16  -8.6 8.68e-04    -  1.00e+00 1.00e+00f  1
+  13  3.9015654e-01 0.00e+00 1.47e-16  -8.6 3.48e-04    -  1.00e+00 1.00e+00f  1
+  14  3.9015653e-01 0.00e+00 2.17e-16  -8.6 8.04e-05    -  1.00e+00 1.00e+00f  1
+
+Number of Iterations....: 14
+
+                                   (scaled)                 (unscaled)
+Objective...............:   3.9015653462196176e-01    3.9015653462196176e-01
+Dual infeasibility......:   2.1747432450719620e-16    2.1747432450719620e-16
+Constraint violation....:   0.0000000000000000e+00    0.0000000000000000e+00
+Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
+Complementarity.........:   4.1114517841581608e-09    4.1114517841581608e-09
+Overall NLP error.......:   4.1114517841581608e-09    4.1114517841581608e-09
+
+
+Number of objective function evaluations             = 15
+Number of objective gradient evaluations             = 15
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 0
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 0
+Number of Lagrangian Hessian evaluations             = 14
+Total seconds in IPOPT                               = 0.044
+
+EXIT: Optimal Solution Found.
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |        0 (       0) 163.00us ( 10.87us)        15
+  nlp_grad_f  |        0 (       0) 284.00us ( 17.75us)        16
+  nlp_hess_l  |   2.00ms (142.86us)  13.72ms (979.79us)        14
+       total  |  47.00ms ( 47.00ms)  44.70ms ( 44.70ms)         1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below we recover the solution for reuse in system simulation. Observe that the simulation loop is essentially the same as the construction of the cost function but we implement just the time-stepping routines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndot_A_opt</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="n">xt_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xt_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xt_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">xt_A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0_num</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">xt_B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0_num</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">xt_C</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0_num</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">vertcat</span><span class="p">(</span><span class="n">xt_A</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xt_B</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xt_C</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">pn</span> <span class="o">=</span> <span class="n">ndot_A_opt</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">xt_A</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt_A</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_A</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+    <span class="n">xt_B</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt_B</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_B</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+    <span class="n">xt_C</span><span class="p">[</span><span class="n">ts</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt_C</span><span class="p">[</span><span class="n">ts</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">F_xdot_C</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to the quality deparment, the product is good to be delivered if its concentration is anywhere withing 5% of the prescribed value. A boolean array <code class="docutils literal notranslate"><span class="pre">good</span></code> is created for displaying. This could be used to predict when the exit valve feed barrels of product or when it should recycle/throw the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs_C_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">xs_C_num</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">xs_C_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">xs_C_num</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">good</span> <span class="o">=</span> <span class="p">(</span><span class="n">xt_C</span> <span class="o">&gt;=</span> <span class="n">xs_C_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xt_C</span> <span class="o">&lt;=</span> <span class="n">xs_C_max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next figure illustrates the expected dynamical behavior of the system. First concentration of <span class="math notranslate nohighlight">\(C\)</span> rises from zero to the prescribed value in about 20 steps, and because of the change in set-point it starts deviating from target at step 60 to reach the new value. It is also interesting to observe that command saturates at 85%, what indicates that production of the second target is a limiting case for this reactor. We respected the process window during 58.4% of the time.</p>
+<p>Because of how <code class="docutils literal notranslate"><span class="pre">matplotlib.step</span></code> works, to display properly the commands and responses we need to add an extra copy of last command to the end of the results. Using <code class="docutils literal notranslate"><span class="pre">where=&quot;post&quot;</span></code> is also required so that a command <em>starts</em> at the reference time-step it is supposed to. You can check the plotting behaviour with the following snippet.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">quality</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">good</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;u8&quot;</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">)</span>
+
+<span class="n">cmd</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ndot_A_opt</span> <span class="o">/</span> <span class="n">ndot_t</span><span class="p">)</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt_A</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_A$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt_B</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_B$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xt_C</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_C$&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xs_C_max</span><span class="p">,</span> <span class="s2">&quot;m--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_none_&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xs_C_min</span><span class="p">,</span> <span class="s2">&quot;m--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_none_&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xs_C_num</span><span class="p">,</span> <span class="s2">&quot;m-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_C$ (target)&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add *negative time* with initial flow rate.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">steps</span><span class="p">],</span> <span class="p">[</span><span class="n">ndot_A_ini</span><span class="o">/</span> <span class="n">ndot_t</span><span class="p">,</span> <span class="o">*</span><span class="n">cmd</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$Q_A$ (relative)&quot;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">xs_C_min</span><span class="p">,</span> <span class="n">xs_C_max</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">good</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected quality level at </span><span class="si">{</span><span class="n">quality</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mole fractions and relative flow rate of A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Action step number over prediction horizon&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">Np</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b2aafae62c567b7ba028d3e30b84c9e7cce4188ca337b6f084d608528f9e4960.png" src="../../_images/b2aafae62c567b7ba028d3e30b84c9e7cce4188ca337b6f084d608528f9e4960.png" />
+</div>
+</div>
+<p>There are many ways you could propose exercises from this guided study:</p>
+<ul class="simple">
+<li><p>Implement a higher order time-stepping scheme.</p></li>
+<li><p>Provide simultaneous simulation/optimization with multiple-shooting.</p></li>
+<li><p>Investigate role of total flow rate or reactor size over quality.</p></li>
+<li><p>Increase error out of target value range (shadowed zones in figure).</p></li>
+<li><p>Use the solver in a simulated control loop with random noise in measurements.</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python\mpc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Fundamentals of MPC</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="part-b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Refactoring</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
