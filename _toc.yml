@@ -13,3 +13,5 @@ chapters:
   - file: python/mpc/part-c
 
 - file: julia/intro
+  sections:
+  - file: julia/julia101
