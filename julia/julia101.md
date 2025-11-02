@@ -611,7 +611,9 @@ Your tools:
 
 Your goal:
 
-<center>
-    <img src="media/newton_cooling.png" alt="Newton cooling" width="50%"/>
-</center>
-
+```{image} media/newton_cooling.png
+:alt: newton-cooling
+:class: bg-primary mb-1
+:width: 80%
+:align: center
+```
