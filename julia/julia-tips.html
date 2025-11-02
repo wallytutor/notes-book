@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to Julia &#8212; Notes Book</title>
+    <title>Julia tips &#8212; Notes Book</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'julia/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia/julia-tips';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Julia 101" href="julia101.html" />
-    <link rel="prev" title="Wrapping up" href="../python/mpc/part-c.html" />
+    <link rel="prev" title="Julia 101" href="julia101.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,9 +185,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-c.html">Wrapping up</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Introduction to Julia</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Introduction to Julia</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="julia101.html">Julia 101</a></li>
-<li class="toctree-l2"><a class="reference internal" href="julia-tips.html">Julia tips</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Julia tips</a></li>
 </ul>
 </details></li>
 </ul>
@@ -262,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fjulia/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fjulia/julia-tips.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +291,7 @@
       
       
       
-      <li><a href="../_sources/julia/intro.md" target="_blank"
+      <li><a href="../_sources/julia/julia-tips.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +362,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,11 +375,30 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to Julia</h1>
+    <h1>Julia tips</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further">Going further</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-julia-organizations">A few Julia organizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help-in-the-wild">Getting help in the wild</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selected-julia-packages">Selected Julia packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-and-graphics">Plotting and graphics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-methods">Numerical methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics-and-thermodynamics">Kinetics and Thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-programming">GPU Programming</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -388,10 +408,103 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-julia">
-<h1>Introduction to Julia<a class="headerlink" href="#introduction-to-julia" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="julia-tips">
+<h1>Julia tips<a class="headerlink" href="#julia-tips" title="Link to this heading">#</a></h1>
+<section id="going-further">
+<h2>Going further<a class="headerlink" href="#going-further" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.julialang.org/en/v1/">Julia Documentation</a>: in this page you find the whole documentation of Julia.</p>
+<ul>
+<li><p>Generally after taking this short course you should be able to navigate and understand a good part of the <a class="reference external" href="https://docs.julialang.org/en/v1/manual/getting-started/">Manual</a>.</p></li>
+<li><p>It is also interesting to check-out <a class="reference external" href="https://docs.julialang.org/en/v1/base/base/">Base</a> to explore what is built-in to Julia and avoid reinventing the wheel!</p></li>
+<li><p>Notice that not everything <em>built-in</em> to Julia is available under <code class="docutils literal notranslate"><span class="pre">Base</span></code> and some functionalities are available in the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/ArgTools/">Standard Library</a> which consists of <em>built-in</em> packages that are shipped with Julia.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://juliaacademy.com/">Julia Academy</a>: you can find a few courses conceived by important Julia community members in this page. The <a class="reference external" href="https://juliaacademy.com/p/intro-to-julia">Introduction to Julia</a> is a longer version of what you learned here.</p></li>
+<li><p><a class="reference external" href="https://www.python.org/">Python</a>: Julia does not replace Python (yet) because it is much younger. We have seen how to call Python from Julia and the computational scientist should be well versed in both languages as of today.</p></li>
+<li><p><a class="reference external" href="https://juliapackages.com/">Julia Packages</a>: the ecosystem of Julia is reaching a good maturity level and you can explore it to find packages suiting your needs in this page.</p></li>
+<li><p><a class="reference external" href="https://exercism.org/tracks/julia">Exercism Julia Track</a>: this page proposes learning through exercises, it is good starting point to get the fundamentals of algorithmic thinking.</p></li>
+<li><p><a class="reference external" href="https://juliadatascience.io/">Julia Data Science</a>: a very straightforward book on Data Science in Julia; you can learn more about tabular data and review some plotting with Makie here.</p></li>
+<li><p><a class="reference external" href="https://computationalthinking.mit.edu/Fall24/">Introduction to Computational Thinking</a>: this MIT course by Julia’s creator <a class="reference external" href="https://math.mit.edu/~edelman/">Dr. Alan Edelman</a> gives an excellent overview of how powerful the language can be in several scientific domains.</p></li>
+<li><p><a class="reference external" href="https://book.sciml.ai/">SciML Book</a>: this course enters more avanced topics and might be interesting as a final learning resource for those into applied mathematics and numerical simulation.</p></li>
+<li><p><a class="reference external" href="https://juliahub.com/">JuliaHub</a>: this company proposes a cloud platform (non-free) for performing computations with Julia. In its page you find a few useful and good quality learning materials.</p></li>
+</ul>
+</section>
+<section id="a-few-julia-organizations">
+<h2>A few Julia organizations<a class="headerlink" href="#a-few-julia-organizations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sciml.ai/">SciML</a>: don’t be tricked by its name, its field of application goes way beyond what we understand by Machine Learning. SciML is probably the best curated set of open source scientific tools out there. Take a look at the list of available packages <a class="reference external" href="https://docs.sciml.ai/Overview/stable/overview/">here</a>. This last link is probably the best place to search for a generic package for Scientific Computing.</p></li>
+<li><p><a class="reference external" href="https://jump.dev/">JuMP</a>: it is a <em>modeling language</em> for optimization problems inside Julia. It is known to work well with several SciML packages and allows to state problems in a readable way. Its documentation has its own <a class="reference external" href="https://jump.dev/JuMP.jl/stable/tutorials/getting_started/getting_started_with_julia/">Getting started with Julia</a> that you may use to review this module.</p></li>
+<li><p><a class="reference external" href="https://github.com/JuliaData">JuliaData</a>: all about tabular data and related manipulations. The parents of <a class="reference external" href="https://dataframes.juliadata.org/stable/">DataFrames.jl</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/JuliaMath">Julia Math</a>: several math-related packages. Most basic users coming from <em>spreadsheet hell</em> might be interested in <a class="reference external" href="https://juliamath.github.io/Polynomials.jl/stable/">Polynomials.jl</a> from this family.</p></li>
+<li><p><a class="reference external" href="https://juliamolsim.github.io/">JuliaMolsim</a>: molecular simulation in Julia, from DFT to Molecular dynamics.</p></li>
+</ul>
+</section>
+<section id="getting-help-in-the-wild">
+<h2>Getting help in the wild<a class="headerlink" href="#getting-help-in-the-wild" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://discourse.julialang.org/">Julialang Discourse</a>: instead of Stackoverflow, most Julia discussion threads are hosted in this page.</p></li>
+<li><p><a class="reference external" href="https://julialang.zulipchat.com/">Zulipchat Julialang</a>: some discussion (specially regarding development) is hold at Zulipchat.</p></li>
+</ul>
+</section>
+<section id="selected-julia-packages">
+<h2>Selected Julia packages<a class="headerlink" href="#selected-julia-packages" title="Link to this heading">#</a></h2>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.julialang.org/en/v1/">Julia Programming</a></p></li>
+<li><p><a class="reference external" href="https://juliagraphs.org/Graphs.jl/dev/">Graphs.jl</a></p></li>
+<li><p><a class="reference external" href="https://jverzani.github.io/Mustache.jl/dev/">Mustache.jl</a></p></li>
+<li><p><a class="reference external" href="https://julialang.github.io/PackageCompiler.jl/stable/index.html">PackageCompiler.jl</a></p></li>
+<li><p><a class="reference external" href="https://timholy.github.io/Revise.jl/stable/">Revise.jl</a></p></li>
+</ul>
+</section>
+<section id="plotting-and-graphics">
+<h3>Plotting and graphics<a class="headerlink" href="#plotting-and-graphics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.makie.org/stable/">Makie.jl</a></p></li>
+<li><p><a class="reference external" href="https://docs.juliaplots.org/stable/">Plots.jl</a></p></li>
+<li><p><a class="reference external" href="https://winston.readthedocs.io/en/latest/">Winston.jl</a></p></li>
+<li><p><a class="reference external" href="https://juliagraphics.github.io/Luxor.jl/stable/">Luxor.jl</a></p></li>
+</ul>
+</section>
+<section id="numerical-methods">
+<h3>Numerical methods<a class="headerlink" href="#numerical-methods" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ferrite-fem.github.io/Ferrite.jl/stable/">Ferrite.jl</a></p></li>
+<li><p><a class="reference external" href="https://xiaotianbai.com/Kinetic.jl/dev/">Kinetic.jl</a></p></li>
+<li><p><a class="reference external" href="https://docs.sciml.ai/ModelingToolkit/stable/">ModelingToolkit.jl</a></p></li>
+<li><p><a class="reference external" href="https://juliamath.github.io/Roots.jl/stable/">Roots.jl</a></p></li>
+<li><p><a class="reference external" href="https://symbolics.juliasymbolics.org/stable/">Symbolics.jl</a></p></li>
+<li><p><a class="reference external" href="https://j-fu.github.io/VoronoiFVM.jl/dev/">VoronoiFVM.jl</a></p></li>
+</ul>
+</section>
+<section id="kinetics-and-thermodynamics">
+<h3>Kinetics and Thermodynamics<a class="headerlink" href="#kinetics-and-thermodynamics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.sciml.ai/Catalyst/stable/">Catalyst.jl</a></p></li>
+<li><p><a class="reference external" href="https://clapeyronthermo.github.io/Clapeyron.jl/dev/">Clapeyron.jl</a></p></li>
+<li><p><a class="reference external" href="https://docs.dftk.org/stable/">DFTK.jl</a></p></li>
+<li><p><a class="reference external" href="https://github.com/braamvandyk/SteamTables.jl">SteamTables.jl</a></p></li>
+</ul>
+</section>
+<section id="machine-learning">
+<h3>Machine learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://fluxml.ai/Flux.jl/stable/">Flux.jl</a></p></li>
+<li><p><a class="reference external" href="https://lux.csail.mit.edu/">Lux.jl</a></p></li>
+<li><p><a class="reference external" href="https://docs.sciml.ai/NeuralPDE/stable/">NeuralPDE.jl</a></p></li>
+<li><p><a class="reference external" href="https://fluxml.ai/Zygote.jl/stable/">Zygote.jl</a></p></li>
+</ul>
+</section>
+<section id="gpu-programming">
+<h3>GPU Programming<a class="headerlink" href="#gpu-programming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cuda.juliagpu.org/stable/">CUDA.jl</a></p></li>
+<li><p><a class="reference external" href="https://github.com/JuliaGPU/Adapt.jl">Adapt.jl</a></p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -425,22 +538,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../python/mpc/part-c.html"
+       href="julia101.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Wrapping up</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="julia101.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Julia 101</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -448,6 +552,32 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further">Going further</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-julia-organizations">A few Julia organizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help-in-the-wild">Getting help in the wild</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selected-julia-packages">Selected Julia packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-and-graphics">Plotting and graphics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-methods">Numerical methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics-and-thermodynamics">Kinetics and Thermodynamics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-programming">GPU Programming</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
