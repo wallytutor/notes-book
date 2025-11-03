@@ -20,5 +20,3 @@ solids.cp_mass * (species[0].molecular_weight / 1000)
 solids.mass_fraction_dict()
 
 solids.species_names
-
-
