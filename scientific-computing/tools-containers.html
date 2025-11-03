@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using containers &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scientific-computing/tools-containers';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working on Windows" href="system-windows.html" />
+    <link rel="prev" title="Git version control" href="tools-git.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="introduction.html">Scientific computing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tools-git.html">Git version control</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system-linux.html">Working on Linux</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/mpc/intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fscientific-computing/tools-containers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/scientific-computing/tools-containers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Using containers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-podman">Using Podman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-apptainer">Using Apptainer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apptainer-and-environment">Apptainer and environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-workflow">Build workflow</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="using-containers">
+<h1>Using containers<a class="headerlink" href="#using-containers" title="Link to this heading">#</a></h1>
+<section id="using-podman">
+<h2>Using Podman<a class="headerlink" href="#using-podman" title="Link to this heading">#</a></h2>
+<p>In the open source community <a class="reference external" href="https://podman.io/">podman</a> takes the place of <a class="reference external" href="https://www.docker.com/">docker</a> for the creation of application containers. It mimics the commercial software to allow developers work with both tools <em>almost</em> interchangeably. It is not uncommon to find people creating aliases of <code class="docutils literal notranslate"><span class="pre">docker</span></code> in their sandbox environments to point to their <code class="docutils literal notranslate"><span class="pre">podman</span></code> executable (some Linux distributions even have packages dedicated to this automatic override). One must be aware that although the command interfaces are very similar, they are not the <em>exactly</em> same and advance usage requires mastering each of them individually.</p>
+<p>The following summarizes some daily life commands with <code class="docutils literal notranslate"><span class="pre">podman</span></code>.</p>
+<ul class="simple">
+<li><p>List available images in a local machine:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>images
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run image <code class="docutils literal notranslate"><span class="pre">&lt;img&gt;</span></code> interactively using bash:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="s1">&#39;&lt;img&gt;&#39;</span><span class="w"> </span>/bin/bash
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run image exposing port <code class="docutils literal notranslate"><span class="pre">&lt;container&gt;</span></code> to host at <code class="docutils literal notranslate"><span class="pre">&lt;host&gt;</span></code>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;&lt;container&gt;:&lt;host&gt;&#39;</span><span class="w"> </span><span class="s1">&#39;&lt;img&gt;&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Dump image <code class="docutils literal notranslate"><span class="pre">&lt;img&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;img&gt;.tar</span></code> for portability:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span><span class="s1">&#39;&lt;img&gt;.tar&#39;</span><span class="w"> </span><span class="s1">&#39;&lt;img&gt;&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List all available containers (there might be external/hidden, so use <code class="docutils literal notranslate"><span class="pre">-a</span></code>):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>container<span class="w"> </span>ls<span class="w"> </span>-a
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove a given container by ID (only the first 2-3 characters of ID are required):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>container<span class="w"> </span>rm<span class="w"> </span><span class="s1">&#39;&lt;ID&gt;&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove a given image by ID:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>rmi<span class="w"> </span><span class="s1">&#39;&lt;ID&gt;&#39;</span>
+<span class="c1"># podman image rm &#39;&lt;ID&gt;&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="using-apptainer">
+<h2>Using Apptainer<a class="headerlink" href="#using-apptainer" title="Link to this heading">#</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">podman</span></code> locally is great, but packaging redistributable containers for reuse in HPC is much smoother with <a class="reference external" href="https://apptainer.org/">Apptainer</a>. The tool started at <a class="reference external" href="https://www.lbl.gov/">Lawrence Berkeley National Laboratory</a> can be <a class="reference external" href="https://github.com/apptainer/apptainer/releases">downloaded</a> for several Linux systems and deployed locally.</p>
+<p>Under Debian (or its variants, as Ubuntu), navigate to the download directory and install with the following, taking care to replace the right version:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINER_VERSION</span><span class="o">=</span><span class="m">1</span>.3.6_amd64.deb
+
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>apptainer_<span class="si">${</span><span class="nv">APPTAINER_VERSION</span><span class="si">}</span>
+<span class="c1"># sudo dpkg -i apptainer-dbgsym_${APPTAINER_VERSION}</span>
+<span class="c1"># sudo dpkg -i apptainer-suid_${APPTAINER_VERSION}</span>
+<span class="c1"># sudo dpkg -i apptainer-suid-dbgsym_${APPTAINER_VERSION}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Converting a local <code class="docutils literal notranslate"><span class="pre">podman</span></code> <em>tar-dump</em> into a Singularity image:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;&lt;img&gt;.sif&quot;</span><span class="w"> </span><span class="s2">&quot;docker-archive://&lt;img&gt;.tar&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Running an <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> image as a non-root user is as simple as:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span><span class="s1">&#39;&lt;img&gt;.sif&#39;</span>
+</pre></div>
+</div>
+<p>Although Apptainer has its own image scripting system through <a class="reference external" href="https://apptainer.org/docs/user/latest/definition_files.html"><em>definition files</em></a>, personal experience has shown that the workflow is much smoother by generating container files and then converting them to Singularity format as explained above.</p>
+<p>There reason is that container files generate intermediate check-points from which they will continue the build if some failure is encountered, <em>i.e.</em> each <code class="docutils literal notranslate"><span class="pre">RUN</span></code> command in a container will generate a partial image.</p>
+<p>When working with Apptainer definition files, failures imply full rebuild of the image, what might become extremely boring when trying to compile new code. A workaround is to use a sequence of definition files, one importing from the dump of the previous one, but that not only will generate a large size of temporary dumps as it will become difficult to manage.</p>
+<p>After getting excited by the Apptainer definition files because they do not need chaining of commands with a <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span> <span class="pre">\</span></code> to make a shell block, I personally gave up on them after loosing a few days of my life recompiling again and again… so for now I stick with the container creation and conversion workflow discussed in more detail below.</p>
+<p>Another option with Apptainer is to run instances on the background, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>instance<span class="w"> </span>start<span class="w"> </span>-B<span class="w"> </span><span class="nv">$PWD</span><span class="w"> </span><span class="s1">&#39;&lt;file-name&gt;.sif&#39;</span><span class="w"> </span><span class="s1">&#39;&lt;instance-name&gt;&#39;</span>
+apptainer<span class="w"> </span>shell<span class="w"> </span><span class="s1">&#39;instance://&lt;instance-name&gt;&#39;</span>
+</pre></div>
+</div>
+<p>Other useful/relevant commands in this context are <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">instance</span> <span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">instance</span> <span class="pre">stop</span> <span class="pre">&lt;instance-name&gt;</span> </code>.</p>
+</section>
+<section id="apptainer-and-environment">
+<h2>Apptainer and environment<a class="headerlink" href="#apptainer-and-environment" title="Link to this heading">#</a></h2>
+<p>Since <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> makes use of <em>user space</em>, sourcing of applications is not done as root, so one must edit add to their <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> if path configuration is desired and re-source that file when activating a container. For instance, the required environment variables for #OpenFOAM are provided <code class="docutils literal notranslate"><span class="pre">FOAM_SOURCE</span></code> file given below; in the <em>host system</em> outside the container it does not exist, so adding a test in <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> is required. Once you activate the container with <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span> <span class="pre">&lt;image-name&gt;.sif</span></code>, by calling <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> the environment will be properly set.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">FOAM_SOURCE</span><span class="o">=</span>/opt/openfoam12/OpenFOAM-12/etc/bashrc
+
+<span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">FOAM_SOURCE</span><span class="si">}</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span><span class="si">${</span><span class="nv">FOAM_SOURCE</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Another approach is to execute the SIF image once, source the required variables required in the container, dump <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">&gt;</span> <span class="pre">draft.env</span></code>, <a class="reference external" href="https://github.com/wallytutor/learning-by-teaching/blob/main/containers/clean-env.py">edit the file</a> as required and then wrap a call with contextualized environment as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>openfoam12<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">FOAM_NAME</span><span class="o">=</span><span class="nv">$HOME</span>/Applications/openfoam12-rockylinux9
+<span class="w">    </span>apptainer<span class="w"> </span>run<span class="w"> </span>--cleanenv<span class="w"> </span>--env-file<span class="w"> </span><span class="si">${</span><span class="nv">FOAM</span><span class="si">}</span>.env<span class="w"> </span><span class="si">${</span><span class="nv">FOAM</span><span class="si">}</span>.sif
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="build-workflow">
+<h2>Build workflow<a class="headerlink" href="#build-workflow" title="Link to this heading">#</a></h2>
+<p>Using both tools can be roughly automated by generating a <code class="docutils literal notranslate"><span class="pre">podman</span></code> image, dumping it into a portable format, then converting to Singularity format. Below we illustrate the workflow for an arbitrary container file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set project name:</span>
+<span class="nv">project</span><span class="o">=</span><span class="s2">&quot;project&quot;</span>
+
+<span class="c1"># Ensure a fresh start:</span>
+<span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.tar&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.tar&quot;</span>
+<span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.sif&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.sif&quot;</span>
+
+<span class="c1"># Configure path to applications:</span>
+<span class="nv">PODMAN</span><span class="o">=</span>/usr/bin/podman
+<span class="nv">APPTAINER</span><span class="o">=</span>/usr/bin/apptainer
+
+<span class="c1"># Avoid the following warning:  WARN[0000] &quot;/&quot; is not a shared mount, this</span>
+<span class="c1"># could cause issues or missing mounts with rootless containers.</span>
+<span class="c1"># sudo mount --make-rshared /</span>
+
+<span class="c1"># Build the container image:</span>
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">PODMAN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;Containerfile&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Dump container to portable .tar file:</span>
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">PODMAN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.tar&quot;</span><span class="w"> </span><span class="s2">&quot;localhost/</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Convert container into apptainer:</span>
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">APPTAINER</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.sif&quot;</span><span class="w"> </span><span class="s2">&quot;docker-archive://</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.tar&quot;</span>
+
+<span class="c1"># Remove tar-file:</span>
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.tar&quot;</span>
+
+<span class="c1"># After making sure it is working, remove the image (do not automate!):</span>
+<span class="c1"># &quot;${PODMAN}&quot; rmi &quot;${project}&quot;</span>
+</pre></div>
+</div>
+<p>Now you can move the SIF image to another computer (for instance, you prepared this in a PC with access to the Internet to later use it in an isolated HPC), open a new terminal or <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apptainer<span class="w"> </span>run<span class="w"> </span>-B<span class="w"> </span><span class="nv">$PWD</span><span class="w"> </span><span class="s1">&#39;/path/to/project/image.sif&#39;</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> does not resolve symbolic links, so <code class="docutils literal notranslate"><span class="pre">$PWD</span></code> above will fail if trying to run from a path that contains a link; navigate to the actual directory containing the project before running the image to get your files visible.</p>
+<p><strong>Note:</strong> use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">run</span></code> when you want to execute the container’s default application or task; on the other hand, use <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">shell</span></code> when you need an interactive session to explore or debug the container. For the OpenFOAM example above, both are very similar as no default application is launched, but a shell session itself.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./scientific-computing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tools-git.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Git version control</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="system-windows.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working on Windows</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-podman">Using Podman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-apptainer">Using Apptainer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apptainer-and-environment">Apptainer and environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-workflow">Build workflow</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

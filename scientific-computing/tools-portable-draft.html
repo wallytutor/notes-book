@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kompanion &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scientific-computing/tools-portable-draft';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system-linux.html">Working on Linux</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/mpc/intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc/part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fscientific-computing/tools-portable-draft.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/scientific-computing/tools-portable-draft.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Kompanion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kompanion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work">How does it work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-limitations">Known limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tested-packages">Tested packages</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setup">General setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-explained">Workflow explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-setup">Initial setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#msys2">MSYS2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-languages">Programming languages</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia">Julia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#octave">Octave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruby">Ruby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rust">Rust</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lisp">LISP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-and-related">LaTeX and related</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#software-specific-instructions">Software specific instructions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dualsphysics">DualSPHysics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mfix">MFiX</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Julia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab">Jupyter lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh">gmsh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphviz">Graphviz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code">VS Code</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="kompanion">
+<h1>Kompanion<a class="headerlink" href="#kompanion" title="Link to this heading">#</a></h1>
+<p>A portable toolbox setup for working in Scientific Computing under Windows.</p>
+<p><strong>NOTE:</strong> before using this, please be aware that your company/university probably forbids the use of portable tools outside sandboxed systems. It is your responsability to use this toolbox only in systems where you are allowed to. The developper does not hold any resposibility on your failure to respect your local regulations.</p>
+<p>Please notice that for teaching purposes there is also a simpler <a class="reference external" href="https://github.com/wallytutor/julia101">Julia101</a> environment setup. This repository is mostly focused on the conception of a production working environment.</p>
+<section id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Link to this heading">#</a></h2>
+<p><em>Kompanion</em> is intended to be used as a portable environment with <em>almost</em> all batteries included. Applications are placed under <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory and all configuration of paths and other required environment variables are provided by <em>batch scripts</em>. Everything revolves around <a class="reference external" href="https://code.visualstudio.com/download">VS Code</a>; you launch the editor through a dedicated script and everything else is available in its terminal. That said, the whole of the ecosystem is command line based, but this is scientific computing, if you don’t know command line you are in the wrong job. It is intended to leave minimal track on host system (probably a few files and directories on your user home directory or under <em>AppData</em>), but this is not enforced in its development, so take care if you are not allowed to execute some software in a given computer.</p>
+<p><strong>NOTE:</strong> by <em>almost</em> all batteries included it is meant that all target applications can be deployed by the user with one exception, <a class="reference external" href="https://learn.microsoft.com/en-us/message-passing-interface/microsoft-mpi">Microsoft MPI </a>. That requires administration rights and unless you have it you will need to ask your local IT for installing it. If your applications do not require parallel computing, then you have everything you need here.</p>
+</section>
+<section id="known-limitations">
+<h2>Known limitations<a class="headerlink" href="#known-limitations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>As already stated, MPI support still requires admin rights.</p></li>
+<li><p>You cannot pin the editor to the taskbar (because of how sourcing environment works), but you can create a shortcut to <code class="docutils literal notranslate"><span class="pre">kode.vbs</span></code> in your desktop.</p></li>
+</ul>
+</section>
+<section id="tested-packages">
+<h2>Tested packages<a class="headerlink" href="#tested-packages" title="Link to this heading">#</a></h2>
+<p>The above was tested with the following versions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Group</p></th>
+<th class="head"><p>Software</p></th>
+<th class="head text-left"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Base</p></td>
+<td><p>VS Code</p></td>
+<td class="text-left"><p>1.96.4</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Base</p></td>
+<td><p>Neovim</p></td>
+<td class="text-left"><p>0.10.4</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Base</p></td>
+<td><p>Notepad++</p></td>
+<td class="text-left"><p>8.7.8</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Base</p></td>
+<td><p>Git</p></td>
+<td class="text-left"><p>2.47.1.2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Base</p></td>
+<td><p>MSYS2</p></td>
+<td class="text-left"><p>20250221</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Language</p></td>
+<td><p>Julia</p></td>
+<td class="text-left"><p>1.11.3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Language</p></td>
+<td><p>WinPython</p></td>
+<td class="text-left"><p>3.13.1.0slim</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Language</p></td>
+<td><p>Octave</p></td>
+<td class="text-left"><p>9.3.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Language</p></td>
+<td><p>Ruby</p></td>
+<td class="text-left"><p>3.3.7-1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Language</p></td>
+<td><p>Rust</p></td>
+<td class="text-left"><p>1.85</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Language</p></td>
+<td><p>Quarto</p></td>
+<td class="text-left"><p>1.6.42</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Language</p></td>
+<td><p>LISP (Portacle)</p></td>
+<td class="text-left"><p>1.5.0.2712</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>MiKTeX</p></td>
+<td class="text-left"><p>24.1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>JabRef</p></td>
+<td class="text-left"><p>5.15</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>pandoc</p></td>
+<td class="text-left"><p>3.6.2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>inkscape</p></td>
+<td class="text-left"><p>1.4</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>Fiji</p></td>
+<td class="text-left"><p>1.54p (Java 1.8.0_322)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>FreeCAD</p></td>
+<td class="text-left"><p>1.0.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>Blender</p></td>
+<td class="text-left"><p>4.3.2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>SALOME</p></td>
+<td class="text-left"><p>9.13.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>gmsh</p></td>
+<td class="text-left"><p>4.13.1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>MeshLab</p></td>
+<td class="text-left"><p>2023.12d</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>ParaView</p></td>
+<td class="text-left"><p>5.13.2-MPI</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>gnuplot</p></td>
+<td class="text-left"><p>6.0.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>Elmer</p></td>
+<td class="text-left"><p>9.0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>Scilab</p></td>
+<td class="text-left"><p>2025.1.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>SU2</p></td>
+<td class="text-left"><p>8.1.0-mpi</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>RadCal</p></td>
+<td class="text-left"><p>2.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>iperf</p></td>
+<td class="text-left"><p>3.18</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>MFiX</p></td>
+<td class="text-left"><p>24.4.1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>Zettlr</p></td>
+<td class="text-left"><p>3.4.3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>Cantera</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>CasADi</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>DualSPHysics</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>DWSIM</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>FreeFEM++</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Extra</p></td>
+<td><p>LAMMPS</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Extra</p></td>
+<td><p>OpenModelica</p></td>
+<td class="text-left"><p>Upcoming…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="general-setup">
+<h1>General setup<a class="headerlink" href="#general-setup" title="Link to this heading">#</a></h1>
+<p>First of all, <a class="reference external" href="https://github.com/wallytutor/Kompanion/archive/refs/heads/main.zip">download</a> or clone this repository somewhere in the target computer. You can consider using <a class="reference external" href="https://github.com/apps/desktop">GitHub Desktop</a> at this stage, assuming you do not have Git yet or you lack the skills to use it. Unless stated otherwise, everything that follows here is performed under <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory, so we refer to its sub-directoires directly, <em>i.e.</em> <code class="docutils literal notranslate"><span class="pre">downloads/</span></code> means <code class="docutils literal notranslate"><span class="pre">bin/downloads/</span></code>.</p>
+<p><strong>IMPORTANT:</strong> After installing <code class="docutils literal notranslate"><span class="pre">VS</span> <span class="pre">Code</span></code>, do <strong>NOT</strong> enable its <a class="reference external" href="https://code.visualstudio.com/docs/editor/portable">portable mode</a> because the VBS file for launching it will point to a specific user-data folder.</p>
+<p><strong>NOTE:</strong> After finishing the configuration in the following sub-sections, you can test the setup by launching VS Code with prototype launcher <code class="docutils literal notranslate"><span class="pre">code.bat</span></code>. If everything is properly set, the above applications will be available in the command prompt of the editor. This script is provided only for testing (because it will show all the startup logs). The production version is <code class="docutils literal notranslate"><span class="pre">kode.vbs</span></code> in the repository root directory.</p>
+<section id="workflow-explained">
+<h2>Workflow explained<a class="headerlink" href="#workflow-explained" title="Link to this heading">#</a></h2>
+<p>This section illustrates the generalities of how do integrate portable software in the toolbox. Before proceding with any installation, make sure to read all the elements provided below; simply trying to follow instructions in a step-by-step fashion will certainly lead to failure and frustration.</p>
+<p><strong>IMPORTANT:</strong> You need to be aware that there are two common practices of compressing a portable software: (1) some editors place everything in a directory and compress the directory, while others (2) pack everything under the root of the compressed file. Windows built-in system allows your to navigate compressed files as part of the filesystem, so inspect which of the above methods was used. If the later is detected, take care to select the right option to ensure the contents are extracted to a new directory. Several packages are stored directly at <em>zip</em> root and that may be messy to clean if extracted without the above precautions.</p>
+<p><strong>IMPORTANT:</strong> Since setting up the environment requires editing <a class="reference external" href="https://www.tutorialspoint.com/batch_script/index.htm">batch scripts</a>, be aware that to open them you cannot <em>click</em> the file, but <em>right-click</em> and <em>edit</em>, as Windows see these as executables. In these files, lines starting by <code class="docutils literal notranslate"><span class="pre">&#64;REM</span></code> are seem as comments and generally explain something about what follow them.</p>
+<p>For each of the applications you will install, make sure to perform the following generic steps:</p>
+<ol class="arabic simple">
+<li><p>Download the portable version of the application, generally a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> compressed file, and save it to <code class="docutils literal notranslate"><span class="pre">downloads/</span></code>. Sometimes the normal installer of an application already supports portable mode.</p></li>
+<li><p>Extract the compressed file to a dedicated folder under <code class="docutils literal notranslate"><span class="pre">apps/</span></code> directory.</p></li>
+<li><p>Configure the application in a dedicated script under <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory.</p></li>
+<li><p>For non-base applications, you might need to add the script to <code class="docutils literal notranslate"><span class="pre">activate.bat</span></code>, which is responsible by making sure all the executables may be found in your environment.</p></li>
+</ol>
+</section>
+<section id="initial-setup">
+<h2>Initial setup<a class="headerlink" href="#initial-setup" title="Link to this heading">#</a></h2>
+<p>These are the required steps to get your system working for the first time:</p>
+<ol class="arabic simple">
+<li><p>Go to VS Code <a class="reference external" href="https://code.visualstudio.com/download">download page</a> and get the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> version for <code class="docutils literal notranslate"><span class="pre">x64</span></code> system (<code class="docutils literal notranslate"><span class="pre">Arm64</span></code> is not supported here). Extract it to <code class="docutils literal notranslate"><span class="pre">apps/</span></code> and copy the name of VS Code directory to edit <code class="docutils literal notranslate"><span class="pre">scripts/base-vscode.bat</span></code> variable <code class="docutils literal notranslate"><span class="pre">VSCODE_DIR</span></code>.</p></li>
+<li><p>Go to Git <a class="reference external" href="https://git-scm.com/download/win">download page</a> and select <em>64-bit Git for Windows Portable</em>, download it and move the file to <code class="docutils literal notranslate"><span class="pre">downloads</span></code>. Notice that this is not a compressed file <em>per se</em>, but it is desguised as an executable. Double-click it and accept the default <code class="docutils literal notranslate"><span class="pre">PortableGit</span></code> installation directory. After extraction finishes, move it to <code class="docutils literal notranslate"><span class="pre">apps/</span></code>; there is nothing left to configure, but you can inspect <code class="docutils literal notranslate"><span class="pre">scripts/base-git.bat</span></code>.</p></li>
+<li><p>(optional) Go to Neovim <a class="reference external" href="https://github.com/neovim/neovim/releases">download page</a> and select the zip version for Windows. Follow the standard extration-installation procedure explained above. <strong>Note:</strong> the automation of configuration path for <code class="docutils literal notranslate"><span class="pre">.vim/</span></code> directory is yet to be done.</p></li>
+</ol>
+</section>
+<section id="msys2">
+<h2>MSYS2<a class="headerlink" href="#msys2" title="Link to this heading">#</a></h2>
+<p>MSYS2 environment is useful for developing native Windows applications and programming in languages as C, C++, Fortran, and Rust. Kompanion VS Code configuration will automatically include this environment to its available terminal lists, what might fail if you do not install it. To get it working do the following:</p>
+<ul class="simple">
+<li><p>Go to MSYS2 <a class="reference external" href="https://www.msys2.org/">page</a> and save the installer to <code class="docutils literal notranslate"><span class="pre">downloads</span></code>.</p></li>
+<li><p>Run the installer and change installation path to point to <code class="docutils literal notranslate"><span class="pre">apps/msys64</span></code> instead of the default <code class="docutils literal notranslate"><span class="pre">C:/msys64</span></code> (requiring admin rights).</p></li>
+<li><p>Once finished, launch an <a class="reference external" href="https://www.msys2.org/docs/environments/">UCRT64</a> environment as proposed in the installation guide. Install at least the following:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mingw-w64-ucrt-x86_64-toolchain<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mingw-w64-ucrt-x86_64-binutils<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mingw-w64-ucrt-x86_64-gcc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mingw-w64-ucrt-x86_64-gcc-fortran
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Full package list is provided <a class="reference external" href="https://packages.msys2.org/queue">here</a>.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="programming-languages">
+<h1>Programming languages<a class="headerlink" href="#programming-languages" title="Link to this heading">#</a></h1>
+<p>The following provides instructions for some languages you might wish to have fully integrated to your environment. For lower level languages, please consider using MSYS2 as described in its dedicated section.</p>
+<p>It is strongly recommended to install <a class="reference external" href="https://quarto.org/docs/download/">Quarto</a> as a supporting tool for publishing reports from Julia and Python. Please notice that Jupyter environment handled automatically by Python post-installation. Upon the first time you launch Julia, it will globally install IJulia and Pluto for the same end.</p>
+<p><strong>Warning:</strong> for now having both Rust and Octave fully operational in command-line is not working. This should not be a problem as Octave can be launched with its user-interface and that remain the most popular/recommended way of using it.</p>
+<p><strong>Warning:</strong> For a fully operational <em>Jupyter notebook</em> environment, other the LaTeX support discussed in its dedicatet section, you also need both <code class="docutils literal notranslate"><span class="pre">pandoc</span></code> and <code class="docutils literal notranslate"><span class="pre">inkscape</span></code>.</p>
+<section id="julia">
+<h2>Julia<a class="headerlink" href="#julia" title="Link to this heading">#</a></h2>
+<p>Go to Julia <a class="reference external" href="https://julialang.org/downloads/">download page</a> and select the latest stable Windows 64-bit portable version. Move the file to <code class="docutils literal notranslate"><span class="pre">downloads</span></code> and extract it, then move the resulting folder to <code class="docutils literal notranslate"><span class="pre">apps</span></code>. You might need to edit <code class="docutils literal notranslate"><span class="pre">scripts/base-julia.bat</span></code>. Notice that in this file it is not the extracted directory name that must be provided, but Julia semantic version.</p>
+</section>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
+<p>Go to WinPython <a class="reference external" href="https://github.com/winpython/winpython/releases">download page</a> and find the latest version taged with a <em>Latest</em> green flag (avoir <em>Pre-release</em> versions on top). Expand the <em>Assets</em> and download the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> version (also a disguised compressed file). Follow steps similar to Git above, but notice that WinPython will extract directly to <code class="docutils literal notranslate"><span class="pre">downloads</span></code>. After moving the directory to <code class="docutils literal notranslate"><span class="pre">apps</span></code>, set the directory variable in <code class="docutils literal notranslate"><span class="pre">scripts/base-python.bat</span></code>.</p>
+</section>
+<section id="octave">
+<h2>Octave<a class="headerlink" href="#octave" title="Link to this heading">#</a></h2>
+<p>Go to Octave <a class="reference external" href="https://octave.org/download">download page</a> and identify the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> package for <code class="docutils literal notranslate"><span class="pre">w64</span></code>. Proceed with edition of <code class="docutils literal notranslate"><span class="pre">scripts/base-octave.bat</span></code> as you have done so far.</p>
+</section>
+<section id="ruby">
+<h2>Ruby<a class="headerlink" href="#ruby" title="Link to this heading">#</a></h2>
+<p>Go to Ruby <a class="reference external" href="https://rubyinstaller.org/downloads/">download page</a> and identify the <code class="docutils literal notranslate"><span class="pre">Devkit</span></code> package for <code class="docutils literal notranslate"><span class="pre">x64</span></code>. During installation change the path to point to <code class="docutils literal notranslate"><span class="pre">apps/</span></code> and unselect the options to associate extensions and adding to the path. Proceed with edition of <code class="docutils literal notranslate"><span class="pre">scripts/base-octave.bat</span></code> as you have done so far.</p>
+</section>
+<section id="rust">
+<h2>Rust<a class="headerlink" href="#rust" title="Link to this heading">#</a></h2>
+<p>To use Rust you must have followed the instllation instructions for <a class="reference internal" href="#setup-general.md"><span class="xref myst">MSYS2</span></a>; package <code class="docutils literal notranslate"><span class="pre">mingw-w64-x86_64-binutils</span></code> must have been installed. Next, download the static GNU <a class="reference external" href="https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-gnu.msi">Rust MSI installer</a> and execute it; chose advanced options to be able to select installation for the current user only. Select to install under <code class="docutils literal notranslate"><span class="pre">apps\rust-stable-gnu-1.85</span></code> directory. Check <code class="docutils literal notranslate"><span class="pre">base-rust.bat</span></code> for environment setup.</p>
+</section>
+<section id="lisp">
+<h2>LISP<a class="headerlink" href="#lisp" title="Link to this heading">#</a></h2>
+<p>LISP is supported through <a class="reference external" href="https://portacle.github.io/">Portacle</a>. Instead of right-clicking and installing the executable, Shift-click and select to extract the contents; place the resulting <code class="docutils literal notranslate"><span class="pre">portacle</span></code> directory under <code class="docutils literal notranslate"><span class="pre">bin</span></code> and verify the batch scripts are properly configured for your version.</p>
+</section>
+<section id="latex-and-related">
+<h2>LaTeX and related<a class="headerlink" href="#latex-and-related" title="Link to this heading">#</a></h2>
+<p>Although LaTeX is not mandatory, it is highly encouraged; otherwise, what is the point of doing any scientific computing and not publishing its results?</p>
+<ul class="simple">
+<li><p>Start by following the instructions provided <a class="reference external" href="https://miktex.org/howto/portable-edition">here</a> to install MikTeX. Point the installation to a directory <code class="docutils literal notranslate"><span class="pre">miktex-portable</span></code> under <code class="docutils literal notranslate"><span class="pre">apps</span></code> and select <em>on-the-fly</em> installation of new packages.</p></li>
+<li><p>Consider installing the following additional software:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.fosshub.com/JabRef.html">JabRef</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jgm/pandoc/releases">pandoc</a></p></li>
+<li><p><a class="reference external" href="https://inkscape.org/release/1.4/windows/64-bit/">inkscape</a></p></li>
+</ul>
+</li>
+<li><p>Globally install <a class="reference external" href="https://pygments.org/"><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Pygments</span></code></a> for enabling syntax highlight in LaTeX using <code class="docutils literal notranslate"><span class="pre">minted</span></code>; that is the most flexible highlighting method for adding code snippets to your documents.</p></li>
+<li><p>Also consider installing extension <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">LaTeX Workshop</a> for automatic compilation in editor with built-in PDF visualization.</p></li>
+</ul>
+<p>To append to <code class="docutils literal notranslate"><span class="pre">TEXMF</span></code> variable one can use the MiKTeX Console graphical interface and under <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Directories</span></code> navigate and select the local path.</p>
+<!-- Alternativelly on can add to the `[Paths]` section of  `bin/apps/miktex-portable/texmfs/install/miktex/config/miktexstartup.ini` a line as `CommonRoots=C:/Path/To/Kompanion/bin/data/texmf` pointing to a directory implementing the project [TeX Directory Structure](https://miktex.org/kb/tds). You might need to add the section to the file, as `[Paths]` is not present in the as-installed condition. -->
+<p>If you prefer a dedicated LaTeX editor, you may wish to install <a class="reference external" href="https://www.texstudio.org/#download">texstudio</a>; some configuration of paths with the application may be required as it is not directly integrated to this environment.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="software-specific-instructions">
+<h1>Software specific instructions<a class="headerlink" href="#software-specific-instructions" title="Link to this heading">#</a></h1>
+<section id="dualsphysics">
+<h2>DualSPHysics<a class="headerlink" href="#dualsphysics" title="Link to this heading">#</a></h2>
+<p>For <a class="reference external" href="https://dual.sphysics.org/downloads/">DualSPHysics</a> one might also want to install <a class="reference external" href="https://github.com/DualSPHysics/DesignSPHysics">this FreeCAD addon</a> and <a class="reference external" href="https://github.com/EPhysLab-UVigo/VisualSPHysics">this Blender addon</a>.</p>
+</section>
+<section id="mfix">
+<h2>MFiX<a class="headerlink" href="#mfix" title="Link to this heading">#</a></h2>
+<p>This package is <a class="reference external" href="https://mfix.netl.doe.gov/products/mfix/download/">installed</a> in a separate environment and not added to the toolbox path; that is because other Python environments could interact with each other and lead to unpredictable behavior. The following instructions are provided:</p>
+<ul class="simple">
+<li><p>Install <a class="reference external" href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe">miniforge3</a> under the <code class="docutils literal notranslate"><span class="pre">apps/</span></code> directory.</p></li>
+<li><p>Launch miniforge console by running:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>%windir%<span class="se">\s</span>ystem32<span class="se">\c</span>md.exe<span class="w"> </span><span class="s2">&quot;/K&quot;</span><span class="w"> </span>^
+<span class="w">    </span>%~dp0<span class="se">\m</span>iniforge3<span class="se">\S</span>cripts<span class="se">\a</span>ctivate.bat<span class="w"> </span>^
+<span class="w">    </span>%~dp0<span class="se">\m</span>iniforge3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Go to the <a class="reference external" href="https://mfix.netl.doe.gov/mfix/download-mfix">downloads</a> page, login and copy the personal installation command that looks like the following:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>mfix-&lt;version&gt;<span class="w"> </span>^
+<span class="w">    </span><span class="nv">mfix</span><span class="o">==</span>&lt;version&gt;<span class="w">            </span>^
+<span class="w">    </span>mfix-doc<span class="o">==</span>&lt;version&gt;<span class="w">        </span>^
+<span class="w">    </span>mfix-gui<span class="o">==</span>&lt;version&gt;<span class="w">        </span>^
+<span class="w">    </span>mfix-solver<span class="o">==</span>&lt;version&gt;<span class="w">     </span>^
+<span class="w">    </span>mfix-src<span class="o">==</span>&lt;version&gt;<span class="w">        </span>^
+<span class="w">    </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-c<span class="w">          </span>^
+<span class="w">    </span>https://mfix.netl.doe.gov/s3/&lt;personal-token&gt;//conda/dist
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To run the software activate the created environment and call its executable:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>mfix-&lt;version&gt;
+mfix
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Julia<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>For the proper functioning of Kompanion, both <a class="reference external" href="https://plutojl.org/">Pluto</a> and <a class="reference external" href="https://julialang.github.io/IJulia.jl/stable/">IJulia</a> need to be available. Generally they should be automatically installed when first launching Julia, but that may fail for many reasons and you might need to manually install them.</p>
+</section>
+<section id="jupyter-lab">
+<h2>Jupyter lab<a class="headerlink" href="#jupyter-lab" title="Link to this heading">#</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">WPY64-31310</span></code> some warnings/errors were found when launching Jupyterlab. Apparently some packages are missing so that it can work with its full capabilities. You may overcome this by manually installing:</p>
+<ul class="simple">
+<li><p>ipyparallel</p></li>
+<li><p>nbclassic</p></li>
+<li><p>voila</p></li>
+</ul>
+</section>
+<section id="gmsh">
+<h2>gmsh<a class="headerlink" href="#gmsh" title="Link to this heading">#</a></h2>
+<p>Because it was chosen that SDK version of gmsh was more adapted to integrate Kompanion, if you want to be able to pin the executable to your taskbar you need to copy the DLL from its <code class="docutils literal notranslate"><span class="pre">lib/</span></code> directory to <code class="docutils literal notranslate"><span class="pre">bin/</span></code>. If you think you will not need Python/Julia interfaces of gmsh, then you can move the DLL instead to save ~80MB of disk.</p>
+</section>
+<section id="graphviz">
+<h2>Graphviz<a class="headerlink" href="#graphviz" title="Link to this heading">#</a></h2>
+<p>If the first time you run <code class="docutils literal notranslate"><span class="pre">dot</span></code> you get a message as</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>There is no layout engine support for &quot;dot&quot;
+Perhaps &quot;dot -c&quot; needs to be run (with installer&#39;s privileges) to register the plugins?
+</pre></div>
+</div>
+<p>Simply run <code class="docutils literal notranslate"><span class="pre">dot</span> <span class="pre">-c</span></code> as suggested and it should work fine (without admin privileges).</p>
+</section>
+<section id="vs-code">
+<h2>VS Code<a class="headerlink" href="#vs-code" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If installing local extensions (such as elmer-sif provided herein), consider using <a class="reference external" href="https://github.com/microsoft/vscode/issues/178667#issuecomment-1495625943">Developer: Install Extension from Location</a> instead of placing it under <code class="docutils literal notranslate"><span class="pre">.vscode/extensions</span></code> manually.</p></li>
+<li><p>For installing extensions from within a VSCode terminal, rather than the main executable one must use <code class="docutils literal notranslate"><span class="pre">%VSCODE_HOME%\bin\Code.cmd</span></code>. Currently, Visual Studio Code’s command-line interface doesn’t directly support installing extensions from a local directory without packaging them into .vsix files. The recommended method is to package your extension into a .vsix file using vsce and then install it.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./scientific-computing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kompanion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work">How does it work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-limitations">Known limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tested-packages">Tested packages</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setup">General setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-explained">Workflow explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-setup">Initial setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#msys2">MSYS2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-languages">Programming languages</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia">Julia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#octave">Octave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruby">Ruby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rust">Rust</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lisp">LISP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-and-related">LaTeX and related</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#software-specific-instructions">Software specific instructions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dualsphysics">DualSPHysics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mfix">MFiX</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Julia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab">Jupyter lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh">gmsh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphviz">Graphviz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code">VS Code</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
