@@ -16,6 +16,7 @@ parts:
       - file: scientific-computing/tools-portable
       - file: scientific-computing/system-windows
       - file: scientific-computing/system-linux
+      - file: scientific-computing/programming
       - file: scientific-computing/general-tips
       - file: scientific-computing/services
 
