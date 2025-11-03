@@ -4,15 +4,40 @@ format: jb-book
 
 root: index
 
-chapters:
+parts:
+  - caption: "Scientific computing"
+    chapters:
+    - file: scientific-computing/introduction
+      sections:
+      - file: scientific-computing/tools-git
+      - file: scientific-computing/tools-ssh
+      - file: scientific-computing/tools-containers
+      - file: scientific-computing/tools-selection
+      - file: scientific-computing/tools-portable
+      - file: scientific-computing/system-windows
+      - file: scientific-computing/system-linux
+      - file: scientific-computing/general-tips
+      - file: scientific-computing/services
 
-- file: python/mpc/intro
-  sections:
-  - file: python/mpc/part-a
-  - file: python/mpc/part-b
-  - file: python/mpc/part-c
+  - caption: "Python tutorials"
+    chapters:
+    - file: python/mpc/intro
+      sections:
+      - file: python/mpc/part-a
+      - file: python/mpc/part-b
+      - file: python/mpc/part-c
 
-- file: julia/intro
-  sections:
-  - file: julia/julia101
-  - file: julia/julia-tips
+  - caption: "Julia tutorials"
+    chapters:
+    - file: julia/intro
+      sections:
+      - file: julia/julia101
+      - file: julia/julia-tips
+
+  - caption: "Ansys Fluent"
+    chapters:
+    - file: simulation-ansys-fluent/tui
+
+  - caption: "Elmer CSC"
+    chapters:
+    - file: simulation-elmer-csc/elmer
