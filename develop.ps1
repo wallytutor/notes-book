@@ -107,7 +107,7 @@ function New-DevEnvironment() {
 
     Enable-DevelVenv
     Start-PipInstall @("--upgrade", "pip")
-    Start-PipInstall @("-r", "requirements.txt")
+    Start-PipInstall @("-r", "pinned.txt")
 }
 
 ##############################################################################
