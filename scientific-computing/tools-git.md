@@ -61,6 +61,16 @@ rm -rf '.git/modules/<path-to-submodule>'
 git config remove-section 'submodule.<path-to-submodule>'
 ```
 
+For managing submodules, the following might be useful:
+
+```bash
+# You added the submodule in another computer, now sync it here:
+git submodule update --init --recursive
+
+# Sync submodule to head of remote:
+git submodule update --remote --merge
+```
+
 ## Line ending normalization
 
 Instructions provided in [this thread](https://stackoverflow.com/questions/2517190); do not forget to add a `.gitattributes` file to the project with `* text=auto` for checking-in files as normalized. Then run the following:
