@@ -1,28 +1,28 @@
 ---
-jupyter:
-  jupytext:
-    cell_metadata_filter: -all
-    formats: md,ipynb
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.18.1
-  kernelspec:
-    display_name: Julia 1.12.1
-    language: julia
-    name: julia-1.12
+jupytext:
+  cell_metadata_filter: -all
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.18.1
+kernelspec:
+  display_name: Julia 1.12.1
+  language: julia
+  name: julia-1.12
 ---
 
 # Porosity quantification
 
++++
 
 In this tutorial we will see how to implement a custom workflow for porosity quantification in materials. The selected tools are those from the [JuliaImages](https://juliaimages.org/latest/) suite.
 
++++
 
 ## Importing required tools
 
-```julia
+```{code-cell}
 using Pkg
 
 requirements = [
@@ -38,14 +38,14 @@ open("index.log", "w") do io
     root = dirname(abspath(@__FILE__))
     Pkg.activate(root; io=io)
     Pkg.instantiate(; io=io)
-    
+
     for pkg ∈ requirements
         Pkg.add(pkg; io=io)
     end
 end
 ```
 
-```julia
+```{code-cell}
 # using CairoMakie
 using Images
 using ImageEdgeDetection
@@ -55,7 +55,7 @@ using IndirectArrays
 using Statistics
 ```
 
-```julia
+```{code-cell}
 function displayimg(img)
     # let f = Figure()
     #     image(f[1, 1], img)
@@ -67,10 +67,11 @@ end
 
 ## Step-by-step
 
++++
 
 ### Loading the image
 
-```julia
+```{code-cell}
 filepath = "media/Ti_pure_1-50.1-50x.jpg"
 img0 = load(filepath)
 
@@ -82,37 +83,39 @@ displayimg(img0)
 
 ### Gray-scale conversion
 
-```julia
+```{code-cell}
 imgg = Gray.(img0)
 ```
 
 It is important to observe the data type of our new matrix:
 
-```julia
+```{code-cell}
 typeof(imgg)
 ```
 
 ### Cropping the bar
 
++++
 
 Next we need to crop the bottom of the image by `crop` pixels:
 
-```julia
+```{code-cell}
 crop = 80
 
 imgc = imgg[1:end-crop, 1:end]
 ```
 
-```julia
+```{code-cell}
 typeof(imgc)
 ```
 
 ### Histogram correction (optional)
 
++++
 
 You might want to edit the next cell for parametrizing the algorithm.
 
-```julia
+```{code-cell}
 correct_hist = true
 
 # alg = AdaptiveEqualization(nbins = 256, rblocks = 4, cblocks = 4,
@@ -126,10 +129,11 @@ imga = correct_hist ? adjust_histogram(imgc, alg) : imgc
 
 ### Gaussian filter (blur)
 
++++
 
 You can test the impact of blurring variance `σ`.
 
-```julia
+```{code-cell}
 σ = 2.0
 
 imgf = imfilter(imga, Kernel.gaussian(σ))
@@ -137,11 +141,12 @@ imgf = imfilter(imga, Kernel.gaussian(σ))
 
 ### Image binarization
 
++++
 
 Now select the trial binarization algorithm:
 
-```julia
-bin_alg = Balanced     
+```{code-cell}
+bin_alg = Balanced
 # bin_alg = Entropy
 # bin_alg = MinimumError
 # bin_alg = Moments
@@ -154,6 +159,7 @@ imgb = binarize(imgf, bin_alg())
 
 ### Quantify porosity
 
++++
 
 White pixes are one valued while black pixels worth zero. Thus adding up the values of all pixels in the image counts the number of white pixels. Thus, the fraction of black pixels, the *porosity* η is
 
@@ -163,21 +169,22 @@ $$
 
 The function below implements this evaluation, with which we compute the porosity level.
 
-```julia
+```{code-cell}
 "Implements porosity quantification in binarized image."
 porosity(im) = 100convert(Float64, 1 - sum(im) / length(im))
 ```
 
-```julia
+```{code-cell}
 @info "Porosity level of $(round(porosity(imgb), digits = 1))%"
 ```
 
 ### Final check
 
++++
 
 As a final step it is interesting to add contours of pores over the original image.
 
-```julia
+```{code-cell}
 "Helper function to draw red edges over pore borders."
 function add_red_edges(im0, imb)
 	canny = Canny(spatial_scale=5, high=Percentile(50), low=Percentile(45))
@@ -199,16 +206,17 @@ function add_red_edges(im0, imb)
 end
 ```
 
-```julia
+```{code-cell}
 add_red_edges(imgc, imgb)
 ```
 
 ## Workflow automation
 
++++
 
 Example following [this tutorial](https://juliaimages.org/dev/examples/image_segmentation/watershed/#Watershed-Segmentation-Algorithm) on watershed segmentation.
 
-```julia
+```{code-cell}
 bw = imgc .> 0.5
 bw_transform = feature_transform(bw)
 
@@ -235,6 +243,6 @@ gray_labels = 1 .- gray_labels
 # mosaic(imgg, gray_labels; nrow=1)
 ```
 
-```julia
+```{code-cell}
 add_red_edges(imgc, gray_labels)
 ```

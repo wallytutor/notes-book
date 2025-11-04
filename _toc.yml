@@ -34,7 +34,6 @@ parts:
       sections:
       - file: julia/julia101
       - file: julia/julia-tips
-    - file: julia/image-analysis/index
 
   - caption: "Ansys Fluent"
     chapters:
@@ -47,5 +46,3 @@ parts:
   - caption: "Coding notes"
     chapters:
     - file: coding-notes/haskell
-    - file: coding-notes/racket
-    - file: coding-notes/other

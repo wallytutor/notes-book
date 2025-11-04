@@ -63,32 +63,24 @@ From a terminal run `stack ghci` for an interative session detached from any pro
 
 ## Creating a stack project
 
+Actual production projects require a build framework for managing dependencies and versions; using Stack is the *to-go* solution for this end. The following provides a minimal example of how to proceed with project creation:
+
 ```bash
+projectName="super-haskell-project"
+
 # Create a new project and enter its directory:
-stack new kinetics-oxidation-iron
-cd kinetics-oxidation-iron
+stack new ${projectName}
+cd ${projectName}
 
 # Build and execute the project (notice the `-exe`):
 stack build
-stack exec kinetics-oxidation-iron-exe
+stack exec ${projectName}-exe
 ```
+
+If the executable accepts command-line arguments, these can be provided after `--` as follows:
 
 ```bash
-stack exec kinetics-oxidation-iron-exe -- '<command arguments here>'
+stack exec ${projectName}-exe -- '<command arguments here>'
 ```
 
-| | |
-|---|---|
-| .stack-work                   | Stack managed
-| app                           | As you progress
-| src                           | As you progress
-| test                          | As you progress
-| .gitignore                    | As you progress
-| CHANGELOG.md                  | As you progress
-| kinetics-oxidation-iron.cabal | Stack managed
-| LICENSE                       | Check on creation
-| package.yaml                  | Stack managed / user editable
-| README.md                     | As you progress
-| Setup.hs                      | Leave as is
-| stack.yaml                    | Leave as is
-| stack.yaml.lock               | Leave as is
+You can modify `${projectName}-exe` name in `${projectName}.cabal`.
