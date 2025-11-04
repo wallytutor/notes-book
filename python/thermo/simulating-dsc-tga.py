@@ -1,27 +1,7 @@
 # %load_ext autoreload
 # %autoreload 2
 
-# +
-import functools
-import matplotlib.pyplot as plt
-import numpy as np
-
-from majordome import MajordomePlot
-
-
-# +
-@MajordomePlot.new()
-def test(*args, plot=None, **kwargs):
-    fig, ax = plot.subplots()
-    ax[0].plot([0, 1], [0, 1])
-
-plot = test()
-# -
-
-
-
-
-
+from majordome import MajordomePlot, bounds
 import cantera as ct
 import majordome as mj
 import numpy as np
@@ -29,25 +9,53 @@ import numpy as np
 ct.add_directory(mj.common.DATA)
 
 
+# +
 def specific_heat_maier_kelley(T, M, a):
     """ Truncated 3-coefficients specific heat [J/(kg.K)]"""
     return (a[0] + a[1] * T + a[2] * pow(T, -2)) / M
 
+def specific_heat_cantera(T, M, s):
+    @np.vectorize
+    def evaluate(T):
+        return s.thermo.cp(T) / M
+    return evaluate(T)
 
-m_mullite = species[5].molecular_weight
-a_mullite = [84.22, 20.0e-03, -25.0e+05]
-specific_heat_maier_kelley(600, m_mullite, a_mullite)
+def sample_temperature(species):
+    T_lims = species.input_data["thermo"]["temperature-ranges"]
+    return np.linspace(T_lims[0], T_lims[1], int(round(T_lims[-1])))
+
+@MajordomePlot.new(
+    xlabel = "Temperature [K]",
+    ylabel = "Specific heat [J/(kg K)]"
+)
+def plot_specific_heat(T, c, plot=None, **kwargs):
+    fig, ax = plot.subplots()
+    ax[0].plot(T, c, label="Schieltz, 1964")
+
+def check_species(mineral, data):
+    m = mineral.molecular_weight
+    
+    T = sample_temperature(mineral)
+    a = 4.184e3 *  np.array(data)
+    c1 = specific_heat_maier_kelley(T, m, a)
+    c2 = specific_heat_cantera(T, m, mineral)
+    
+    plot = plot_specific_heat(T, c1)
+    plot.axes[0].plot(T, c2, label="Cantera")
+    _ = plot.axes[0].legend(loc=4)
 
 
-
-
-
-
-
-
+# -
 
 species = ct.Species.list_from_file("materials.yaml", "species_minerals")
 species
+
+check_species(species[5], [84.22, 20.00e-03, -25.00e+05, -1804000.0, 60.00])
+
+check_species(species[1], [11.22, 8.20e-03, -2.70e+05, -209900.0, 10.06])
+
+water = species = ct.Species.list_from_file("materials.yaml", "species_water")
+check_species(species[1], [7.17, 2.56e-03, 0.08e+05, -57800.0, 45.13])
 
 species[0].thermo.cp(1000) / 1000, species[0].molecular_weight
 
