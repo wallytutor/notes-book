@@ -3,7 +3,7 @@ import majordome as mj
 
 ct.add_directory(mj.common.DATA)
 
-species = ct.Species.list_from_file("materials.yaml")
+species = ct.Species.list_from_file("materials.yaml", "species_minerals")
 species
 
 species[0].thermo.cp(1000) / 1000, species[0].molecular_weight
@@ -16,5 +16,3 @@ solids.cp_mass * (species[0].molecular_weight / 1000)
 solids.mass_fraction_dict()
 
 solids.species_names
-
-
