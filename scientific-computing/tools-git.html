@@ -220,6 +220,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -486,6 +490,14 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s1">&#39;.git/modules/&lt;path-to-submodule&gt;&#39;</span>
 
 git<span class="w"> </span>config<span class="w"> </span>remove-section<span class="w"> </span><span class="s1">&#39;submodule.&lt;path-to-submodule&gt;&#39;</span>
+</pre></div>
+</div>
+<p>For managing submodules, the following might be useful:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># You added the submodule in another computer, now sync it here:</span>
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+
+<span class="c1"># Sync submodule to head of remote:</span>
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote<span class="w"> </span>--merge
 </pre></div>
 </div>
 </section>

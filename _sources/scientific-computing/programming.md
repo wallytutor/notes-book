@@ -1,8 +1,11 @@
 # Scientific programming
 
+
 This page provides access to programming learning materials and related links. If this subject is new to you, to be able to successfully follow the contents you might learn a bit about the environment we will use, [VS Code](https://code.visualstudio.com/) and the minimum about [command prompt](system-windows.md). If you are planning to start a career in scientific computing, there is also a short introduction [here](introduction.md) that might help you find your way through this broad field.
 
+
 ## Coding practices
+
 
 It is not worth learning any programming before being introduced to the good practices. Many programmers I know write *garbage that works for them only*. It is impossible to have a healthy collaboration if code is not standardized, reason why I place this highly biased introduction here.
 
@@ -27,7 +30,9 @@ Python code documentation is generally done with [Sphinx](https://www.sphinx-doc
 
 **Important:** Julia supports [Unicode input](https://docs.julialang.org/en/v1/manual/unicode-input/), but its use is highly discouraged in modules. Unicode characters are better suited to write application scripts such as notebooks (in Pluto or Jupyter).
 
+
 ## Scientific publishing
+
 
 The following tools might be of interest for creating scientific content with embedded code.
 
@@ -38,7 +43,9 @@ The following tools might be of interest for creating scientific content with em
 - [Pluto.jl - interactive Julia programming environment](https://plutojl.org/)
 - [Quarto](https://quarto.org/)
 
+
 ## Visual Studio Code
+
 
 If you are reading this, you are probably using [VS Code](https://code.visualstudio.com/) for the first time or need a refresher! VS Code is Microsoft's open source text editor that has become the most popular editor in the past decade. It is portable (meaning it works in Windows, Linux, and Mac) and relatively light-weight (it won't use all you RAM as some proprietary tools would do). There are a few shortcuts you might want to keep in mind for using this tool in an efficient manner:
 
@@ -60,7 +67,9 @@ Notice that `Ctrl+M` will toggle the visibility of the integrated terminal; if y
 
 VS Code supports a number of extensions to facilitate coding and data analysis, among other tasks. Local (user-created) extensions can be manually installed by placing their folder under `%USERPROFILE%/.vscode/extensions` or in the equivalent directory documented [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_where-are-extensions-installed). Below you find my recommended extensions for different purposes and languages.
 
+
 ## VS Code extensions
+
 
 The following extensions are recommended.
 
