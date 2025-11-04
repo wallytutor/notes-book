@@ -26,6 +26,7 @@ In this tutorial we will see how to implement a custom workflow for porosity qua
 using Pkg
 
 requirements = [
+    # "CairoMakie",
     "Images",
     "ImageEdgeDetection",
     "ImageSegmentation",
@@ -33,21 +34,35 @@ requirements = [
     "Statistics"
 ]
 
-HERE = dirname(abspath(@__FILE__))
-Pkg.activate(HERE)
-
-for pkg ∈ requirements
-    Pkg.add(pkg)
+open("index.log", "w") do io
+    root = dirname(abspath(@__FILE__))
+    Pkg.activate(root; io=io)
+    Pkg.instantiate(; io=io)
+    
+    for pkg ∈ requirements
+        Pkg.add(pkg; io=io)
+    end
 end
 ```
 
 ```julia
+# using CairoMakie
 using Images
 using ImageEdgeDetection
 using ImageEdgeDetection: Percentile
 using ImageSegmentation
 using IndirectArrays
 using Statistics
+```
+
+```julia
+function displayimg(img)
+    # let f = Figure()
+    #     image(f[1, 1], img)
+    #     f
+    # end
+    img
+end
 ```
 
 ## Step-by-step
@@ -62,7 +77,7 @@ img0 = load(filepath)
 (h, w) = size(img0)
 @info "$(typeof(img0)) : size $(h)x$(w)"
 
-img0
+displayimg(img0)
 ```
 
 ### Gray-scale conversion

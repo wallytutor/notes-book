@@ -12,3 +12,7 @@ __pycache__/
 
 # Any sandbox
 sandbox*
+
+# Log files
+*.log
+log.*
