@@ -59,6 +59,8 @@ import numpy as np
 ct.add_directory(mj.common.DATA)
 ```
 
+## Creating the model
+
 ```python
 class WaterReactor(ExtensibleConstPressureReactor):
     __slots__ = (
@@ -67,6 +69,7 @@ class WaterReactor(ExtensibleConstPressureReactor):
         "_rate_const",
         "_heat_rate",
         "_var_names",
+        "_mass_tol",
     )
 
     def __init__(self, solution, mass_liq, vapor, heat_rate,  **kwargs):
@@ -79,33 +82,28 @@ class WaterReactor(ExtensibleConstPressureReactor):
 
         self._vapor = vapor
         self._heat_rate = heat_rate
-        self._rate_const = ct.ArrheniusRate(5.0e+07, 0, 74.0e+06)
-
+        self._rate_const = ct.ArrheniusRate(5.0e+07, 0, 78.0e+06)
+        self._mass_tol = kwargs.get("mass_tol", 0.01 * mass_liq)
+        
     def replace_eval(self, t, LHS, RHS) -> None:
         """ Evaluate problem equations for mass, enthalpy, composition. """
         m = self.mass
         h = self.thermo.enthalpy_mass
         Y = self.thermo.Y
 
-        if m < 1.0e-03:
+        if m < self._mass_tol:
             raise StopIteration()
 
-        # Reset LHS/RHS to standard values (no rate):
-        LHS[:] = 1.0
-        RHS[:] = 0.0
-    
+        # Get provided heat [W]:
         Q = self._heat_rate
     
         # Evaluate current reaction rate [kg/s]:
         rr = self._rate_const(self.T) * m * Y[0]
 
-        try:
-            # Heat of reactions [J/kg * kg/s = W]:
-            self._vapor.TP = self.thermo.T, None
-            delta_h = (h - self._vapor.enthalpy_mass)
-            Q += delta_h * rr
-        except ct.CanteraError:
-            Q += -2250_000.0 * rr
+        # Heat of reactions [J/kg * kg/s = W]:
+        self._vapor.TP = self.thermo.T, None
+        delta_h = (h - self._vapor.enthalpy_mass)
+        Q += delta_h * rr
 
         RHS[0] = -rr
         RHS[1] = Q - h * rr
@@ -126,44 +124,43 @@ class WaterReactor(ExtensibleConstPressureReactor):
 ```
 
 ```python
+def simulate(n_pts, t_end, reactor):
+    times = np.linspace(0, t_end, n_pts)
+    results = ct.SolutionArray(reactor.thermo, shape=(n_pts,),
+                               extra={"t": 0.0, "m": reactor.mass})
+    
+    network = ct.ReactorNet([reactor])
+    network.initialize()
+    
+    for i, t in enumerate(times[1:], 1):
+        try:
+            network.advance(t)
+            results[i].TPY = reactor.thermo.TPY
+            results[i].t = t
+            results[i].m = reactor.mass
+        except:
+            break
+
+    df = results.to_pandas()
+    return df.iloc[:i].copy()
+```
+
+## Running a simulation
+
+```python
 water_liq = ct.Solution("materials.yaml", "water_liq")
 water_gas = ct.Solution("materials.yaml", "water_gas")
 
 # Heat rate [W]
-rate = 1200
+rate = 3000
 
-n_pts = 101
-times = np.linspace(0, 3000, n_pts)
-results = ct.SolutionArray(water_liq, shape=(n_pts,), extra={"t": 0.0, "m": 1.0})
+n_pts = 1001
+t_end = 1000
+
 reactor = WaterReactor(water_liq, mass_liq=1.0, heat_rate=rate, vapor=water_gas)
 
-network = ct.ReactorNet([reactor])
-network.initialize()
+df = simulate(n_pts, t_end, reactor)
 
-for i, t in enumerate(times[1:], 1):
-    try:
-        network.advance(t)
-        results[i].TPY = reactor.thermo.TPY
-        results[i].t = t
-        results[i].m = reactor.mass
-    except:
-        break
-
-df = results.to_pandas()
-df.drop(columns=["P", "Y_H2O_LIQUID"], inplace=True)
-df = df.iloc[:i].copy()
-
-df.plot(x="t", y="T")
-```
-
-```python
-df
-```
-
-```python
-
-```
-
-```python
-
+ax = df.plot(x="t", y="T")
+# _ = ax.axhline(373.15, color="k", linestyle=":")
 ```
