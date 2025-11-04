@@ -43,3 +43,9 @@ parts:
   - caption: "Elmer CSC"
     chapters:
     - file: simulation-elmer-csc/elmer
+
+  - caption: "Coding notes"
+    chapters:
+    - file: coding-notes/haskell
+    - file: coding-notes/racket
+    - file: coding-notes/other
