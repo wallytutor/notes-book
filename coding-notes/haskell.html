@@ -533,6 +533,12 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 </section>
 <section id="learn-by-example">
 <h2>Learn by example<a class="headerlink" href="#learn-by-example" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Declaring variables</p></li>
+<li><p>Some numerical types</p></li>
+<li><p>Applying a function to a list</p></li>
+<li><p>Type annotations as good practice</p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">a</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span>
 <span class="nf">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">5</span>
 
@@ -548,12 +554,12 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 <span class="nf">myPi</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mf">3.141592654</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Declaring a curried function</p></li>
+<li><p>Partial application of a curried function</p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="c1">-- arc :: (Double -&gt; (Double -&gt; Double))</span>
 <span class="nf">arc</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span>
-<span class="nf">arc</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
-
-<span class="c1">-- Using type classes (generic):</span>
-<span class="nf">arc</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Num</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
 <span class="nf">arc</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
 
 <span class="c1">-- Currying of arc:</span>
@@ -566,6 +572,18 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 <span class="nf">isTwo</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">circ</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Type annotations using generic type classes</p></li>
+</ul>
+<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">arc</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Num</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<span class="nf">arc</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Using expression result from <code class="docutils literal notranslate"><span class="pre">$</span></code></p></li>
+<li><p>Breaking a complex function in <code class="docutils literal notranslate"><span class="pre">where</span></code> clauses</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">show</span></code> to print results inside <code class="docutils literal notranslate"><span class="pre">main</span></code></p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">hypotenuse</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span>
 <span class="nf">hypotenuse</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">sqrt</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">square</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">square</span><span class="w"> </span><span class="n">c</span>
 <span class="w">    </span><span class="kr">where</span><span class="w"> </span><span class="n">square</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span>
@@ -576,6 +594,10 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 <span class="w">    </span><span class="n">putStrLn</span><span class="w"> </span><span class="p">(</span><span class="n">show</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="p">(</span><span class="n">hypotenuse</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Tuple types are types of their own</p></li>
+<li><p>Prefer curried functions when possible</p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">sumIt</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Num</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
 <span class="nf">sumIt</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
 
@@ -583,15 +605,22 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 <span class="nf">sumIt</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Declaring a simple data type</p></li>
+<li><p>Pattern matching functions is more idiomatic in Haskell</p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Data types start with capital letters</span>
 <span class="kr">data</span><span class="w"> </span><span class="kt">RGB</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Red</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Green</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Blue</span>
 
-<span class="c1">-- Pattern matching is more idiomatic in Haskell</span>
+
 <span class="nf">judgementalColor</span><span class="w"> </span><span class="kt">Red</span><span class="w">   </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;Those communists!&quot;</span>
 <span class="nf">judgementalColor</span><span class="w"> </span><span class="kt">Green</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;Oh, Greta!&quot;</span>
 <span class="nf">judgementalColor</span><span class="w"> </span><span class="kt">Blue</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;Far right is here!&quot;</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>To have equality testing and printing, add <code class="docutils literal notranslate"><span class="pre">deriving</span></code> directives</p></li>
+</ul>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Derive show and equality type classes</span>
 <span class="kr">data</span><span class="w"> </span><span class="kt">RGB</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Red</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Green</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Blue</span>
 <span class="w">    </span><span class="kr">deriving</span><span class="w"> </span><span class="p">(</span><span class="kt">Show</span><span class="p">,</span><span class="w"> </span><span class="kt">Eq</span><span class="p">)</span>
@@ -601,13 +630,59 @@ stack<span class="w"> </span><span class="nb">exec</span><span class="w"> </span
 <span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w">    </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;I missed those!&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span>
+<ul class="simple">
+<li><p>Data type with encapsulation of base types</p></li>
+<li><p>Value capture by pattern matching</p></li>
+</ul>
+<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">data</span><span class="w"> </span><span class="kt">HttpRequest</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Get</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Post</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Ping</span>
+
+<span class="nf">handleRequest</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">HttpRequest</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">String</span>
+<span class="nf">handleRequest</span><span class="w"> </span><span class="p">(</span><span class="kt">Get</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;You asked for &quot;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">content</span>
+<span class="nf">handleRequest</span><span class="w"> </span><span class="p">(</span><span class="kt">Post</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;You, hacker! BANNED &quot;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">content</span>
+<span class="nf">handleRequest</span><span class="w"> </span><span class="kt">Ping</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;Dunno!&quot;</span>
+
+<span class="c1">-- handleRequest (Get &quot;milk!&quot;)</span>
+<span class="c1">-- handleRequest (Post &quot;chalk!&quot;)</span>
+<span class="c1">-- handleRequest Ping</span>
 </pre></div>
 </div>
-<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span>
+<ul class="simple">
+<li><p>Record data types for named access of attributes</p></li>
+<li><p>Pattern matching on a partial set of attributes</p></li>
+<li><p>Always possible to use normal function application</p></li>
+</ul>
+<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">data</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Double</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Double</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">deriving</span><span class="w"> </span><span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+
+<span class="nf">area</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span>
+<span class="nf">area</span><span class="w"> </span><span class="p">(</span><span class="kt">Terrain</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">d</span><span class="p">})</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d</span>
+
+<span class="nf">value</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Double</span>
+<span class="nf">value</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">area</span><span class="w"> </span><span class="n">property</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">price</span><span class="w"> </span><span class="n">property</span><span class="p">)</span>
+
+<span class="nf">terrain</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">}</span>
+<span class="nf">pricier</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Terrain</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">2000</span>
+
+<span class="c1">-- This won&#39;t work in the same context: multiple declarations of `price`!</span>
+<span class="c1">-- data Banana = Banana { weight :: Double, price :: Double }</span>
+<span class="c1">--     deriving (Show)</span>
 </pre></div>
 </div>
-<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span>
+<ul class="simple">
+<li><p>As an alternative, use compiler extensions to get around the name limitation</p></li>
+<li><p>This is not recommended and not very idiomatic</p></li>
+</ul>
+<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="cm">{-# LANGUAGE DuplicateRecordFields #-}</span>
+<span class="cm">{-# LANGUAGE OverloadedRecordDot #-}</span>
+
+<span class="kr">data</span><span class="w"> </span><span class="kt">Board</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="kt">Board</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">data</span><span class="w"> </span><span class="kt">Player</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Player</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">}</span>
+
+<span class="nf">getBoardWidth</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Board</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nf">getBoardWidth</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="n">width</span>
+
+<span class="nf">getPlayerWidth</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Player</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nf">getPlayerWidth</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">width</span>
 </pre></div>
 </div>
 <div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span>
