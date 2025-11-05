@@ -100,6 +100,11 @@ It is also useful to known that `Ctrl+L` cleans up the current CLI view.
 
 ## Learn by example
 
+- Declaring variables
+- Some numerical types
+- Applying a function to a list
+- Type annotations as good practice
+
 ```haskell
 a :: Int
 a = 5
@@ -116,13 +121,12 @@ myPi :: Double
 myPi = 3.141592654
 ```
 
+- Declaring a curried function
+- Partial application of a curried function
+
 ```haskell
 -- arc :: (Double -> (Double -> Double))
 arc :: Double -> Double -> Double
-arc theta r = theta * r
-
--- Using type classes (generic):
-arc :: Num a => a -> a -> a
 arc theta r = theta * r
 
 -- Currying of arc:
@@ -133,8 +137,18 @@ oneFourthCirc = arc (pi/2)
 
 -- Is round-off playing here:
 isTwo = (circ 2.0) / pi == 2
-
 ```
+
+- Type annotations using generic type classes
+
+```haskell
+arc :: Num a => a -> a -> a
+arc theta r = theta * r
+```
+
+- Using expression result from `$`
+- Breaking a complex function in `where` clauses
+- Using `show` to print results inside `main`
 
 ```haskell
 hypotenuse :: Double -> Double -> Double
@@ -147,6 +161,9 @@ main = do
     putStrLn (show $ (hypotenuse 3) 4)
 ```
 
+- Tuple types are types of their own
+- Prefer curried functions when possible
+
 ```haskell
 sumIt :: Num a => (a, a) -> a
 sumIt (a, b) = a + b
@@ -155,15 +172,20 @@ sumIt :: Num a => a -> a -> a
 sumIt a b = a + b
 ```
 
+- Declaring a simple data type
+- Pattern matching functions is more idiomatic in Haskell
+
 ```haskell
 -- Data types start with capital letters
 data RGB = Red | Green | Blue
 
--- Pattern matching is more idiomatic in Haskell
+
 judgementalColor Red   = "Those communists!"
 judgementalColor Green = "Oh, Greta!"
 judgementalColor Blue  = "Far right is here!"
 ```
+
+- To have equality testing and printing, add `deriving` directives
 
 ```haskell
 -- Derive show and equality type classes
@@ -174,6 +196,9 @@ judgementalColorBis color
     | color == Red = "Those communists!"
     | otherwise    = "I missed those!"
 ```
+
+- Data type with encapsulation of base types
+- Value capture by pattern matching
 
 ```haskell
 data HttpRequest = Get String | Post String | Ping
@@ -188,8 +213,11 @@ handleRequest Ping = "Dunno!"
 -- handleRequest Ping
 ```
 
+- Record data types for named access of attributes
+- Pattern matching on a partial set of attributes
+- Always possible to use normal function application
+
 ```haskell
--- define box as a record type
 data Terrain = Terrain { width :: Double, depth :: Double, price :: Double }
     deriving (Show)
 
@@ -207,8 +235,21 @@ pricier = Terrain 20 10 2000
 --     deriving (Show)
 ```
 
-```haskell
+- As an alternative, use compiler extensions to get around the name limitation
+- This is not recommended and not very idiomatic
 
+```haskell
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE OverloadedRecordDot #-}
+
+data Board  = Board  { width :: Int, height :: Int }
+data Player = Player { width :: Int, height :: Int }
+
+getBoardWidth :: Board -> Int
+getBoardWidth b = b.width
+
+getPlayerWidth :: Player -> Int
+getPlayerWidth p = p.width
 ```
 
 ```haskell
