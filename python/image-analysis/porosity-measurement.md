@@ -1,13 +1,32 @@
-# # Workflow for porosity quantification
+---
+jupytext:
+  formats: md:myst,ipynb
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.18.0
+kernelspec:
+  name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
+---
 
-# In this notebook we implement a simple segmentation routine for porosity quantification.
-#
-# Workflow is mostly based on [scikit-image](https://scikit-image.org/docs/stable/auto_examples/) package.
-#
-# You should run it sequentially and check quality of outputs at each step.
+# Workflow for porosity quantification
 
-# ## Required tools
++++
 
+In this notebook we implement a simple segmentation routine for porosity quantification.
+
+Workflow is mostly based on [scikit-image](https://scikit-image.org/docs/stable/auto_examples/) package.
+
+You should run it sequentially and check quality of outputs at each step.
+
++++
+
+## Required tools
+
+```{code-cell} ipython3
 from pathlib import Path
 from skimage.io import imread
 from skimage.draw import ellipse
@@ -23,99 +42,114 @@ import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+```
 
-media = Path(".").resolve().parent / "media" / "samples-porosity"
+```{code-cell} ipython3
+media = Path("..").resolve().parent / "media" / "samples-porosity"
 media.exists()
+```
 
-
+```{code-cell} ipython3
 def display_img(img, cmap="gray", no_ticks=True, **kw):
-    """ Display an image in a standard way. """
+    """ Display an image in a standard way with no borders. """
     fig, ax = plt.subplots()
     ax.imshow(img, cmap=cmap, **kw)
 
     if no_ticks:
         ax.axis("off")
         plt.subplots_adjust(left=0, right=1, top=1, bottom=0) 
+```
 
+## Load and inspect initial image
 
-# ## Load and inspect initial image
++++
 
-# Consider providing the relative or full path to target image.
+Consider providing the relative or full path to target image.
 
-# +
+```{code-cell} ipython3
 # fname = media / "500004.JPG"
 # fname = media / "700005.JPG"
 
 fname = media / "800009.JPG"
 fname.exists()
-# -
+```
 
-# Image is loaded in gray-scale, *i.e.* as a 2-D array, for later thresholding.
+Image is loaded in gray-scale, *i.e.* as a 2-D array, for later thresholding.
 
-# +
+```{code-cell} ipython3
 img0 = imread(fname, as_gray=True)
 
 display_img(img0)
-# -
+```
 
-# ## Blurring
+## Blurring
 
-# Because of grinding and etching defects, it is important to apply an initial blur to the image.
-#
-# You can control this by changing the value of `sigma`, the variance of the filter.
-#
-# **NOTE:** the `sigma` value you choose here will impact the value of threshold `img_lo` you will use later. If Otsu automated thresholding works properly, you do not need to tweak this parameter and the associated `img_lo`. This is provided for cases where Otsu fails to automatically get pore boundaries.
++++
 
-# +
+Because of grinding and etching defects, it is important to apply an initial blur to the image.
+
+You can control this by changing the value of `sigma`, the variance of the filter.
+
+**NOTE:** the `sigma` value you choose here will impact the value of threshold `img_lo` you will use later. If Otsu automated thresholding works properly, you do not need to tweak this parameter and the associated `img_lo`. This is provided for cases where Otsu fails to automatically get pore boundaries.
+
+```{code-cell} ipython3
 img1 = gaussian(img0, sigma=15)
 
 display_img(img1)
-# -
+```
 
-# ## Rescaling
+## Rescaling
 
-# Rescaling with standardize the range of image for later binary selection.
-#
-# There is no need to tweak the next cell.
++++
 
-# +
+Rescaling with standardize the range of image for later binary selection.
+
+There is no need to tweak the next cell.
+
+```{code-cell} ipython3
 img2 = rescale_intensity(img1, out_range=(-1, 1))
 
 display_img(img2)
-# -
+```
 
-# ## Manual thresholding
+## Manual thresholding
 
-# Using a cut-off lower threshold we can capture the pores.
-#
-# You need to manually edit parameter `img_lo`, which should be close to -1 because image intensity has been scaled to $I\in[-1,1]$.
++++
 
-# +
+Using a cut-off lower threshold we can capture the pores.
+
+You need to manually edit parameter `img_lo`, which should be close to -1 because image intensity has been scaled to $I\in[-1,1]$.
+
+```{code-cell} ipython3
 img_lo = -0.80
 
 img3 = np.ones_like(img2)
 img3[img2 < img_lo] = 0
 
 display_img(img3)
-# -
+```
 
-# ## Automatic thresholding
+## Automatic thresholding
 
-# The following is based on this [example](https://scikit-image.org/docs/stable/auto_examples/segmentation/plot_thresholding.html#sphx-glr-auto-examples-segmentation-plot-thresholding-py) provided by scikit-image.
++++
 
-# +
+The following is based on this [example](https://scikit-image.org/docs/stable/auto_examples/segmentation/plot_thresholding.html#sphx-glr-auto-examples-segmentation-plot-thresholding-py) provided by scikit-image.
+
+```{code-cell} ipython3
 img4 = img1 > threshold_otsu(img1)
 
 display_img(img4)
-# -
+```
 
-# ## Validation and results
+## Validation and results
 
-# We find the countours of pores for display with the original image.
-#
-# It is recommended you check the aspect to confirm the quality of results.
++++
 
-# +
+We find the countours of pores for display with the original image.
+
+It is recommended you check the aspect to confirm the quality of results.
+
+```{code-cell} ipython3
 porosity_manu = 100 * (1 - img3.sum() / img0.size)
 porosity_auto = 100 * (1 - img4.sum() / img0.size)
 
@@ -140,14 +174,12 @@ ax[0].axis("off")
 ax[1].axis("off")
 
 fig.tight_layout()
-plt.savefig(f"{Path(fname).stem}-result.png")
+```
 
+## Wrap-up of automated workflow
 
-# -
-
-# ## Wrap-up of automated workflow
-
-def workflow(fname, sigma=15):
+```{code-cell} ipython3
+def porosity_workflow(fname, sigma=15):
     """ Mostly automated quantification (play with sigma). """
     img0 = imread(fname, as_gray=True)
     img1 = gaussian(img0, sigma=sigma)
@@ -167,19 +199,15 @@ def workflow(fname, sigma=15):
 
     ax.axis("off")
     fig.tight_layout()
-    # plt.savefig(f"{Path(fname).stem}-result-auto.png")
-    plt.close("all")
+```
 
+```{code-cell} ipython3
+porosity_workflow(fname)
+```
 
-# +
-# all_files = Path(media).glob("*.JPG")
+## Region properties *bonus*
 
-# for fname in all_files:
-#     workflow(fname)
-# -
-
-# ## Region properties *bonus*
-
+```{code-cell} ipython3
 def plot_region(ax, props, cutoff):
     """ Display a region with borders and equivalent ellipse. """
     if props.area < cutoff:
@@ -203,9 +231,11 @@ def plot_region(ax, props, cutoff):
     bx = (minc, maxc, maxc, minc, minc)
     by = (minr, minr, maxr, maxr, minr)
     ax.plot(bx, by, "-b", linewidth=1)
+```
 
-
+```{code-cell} ipython3
 def plot_all_regions(img, contours, regions, cutoff):
+    """ Plot all detected regions in an image. """
     plt.close("all")
     fig, ax = plt.subplots(1, 1, figsize=(6, 5))
     # ax.set_title(f"Automated porosity of {porosity:.1f}%")
@@ -218,12 +248,13 @@ def plot_all_regions(img, contours, regions, cutoff):
         plot_region(ax, props, cutoff)
 
     ax.axis("off")
-    # plt.subplots_adjust(left=0, right=1, top=1, bottom=0) 
-    fig.tight_layout()
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0) 
+    # fig.tight_layout()
 
     return fig, ax
+```
 
-
+```{code-cell} ipython3
 def regions_workflow(fname, sigma=10, cutoff=20):
     """ Mostly automated quantification (play with sigma). """
     img0 = imread(fname, as_gray=True)
@@ -252,10 +283,12 @@ def regions_workflow(fname, sigma=10, cutoff=20):
         "perimeter_crofton"
     ))
     return pd.DataFrame(table)
+```
 
-
+```{code-cell} ipython3
 table = regions_workflow(fname)
+```
 
+```{code-cell} ipython3
 table.head().T
-
-
+```
