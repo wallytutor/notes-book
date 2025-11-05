@@ -27,6 +27,7 @@ parts:
       - file: python/mpc/part-a
       - file: python/mpc/part-b
       - file: python/mpc/part-c
+      - file: python/mpc/multiple-shooting
 
   - caption: "Julia tutorials"
     chapters:
