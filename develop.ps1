@@ -108,6 +108,13 @@ function New-DevEnvironment() {
     Enable-DevelVenv
     Start-PipInstall @("--upgrade", "pip")
     Start-PipInstall @("-r", "pinned.txt")
+
+    try {
+        Start-PipInstall @("-e", "..\")
+    }
+    catch {
+        Write-Error "Not working under Majordome."
+    }
 }
 
 ##############################################################################

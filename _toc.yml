@@ -22,15 +22,8 @@ parts:
 
   - caption: "Python tutorials"
     chapters:
-    - file: python/mpc/intro
-      sections:
-      - file: python/mpc/part-a
-      - file: python/mpc/part-b
-      - file: python/mpc/part-c
-      - file: python/mpc/multiple-shooting
-    - caption: "Image analysis"
-      sections:
-      - file: python/image-analysis/porosity-measurement
+    - file: python/mpc-kinetics-intro
+    - file: python/porosity-measurement
 
   - caption: "Julia tutorials"
     chapters:

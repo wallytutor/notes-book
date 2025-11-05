@@ -14,6 +14,7 @@ exclude_patterns:
   - sandbox
   - cooking
   - README.md
+  - references/@*.md
 
 latex:
   latex_documents:

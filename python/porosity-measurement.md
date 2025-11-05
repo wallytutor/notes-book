@@ -45,7 +45,7 @@ import pandas as pd
 ```
 
 ```{code-cell} ipython3
-media = Path("..").resolve().parent / "media" / "samples-porosity"
+media = Path(".").resolve().parent / "media" / "samples-porosity"
 media.exists()
 ```
 
@@ -57,7 +57,7 @@ def display_img(img, cmap="gray", no_ticks=True, **kw):
 
     if no_ticks:
         ax.axis("off")
-        plt.subplots_adjust(left=0, right=1, top=1, bottom=0) 
+        plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 ```
 
 ## Load and inspect initial image
@@ -215,7 +215,7 @@ def plot_region(ax, props, cutoff):
 
     y0, x0 = props.centroid
     theta = props.orientation
-    
+
     x1 = x0 + np.cos(theta) * props.axis_minor_length / 2
     y1 = y0 - np.sin(theta) * props.axis_minor_length / 2
     x2 = x0 - np.sin(theta) * props.axis_major_length / 2
@@ -248,7 +248,7 @@ def plot_all_regions(img, contours, regions, cutoff):
         plot_region(ax, props, cutoff)
 
     ax.axis("off")
-    plt.subplots_adjust(left=0, right=1, top=1, bottom=0) 
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
     # fig.tight_layout()
 
     return fig, ax
