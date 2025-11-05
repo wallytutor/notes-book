@@ -179,7 +179,6 @@ sumIt a b = a + b
 -- Data types start with capital letters
 data RGB = Red | Green | Blue
 
-
 judgementalColor Red   = "Those communists!"
 judgementalColor Green = "Oh, Greta!"
 judgementalColor Blue  = "Far right is here!"
@@ -251,6 +250,8 @@ getBoardWidth b = b.width
 getPlayerWidth :: Player -> Int
 getPlayerWidth p = p.width
 ```
+
+- Type...
 
 ```haskell
 
