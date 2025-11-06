@@ -24,6 +24,7 @@ parts:
     chapters:
     - file: python/mpc-kinetics-intro
     - file: python/porosity-measurement
+    - file: python/thermo-converting-shomate
 
   - caption: "Julia tutorials"
     chapters:
