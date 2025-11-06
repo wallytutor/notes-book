@@ -1,0 +1,1024 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Converting data to Shomate format &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/thermo-converting-shomate';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Julia" href="../julia/intro.html" />
+    <link rel="prev" title="Workflow for porosity quantification" href="porosity-measurement.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../scientific-computing/introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-ssh.html">SSH key generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-selection.html">Selection of tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-portable.html">Portable toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-linux.html">Working on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/programming.html">Scientific programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/general-tips.html">General Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/services.html">Deploying services</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Converting data to Shomate format</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/thermo-converting-shomate.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python/thermo-converting-shomate.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Converting data to Shomate format</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-data">Species data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nist-validation-data">NIST validation data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-model">Data model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-of-calculator">Validation of calculator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#water-gas">Water gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mullite">Mullite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quartz">Quartz</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-shomate-formalism">Converting to Shomate formalism</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="converting-data-to-shomate-format">
+<h1>Converting data to Shomate format<a class="headerlink" href="#converting-data-to-shomate-format" title="Link to this heading">#</a></h1>
+<p>The goal of this tutorial is to illustrate how to transform other thermodynamic data formats (here the closely related Maier-Kelly) into <a class="reference external" href="https://cantera.org/stable/reference/thermo/species-thermo.html#the-shomate-parameterization">Shomate formalist</a> for use with Cantera. This is especially useful for composing larger databases with standardized properties.</p>
+<p>We start by importing the required tools:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cantera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mj</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="species-data">
+<h2>Species data<a class="headerlink" href="#species-data" title="Link to this heading">#</a></h2>
+<p>The following provides a compilation of data from <a class="reference external" href="https://doi.org/10.1346/CCMN.1964.0130139">Schieltz (1964)</a>; please notice that at the time of publication customary units where <span class="math notranslate nohighlight">\(\text{cal}\,\text{mol}^{-1}\)</span>, so when loading data we will need to multipy data by <span class="math notranslate nohighlight">\(4.184\:\text{J}\,\text{cal}^{-1}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">- name: KAOLINITE</span>
+<span class="s2">  composition: {Al: 2, Si: 2, O : 9, H : 4}</span>
+<span class="s2">  data: [57.47, 35.30e-03, -7.87e+05, -964940.0, 40.50]</span>
+
+<span class="s2">- name: METAKAOLIN</span>
+<span class="s2">  composition: {Al: 2, Si: 2, O: 7}</span>
+<span class="s2">  data: [54.85, 8.80e-03, -3.48e+05, -767500.0, 32.78]</span>
+
+<span class="s2">- name: AL6SI2O13_MULLITE</span>
+<span class="s2">  composition: {Al: 6, Si: 2, O: 13}</span>
+<span class="s2">  data: [84.22, 20.00e-03, -25.00e+05, -1804000.0, 60.00]</span>
+
+<span class="s2">- name: AL2O3_GAMMA</span>
+<span class="s2">  composition: {Al: 2, O: 3}</span>
+<span class="s2">  data: [16.37, 11.10e-03, 0.0, -395000.0, 12.20]</span>
+
+<span class="s2">- name: SIO2_QUARTZ_ALPHA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [11.22, 8.20e-03, -2.70e+05, -209900.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_QUARTZ_BETA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [14.41, 1.94e-03, 0.0, -209900.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_GLASS</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [13.38, 3.68e-03, -3.45e+05, -202000.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_CRISTOBALITE_ALPHA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [4.28, 21.06e-03, 0.0, -209500.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_CRISTOBALITE_BETA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [14.40, 2.04e-03, 0.0, -209500.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_TRIDYMITE_ALPHA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [3.27, 24.80e-03, 0.0, -209400.0, 10.06]</span>
+
+<span class="s2">- name: SIO2_TRIDYMITE_BETA</span>
+<span class="s2">  composition: {Si: 1, O: 2}</span>
+<span class="s2">  data: [13.64, 2.64e-03, 0.0, -209400.0, 10.06]</span>
+
+<span class="s2">- name: H2O_LIQUID</span>
+<span class="s2">  composition: {H: 2, O: 1}</span>
+<span class="s2">  data: [18.03, 0.0, 0.0, -68320.0, 16.72]</span>
+
+<span class="s2">- name: H2O_STEAM</span>
+<span class="s2">  composition: {H: 2, O: 1}</span>
+<span class="s2">  data: [7.17, 2.56e-03, 0.08e+05, -57800.0, 45.13]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="nist-validation-data">
+<h2>NIST validation data<a class="headerlink" href="#nist-validation-data" title="Link to this heading">#</a></h2>
+<p>Data sources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&amp;amp;Units=SI&amp;amp;Mask=1&amp;amp;Type=JANAFG&amp;amp;Table=on#JANAFG">Water</a></p></li>
+<li><p><a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C1302938&amp;amp;Units=SI&amp;amp;Mask=2&amp;amp;Type=JANAFS&amp;amp;Table=on#JANAFS">Mullite</a></p></li>
+<li><p><a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C14808607&amp;amp;Units=SI&amp;amp;Mask=2&amp;amp;Type=JANAFS&amp;amp;Table=on#JANAFS">Quartz</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nist_water</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"> 500.0 35.22 206.5 192.7  6.92</span>
+<span class="s2"> 600.0 36.32 213.1 195.5 10.50</span>
+<span class="s2"> 700.0 37.50 218.7 198.5 14.19</span>
+<span class="s2"> 800.0 38.74 223.8 201.3 18.00</span>
+<span class="s2"> 900.0 40.00 228.5 204.1 21.94</span>
+<span class="s2">1000.0 41.27 232.7 206.7 26.00</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nist_mullite</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"> 298.0  325.0   274.1  275.1   -0.30</span>
+<span class="s2"> 300.0  326.9   276.3  275.1    0.35</span>
+<span class="s2"> 400.0  392.6   380.3  288.6   36.66</span>
+<span class="s2"> 500.0  431.8   472.4  316.4   78.02</span>
+<span class="s2"> 600.0  458.8   553.7  349.3   122.6</span>
+<span class="s2"> 700.0  478.5   625.9  383.7   169.5</span>
+<span class="s2"> 800.0  493.5   690.9  418.1   218.2</span>
+<span class="s2"> 900.0  505.1   749.7  451.8   268.1</span>
+<span class="s2">1000.0  514.0   803.4  484.3   319.1</span>
+<span class="s2">1100.0  521.0   852.7  515.6   370.9</span>
+<span class="s2">1200.0  526.6   898.3  545.6   423.2</span>
+<span class="s2">1300.0  531.2   940.6  574.4   476.1</span>
+<span class="s2">1400.0  535.3   980.1  601.9   529.5</span>
+<span class="s2">1500.0  539.4  1017.0  628.4   583.2</span>
+<span class="s2">1600.0  543.8  1052.0  653.8   637.4</span>
+<span class="s2">1700.0  548.9  1085.0  678.2   692.0</span>
+<span class="s2">1700.0  547.7  1085.0  678.1   692.0</span>
+<span class="s2">1800.0  551.3  1117.0  701.6   747.0</span>
+<span class="s2">1900.0  554.6  1147.0  724.3   802.3</span>
+<span class="s2">2000.0  557.9  1175.0  746.1   857.9</span>
+<span class="s2">2100.0  561.1  1202.0  767.2   913.8</span>
+<span class="s2">2200.0  564.4  1229.0  787.6   970.1</span>
+<span class="s2">2300.0  567.7  1254.0  807.3  1027.0</span>
+<span class="s2">2400.0  571.1  1278.0  826.4  1084.0</span>
+<span class="s2">2500.0  574.6  1301.0  844.9  1141.0</span>
+<span class="s2">2600.0  578.3  1324.0  862.9  1199.0</span>
+<span class="s2">2700.0  582.0  1346.0  880.4  1257.0</span>
+<span class="s2">2800.0  585.9  1367.0  897.4  1315.0</span>
+<span class="s2">2900.0  589.9  1388.0  914.0  1374.0</span>
+<span class="s2">3000.0  593.9  1408.0  930.1  1433.0</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nist_quartz</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"> 298.0  44.57  41.44  41.47  -0.01</span>
+<span class="s2"> 300.0  44.77  41.74  41.47   0.08</span>
+<span class="s2"> 400.0  53.43  55.87  43.34   5.01</span>
+<span class="s2"> 500.0  59.64  68.50  47.13  10.68</span>
+<span class="s2"> 600.0  64.42  79.81  51.65  16.89</span>
+<span class="s2"> 700.0  68.77  90.06  56.42  23.55</span>
+<span class="s2"> 800.0  73.70  99.56  61.22  30.67</span>
+<span class="s2"> 847.0  67.42  104.7  63.47  34.93</span>
+<span class="s2"> 900.0  67.95  108.8  66.02  38.51</span>
+<span class="s2">1000.0  68.95  116.0  70.66  45.36</span>
+<span class="s2">1100.0  69.96  122.6  75.09  52.30</span>
+<span class="s2">1200.0  70.96  128.8  79.31  59.35</span>
+<span class="s2">1300.0  71.96  134.5  83.34  66.50</span>
+<span class="s2">1400.0  72.97  139.9  87.18  73.74</span>
+<span class="s2">1500.0  73.97  144.9  90.87  81.09</span>
+<span class="s2">1600.0  74.98  149.7  94.40  88.54</span>
+<span class="s2">1700.0  75.98  154.3  97.79  96.08</span>
+<span class="s2">1800.0  76.99  158.7  101.0  103.7</span>
+<span class="s2">1900.0  77.99  162.9  104.2  111.5</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-model">
+<h2>Data model<a class="headerlink" href="#data-model" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SchieltzSpecies</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Simple species representation to load data from Schieltz, 1964. &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_name&quot;</span><span class="p">,</span> <span class="s2">&quot;_mass&quot;</span><span class="p">,</span> <span class="s2">&quot;_coef&quot;</span><span class="p">,</span> <span class="s2">&quot;_h298&quot;</span><span class="p">,</span> <span class="s2">&quot;_s298&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">Tref</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">298.15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;composition&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Store coefficients in J/mol units:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span> <span class="o">=</span> <span class="mf">4.184</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Store reference state quantities for integrations:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h298</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h</span><span class="p">(</span><span class="n">Tref</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_s298</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s</span><span class="p">(</span><span class="n">Tref</span><span class="p">)</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Unique representation of species. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Species </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">molecular_weight</span><span class="p">(</span><span class="n">composition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Evaluate molecular weight of species [kg/kmol]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">weight</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">composition</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Evaluation by definition (from coefficients). &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">c</span> <span class="o">/</span> <span class="n">T</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Evaluation by definition (dH = dT*c_p*). &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c</span> <span class="o">/</span> <span class="n">T</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_s</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Evaluation by definition (dS = dT*c_p/T. &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">T</span> <span class="o">-</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_heat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Maier-Kelley specific heat [J/(mol.K)]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_enthalpy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Maier-Kelley specific enthalpy [J/mol]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h298</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Maier-Kelley specific entropy [J/(mol.K)]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_specific_entropy</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s298</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reference_specific_enthalpy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Reference state formation enthalpy [J/mol]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reference_specific_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Reference state formation entropy [J/(mol.K)]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coef</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Generate a table for comparison with NIST Web-book of Chemistry. &quot;&quot;&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">specific_heat</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">specific_entropy</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">specific_enthalpy</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span>  <span class="o">/</span> <span class="mi">1000</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span>
+            <span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;Cp&quot;</span><span class="p">,</span> <span class="s2">&quot;J/(mol.K)&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;S°&quot;</span><span class="p">,</span> <span class="s2">&quot;J/(mol.K)&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;-(G°-H°298.15)/T&quot;</span><span class="p">,</span> <span class="s2">&quot;J/(mol.K)&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;H°-H°298.15&quot;</span><span class="p">,</span> <span class="s2">&quot;kJ/mol&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CanteraSpecies</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Simple wrapper to compute vectorized properties of species. &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_species&quot;</span><span class="p">,</span> <span class="s2">&quot;_c&quot;</span><span class="p">,</span> <span class="s2">&quot;_h&quot;</span><span class="p">,</span> <span class="s2">&quot;_s&quot;</span><span class="p">,</span> <span class="s2">&quot;_trng&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">species</span><span class="p">:</span> <span class="n">ct</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">Species</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_species</span> <span class="o">=</span> <span class="n">species</span>
+
+        <span class="n">h298</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mf">298.15</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+        <span class="c1"># s298 = species.thermo.s(298.15) / 1000</span>
+        
+        <span class="c1"># XXX: notice that properties are in *kmol* basis in Cantera</span>
+        <span class="c1"># https://cantera.org/stable/python/thermo.html#cantera.SpeciesThermo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">species</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">species</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">h298</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">species</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trng</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">input_data</span><span class="p">[</span><span class="s2">&quot;thermo&quot;</span><span class="p">][</span><span class="s2">&quot;temperature-ranges&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Unique representation of species. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_species</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_heat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cantera species specific heat [J/(mol.K)]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_enthalpy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cantera species specific enthalpy [J/mol]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">specific_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Cantera species specific entropy [J/(mol.K)]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">temperature_ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Temperature ranges for data set [K]. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trng</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_plot</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="s2">&quot;xlabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Temperature [K]&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ylabel&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">r</span><span class="s2">&quot;$c_p$&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;$s^\circ$&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;-$(G^\circ-H^\circ)/T$&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;$H-H^\circ$&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">**</span><span class="n">config_plot</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_properties</span><span class="p">(</span><span class="n">spec_ref</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">spec_ref</span><span class="o">.</span><span class="n">specific_heat</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">spec_ref</span><span class="o">.</span><span class="n">specific_enthalpy</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">spec_ref</span><span class="o">.</span><span class="n">specific_entropy</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># h is already h-h298!</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span>
+
+    <span class="n">T_nist</span> <span class="o">=</span> <span class="n">truth</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c_nist</span> <span class="o">=</span> <span class="n">truth</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">s_nist</span> <span class="o">=</span> <span class="n">truth</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">g_nist</span> <span class="o">=</span> <span class="n">truth</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">h_nist</span> <span class="o">=</span> <span class="n">truth</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Schieltz (1964)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cantera&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T_nist</span><span class="p">,</span> <span class="n">c_nist</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NIST&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Schieltz (1964)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cantera&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T_nist</span><span class="p">,</span> <span class="n">s_nist</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NIST&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Schieltz (1964)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cantera&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T_nist</span><span class="p">,</span> <span class="n">g_nist</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NIST&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Schieltz (1964)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">h</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cantera&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T_nist</span><span class="p">,</span> <span class="n">h_nist</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NIST&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">mj</span><span class="o">.</span><span class="n">bounds</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below we load both databases in a format convenient for the computations that follow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">database</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]:</span> <span class="n">SchieltzSpecies</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">data</span><span class="p">)}</span>
+<span class="n">species</span>  <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">CanteraSpecies</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ct</span><span class="o">.</span><span class="n">Species</span><span class="o">.</span><span class="n">list_from_file</span><span class="p">(</span><span class="s2">&quot;materials.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">)}</span>
+<span class="c1"># database, species</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="validation-of-calculator">
+<h2>Validation of calculator<a class="headerlink" href="#validation-of-calculator" title="Link to this heading">#</a></h2>
+<section id="water-gas">
+<h3>Water gas<a class="headerlink" href="#water-gas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec_ref</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s2">&quot;H2O_GAS&quot;</span><span class="p">]</span>
+
+<span class="n">T_mullite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">298</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">df_calc</span> <span class="o">=</span> <span class="n">database</span><span class="p">[</span><span class="s2">&quot;H2O_STEAM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T_mullite</span><span class="p">)</span>
+<span class="n">df_nist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">nist_water</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plot_properties</span><span class="p">(</span><span class="n">spec_ref</span><span class="p">,</span> <span class="n">df_nist</span><span class="p">,</span> <span class="n">df_calc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2a3537cd1f6fbdd59cc0ac62a683e3e050f750ca133f57344e4f8d1662400ada.png" src="../_images/2a3537cd1f6fbdd59cc0ac62a683e3e050f750ca133f57344e4f8d1662400ada.png" />
+</div>
+</div>
+</section>
+<section id="mullite">
+<h3>Mullite<a class="headerlink" href="#mullite" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec_ref</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s2">&quot;AL6SI2O13_MULLITE&quot;</span><span class="p">]</span>
+
+<span class="n">T_mullite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">mj</span><span class="o">.</span><span class="n">bounds</span><span class="p">(</span><span class="n">spec_ref</span><span class="o">.</span><span class="n">temperature_ranges</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">df_calc</span> <span class="o">=</span> <span class="n">database</span><span class="p">[</span><span class="s2">&quot;AL6SI2O13_MULLITE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T_mullite</span><span class="p">)</span>
+<span class="n">df_nist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">nist_mullite</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plot_properties</span><span class="p">(</span><span class="n">spec_ref</span><span class="p">,</span> <span class="n">df_nist</span><span class="p">,</span> <span class="n">df_calc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/36293fd921d3a470e4a0568236279546ed5bf16f1156904d84d820be069acf78.png" src="../_images/36293fd921d3a470e4a0568236279546ed5bf16f1156904d84d820be069acf78.png" />
+</div>
+</div>
+</section>
+<section id="quartz">
+<h3>Quartz<a class="headerlink" href="#quartz" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tabulate_sio2</span><span class="p">(</span><span class="n">T_ranges</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Compose a single table with data for SiO2 (Quartz). &quot;&quot;&quot;</span>
+    <span class="n">sio2_alpha</span> <span class="o">=</span> <span class="n">database</span><span class="p">[</span><span class="s2">&quot;SIO2_QUARTZ_ALPHA&quot;</span><span class="p">]</span>
+    <span class="n">sio2_beta</span>  <span class="o">=</span> <span class="n">database</span><span class="p">[</span><span class="s2">&quot;SIO2_QUARTZ_BETA&quot;</span><span class="p">]</span>
+
+    <span class="c1"># XXX: in Shomate formalism, ranges as [Tmin; Tmax), so use</span>
+    <span class="c1"># a slightly smaller value for jump temperature in T_alpha.</span>
+    <span class="n">T_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">298</span><span class="p">,</span> <span class="n">T_ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">T_beta</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">T_ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="n">df_alpha</span> <span class="o">=</span> <span class="n">sio2_alpha</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T_alpha</span><span class="p">)</span>
+    <span class="n">df_beta</span>  <span class="o">=</span> <span class="n">sio2_beta</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T_beta</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_alpha</span><span class="p">,</span> <span class="n">df_beta</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec_ref</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s2">&quot;SIO2_QUARTZ&quot;</span><span class="p">]</span>
+<span class="n">df_calc</span> <span class="o">=</span> <span class="n">tabulate_sio2</span><span class="p">(</span><span class="n">spec_ref</span><span class="o">.</span><span class="n">temperature_ranges</span><span class="p">)</span>
+<span class="n">df_nist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">nist_quartz</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plot_properties</span><span class="p">(</span><span class="n">spec_ref</span><span class="p">,</span> <span class="n">df_nist</span><span class="p">,</span> <span class="n">df_calc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/12b158ef37b5b54d026598c0220613cfd64bbbb7c579a4676d802b674e981d46.png" src="../_images/12b158ef37b5b54d026598c0220613cfd64bbbb7c579a4676d802b674e981d46.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="converting-to-shomate-formalism">
+<h2>Converting to Shomate formalism<a class="headerlink" href="#converting-to-shomate-formalism" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="porosity-measurement.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Workflow for porosity quantification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../julia/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Julia</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-data">Species data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nist-validation-data">NIST validation data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-model">Data model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-of-calculator">Validation of calculator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#water-gas">Water gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mullite">Mullite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quartz">Quartz</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-shomate-formalism">Converting to Shomate formalism</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

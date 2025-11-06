@@ -199,8 +199,14 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -646,16 +652,16 @@ Number of inequality constraint evaluations          = 0
 Number of equality constraint Jacobian evaluations   = 12
 Number of inequality constraint Jacobian evaluations = 0
 Number of Lagrangian Hessian evaluations             = 11
-Total seconds in IPOPT                               = 1.358
+Total seconds in IPOPT                               = 1.883
 
 EXIT: Optimal Solution Found.
       solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
-       nlp_f  |  14.00ms (  1.17ms)  36.67ms (  3.06ms)        12
-       nlp_g  |  35.00ms (  2.92ms)  37.16ms (  3.10ms)        12
-  nlp_grad_f  | 395.00ms ( 15.19ms) 390.18ms ( 15.01ms)        26
-  nlp_hess_l  | 672.00ms ( 61.09ms) 638.36ms ( 58.03ms)        11
-   nlp_jac_g  | 248.00ms ( 19.08ms) 257.21ms ( 19.79ms)        13
-       total  |   1.39 s (  1.39 s)   1.37 s (  1.37 s)         1
+       nlp_f  |  41.00ms (  3.42ms)  49.82ms (  4.15ms)        12
+       nlp_g  |  36.00ms (  3.00ms)  48.56ms (  4.05ms)        12
+  nlp_grad_f  | 558.00ms ( 21.46ms) 543.20ms ( 20.89ms)        26
+  nlp_hess_l  | 868.00ms ( 78.91ms) 873.55ms ( 79.41ms)        11
+   nlp_jac_g  | 359.00ms ( 27.62ms) 369.88ms ( 28.45ms)        13
+       total  |   1.90 s (  1.90 s)   1.91 s (  1.91 s)         1
 </pre></div>
 </div>
 </div>

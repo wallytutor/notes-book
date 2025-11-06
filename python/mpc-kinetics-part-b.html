@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc-kinetics-part-b';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wrapping up" href="mpc-kinetics-part-c.html" />
+    <link rel="prev" title="Basics" href="mpc-kinetics-part-a.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -121,8 +123,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -196,9 +196,15 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -775,14 +781,14 @@ Number of inequality constraint evaluations          = 0
 Number of equality constraint Jacobian evaluations   = 0
 Number of inequality constraint Jacobian evaluations = 0
 Number of Lagrangian Hessian evaluations             = 14
-Total seconds in IPOPT                               = 0.045
+Total seconds in IPOPT                               = 0.058
 
 EXIT: Optimal Solution Found.
       solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
-       nlp_f  |        0 (       0) 178.00us ( 11.87us)        15
-  nlp_grad_f  |   6.00ms (375.00us) 286.00us ( 17.87us)        16
-  nlp_hess_l  |  17.00ms (  1.21ms)  13.93ms (994.71us)        14
-       total  |  40.00ms ( 40.00ms)  45.58ms ( 45.58ms)         1
+       nlp_f  |        0 (       0) 220.00us ( 14.67us)        15
+  nlp_grad_f  |        0 (       0) 368.00us ( 23.00us)        16
+  nlp_hess_l  |  20.00ms (  1.43ms)  18.07ms (  1.29ms)        14
+       total  |  58.00ms ( 58.00ms)  58.98ms ( 58.98ms)         1
 </pre></div>
 </div>
 </div>
@@ -883,6 +889,24 @@ EXIT: Optimal Solution Found.
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="mpc-kinetics-part-a.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mpc-kinetics-part-c.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Wrapping up</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
