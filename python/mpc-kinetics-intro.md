@@ -10,5 +10,5 @@ Let's break down our introduction to model predictive control (MPC) into simpler
 
 ## Supplementary materials
 
-- [Multiple shooting method](multiple-shooting.md)
-- [Modeling boiling/evaporation](boiling-evaporation.md)
+- [Multiple shooting method](mpc-multiple-shooting.md)
+- [Modeling boiling/evaporation](mpc-boiling-evaporation.md)

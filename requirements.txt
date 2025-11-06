@@ -1,9 +1,10 @@
 # Jupyter Book
-jupyter-book
+jupyter-book<2
 jupyterlab
 jupytext
 nbconvert
 ghp-import
+mystmd
 
 # Scientific dependencies
 cantera
@@ -13,5 +14,7 @@ numba
 numpy
 pandas
 pyvista
+scikit-image
+scikit-learn
 scipy
 sympy

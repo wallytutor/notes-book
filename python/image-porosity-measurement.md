@@ -12,7 +12,7 @@ kernelspec:
   language: python
 ---
 
-# Workflow for porosity quantification
+# Porosity quantification
 
 +++
 

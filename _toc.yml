@@ -22,9 +22,23 @@ parts:
 
   - caption: "Python tutorials"
     chapters:
+
     - file: python/mpc-kinetics-intro
-    - file: python/porosity-measurement
-    - file: python/thermo-converting-shomate
+      sections:
+      - file: python/mpc-kinetics-part-a
+      - file: python/mpc-kinetics-part-b
+      - file: python/mpc-kinetics-part-c
+      - file: python/mpc-boiling-evaporation
+      - file: python/mpc-multiple-shooting
+
+    - file: python/thermo-notes-intro
+      sections:
+      - file: python/thermo-converting-shomate
+      - file: python/thermo-calphad-nitrides
+
+    - file: python/image-notes-intro
+      sections:
+      - file: python/image-porosity-measurement
 
   - caption: "Julia tutorials"
     chapters:
