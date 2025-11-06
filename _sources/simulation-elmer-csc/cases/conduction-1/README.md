@@ -1,5 +1,6 @@
 # Heat conduction in Elmer
 
+
 The goals of this set of cases is to:
 
 - illustrate how to setup heat conduction in Elmer;
@@ -7,11 +8,154 @@ The goals of this set of cases is to:
 - help on how to interpret symmetries and fluxes in Elmer;
 - provide uses of data extraction during calculation.
 
-Before following the discussion below, the reader is invited to check the guided setup of a reference case under [concept](concept/README.md). This is provided to facilitate the structuring of SIF files. Once the initial SIF file is generated, you can copy it to the `2d` directory, where is continue the discussion.
+It is recommended to follow the content linearly, as the guided setup of a reference case in the next section is a pre-requisite for what comes next. This is provided to facilitate the structuring of SIF files.
+
+```python
+from majordome import MajordomePlot
+from majordome import ReadTextData
+import majordome as mj
+import numpy as np
+```
+
+## Base case conception
+
+<!-- #region -->
+Although the recommended way to deal with Elmer setup is through SIF files, creating them by hand is sort of cumbersome if you do not dispose of a similar case to modify. Here we provide a guided workflow to create a case that we will later modify by hand. This will allow us to quickly produce a working version of the base operating version of SIF file.
+
+In what follows we assume you have generated the computational grid with `gmsh` under the `2d/` directory. To do so, navigate to that folder in a terminal and run:
+
+```bash
+gmsh - domain.geo
+```
+
+A file `domain.msh` in `gmsh` format will be generated. That said, what we will create here is essentially the 2D case since it is conceived with its mesh. In what follows we will perform the following steps:
+
+1. Create a base case with the referred mesh and add additional tools to the UI.
+2. Add a set of equations with all the models associated to the loaded body.
+3. Create a material and attribute it to the body.
+4. Set initial and boundary conditions.
+<!-- #endregion -->
+
+### Raw case preparation
+
+
+It is important that the non-default solvers be added at this stage, otherwise they will not appear in the model selection tabs (and you might need to delete already configured models to be able to use them). From the `File` menu entry perform the following steps:
+
+- File > Open > *select 2D mesh file*
+- File > Definitions > Append > *fluxsolver.xml*
+- File > Definitions > Append > *saveline.xml*
+- File > Save Project > *navigate to concept directory*
+
+Now on the object tree, expand `Body`, open `Body Property 1`, rename it `Hollow Cylinder`. You can save project again here (and as often as you wish) to keep track of modifications.
+
+
+### Creation of equations
+
+
+In Elmer not everything that is called equation represents an actual *physical equation*. It is important to add all [models](https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerModelsManual.pdf) that apply to a body at the same equation, as follows:
+
+- Equation > [Add...]:
+    - Rename it `Model`
+    - Apply to bodies: check `Hollow Cylinder`
+    - Check `Active` in tabs:
+        - `Heat equation`
+        - `Flux and Gradient`
+        - `SaveLine`
+
+As you may notice, in the above we have actually one physical model (heat equation) and a pair of processing utilities. As in FEM we perform projections to solve for these processed quantities, they need to be extracted at runtime. To get the heat flux at system boundary and extracting solution over a given line during calculation we perform the following configurations.
+
+- Edit Solver Settings in `Model` tab `Flux and Gradient`:
+    - Tab `Solver specific options`:
+        - Target Variable `Temperature`
+        - Flux Coefficient `Heat Conductivity`
+        - Check `Calculate Flux`
+    - Tab `General`:
+        - Execute solver `After timestep`
+
+In steady state simulations the flux is generally computed *after all* calculations are performed (at converged solution); for transient simulations this is generally done after each time step. Failing to configure this properly may lead to an overhead of useless intermediate computations. 
+
+- Edit Solver Settings in `Model` tab `SaveLine`:
+    - Tab `Solver specific options`:
+        - Polyline Coordinates `Size(2, 2);  0.005 0.025  0.100 0.025`
+        - Polyline Divisions `25`
+    - Tab `General`:
+        - Execute solver `After simulation`
+
+Saving data could be done on a time basis, but for this case we have decided to extract only a profile of the final solution *after simulation*.
+
+
+### Setting up materials
+
+
+For being able to eventually verify this case against analytical solutions,  the simplest set of material properties are introduced below; everything is held constant.
+
+- Material > [Add...]:
+    - Rename it `Solid`
+    - Apply to bodies: check `Hollow Cylinder`
+    - Density `3000`
+    - Heat Capacity `1000`
+    - Tab `Heat equation`:
+        - Heat Conductivity `10`
+
+
+### Configuring conditions
+
+
+Next we initialize the body to be at 1000 K:
+
+- Initial condition > [Add...]:
+    - Rename it `Initial Temperature`
+    - Apply to bodies: check `Hollow Cylinder`
+    - Tab `Heat equation`:
+        - Temperature `1000`
+
+Both the whole (left side) and ends (top/bottom) are set as adiabatic:
+
+- Boundary condition > [Add...]:
+    - Rename it `Hole`
+    - Apply to boundaries: check `Boundary 1`
+    - Tab `Heat equation`:
+        - Heat Flux `0`
+
+- Boundary condition > [Add...]:
+    - Rename it `Ends`
+    - Apply to boundaries: check `Boundary 3`
+    - Tab `Heat equation`:
+        - Heat Flux `0`
+
+Finally a Robin boundary condition is provided for environment (radius/right side):
+
+- Boundary condition > [Add...]:
+    - Rename it `Environment`
+    - Apply to boundaries: check `Boundary 2`
+    - Tab `Heat equation`:
+        - Heat Transfer Coeff. `10`
+        - External Temperature `300`
+
+So far the model is built with the default steady-state solver. This might be useful for testing *if it runs* towards the trivial solution (equilibrium with external environment), what should be pretty fast. So save, generate, and run the model for testing.
+
+
+### Final setup
+
+
+Back to menu `Model > Setup...`, tune a few parameters as follows:
+
+- Results directory `results`
+- Coordinate system `Axi Symmetric`
+- Simulation type `Transient`
+- Output intervals `10`
+- Timestep intervals `120`
+- Timestep sizes `10`
+
+Now save, generate, and run. It should be up and running as desired by here!
+
+Once the initial SIF file is generated, you can copy it to the `2d` directory and follow the next section.
+
 
 ## Conduction in 2D
 
-The case you find here is essentially the same as the one under [concept](concept/README.md). A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.
+<!-- #region -->
+The case you find here is essentially the same as the one under `concept/` by following the previous section. A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.
 
 As the script is expected to be manually edited from now on, we added comments (in SIF a comment line starts with a `!` as in Fortran - the main language of Elmer) splitting the case in logical blocks with *general* content, *material and its domain*, the *solvers*, and finally the *conditions*.
 
@@ -21,15 +165,15 @@ The location of the mesh was changed from default (the only supported location w
 Mesh DB "domain" "."
 ```
 
-If you followed the [concept](concept/README.md) setup you should already have a mesh there, otherwise run:
+If you followed the base case setup above you should already have a mesh there, otherwise run:
 
-```shell
+```bash
 gmsh - domain.geo
 ```
 
 This can be converted to Elmer format with `ElmerGrid` by running:
 
-```shell
+```bash
 ElmerGrid 14 2 domain.msh -autoclean -merge 1.0e-05
 ```
 
@@ -37,13 +181,15 @@ In this command `14` represents the `gmsh` input format and `2` the `ElmerSolver
 
 For a standard sequential run simple enter:
 
-```shell
+```bash
 ElmerSolver
 ```
 
 It was not illustrated above, but it is important to redirect the output of these commands to log files so that they can be inspected for any errors or warnings. Results are dumped to `results/` directory as defined in the concept phase and can be inspected with ParaView.
+<!-- #endregion -->
 
 ## Improved 2D case
+
 
 After the initial run, a few manual additions were performed. Since they are always present and for better clarity, the following keywords are placed on top of each solver:
 
@@ -116,8 +262,49 @@ Equation 1
 End
 ```
 
+```python
+@MajordomePlot.new(size=(6, 5), xlabel="Time [s]", ylabel="Heat flow [W]")
+def post_heat_flux_2d(scalars, sides, plot=None):
+    # Dimensions of the cylinder:
+    R = 0.10
+    h = 0.05
+    
+    # Parameters of the problem:
+    htc = 10.0
+    Tinf = 300
+    
+    # Retrieve time series of the heat flux:
+    t = scalars[0]
+    Q = scalars[1]
+    
+    # Retrieve the final values of the temperature and heat flux:
+    T = sides.iloc[-1, 7]
+    q = sides.iloc[-1, 8]
+    
+    # Calculate the heat flux from the analytical solution:
+    A = 2 * np.pi * R * h
+    q_calc = htc * (T - Tinf)
+    Q_calc = q_calc * A
+
+    # Start the actual plotting:
+    fig, ax = plot.subplots()
+    ax[0].plot(t, Q, color="b")
+    ax[0].set_xlim(200, 1200)
+    ax[0].set_ylim(195, 215)
+    fig.tight_layout()
+    fig.savefig("2d/heat-flow.png", dpi=150)
+```
+
+```python
+scalars = ReadTextData.read_sep("2d/results/scalars.dat", header=None)
+sides = ReadTextData.read_sep("2d/results/sides.dat", header=None)
+
+plot = post_heat_flux_2d(scalars, sides)
+```
+
 ## Conduction in 3D
 
+<!-- #region -->
 Adapting the case for running with a 3D geometry (provided under directory `3d`) is quite simple now. First, we modify the coordinate system under `Simulation` section to cartesian. This is because now we are solving an actual 3D geometry and enforcing specific coordinate systems is no longer required (or formally compatible).
 
 ```c
@@ -142,19 +329,21 @@ End
 
 To generate the `ElmerSolver` mesh under `domain/` we run the same command as before. Because transient 3D cases are quite computationally intensive, for any practical purposes the simulation must be run in parallel. Domain decomposition is also performed with `ElmerGrid` as follows:
 
-```shell
+```bash
 ElmerGrid 2 2 domain -partdual -metiskway 16
 ```
 
 In the above command the number `16` represents the number of cores; you might need to adapt for a lower value if running from most laptops (generally with 4 or 6 cores these days). For running in parallel with 16 cores we need to run the command:
 
-```shell
+```bash
 mpiexec -n 16 ElmerSolver_mpi
 ```
 
 The command `mpiexec` is how the message passing interface (MPI) runner is called in Windows; for Linux this should be `mpirun` instead.
+<!-- #endregion -->
 
 ## Understanding heat flux
+
 
 Depending on problem dimension it might be tricky to understand what the reported values of heat flux correspond to. That is specially tricky when dealing with axisymmetric cases.
 
@@ -168,21 +357,40 @@ In this case we have set $U=10\;W\;m^{-2}\;K^{-1}$ and $T_{\infty}=300\;K$. The 
 
 To get an integral value we used `SaveScalars`, which is plotted below against time. Since the value of heat flux was integrated over the boundary, it is provided in power units. At the final time we have a value of $Q\approx{}198.4\;W$. The segment of cylinder simulated here has an outer radius of $R=0.10\;m$ and height $h=0.05\;m$. With this values in hand it can be shown that the integral quantity is evaluated for $2\pi\;rad$, *i.e.* $Q=2\pi{}Rhq=Aq$.
 
-![2D case](2d/heat-flow.png)
+```{image} 2d/heat-flow.png
+:alt: 2d-heat-flow
+:class: bg-primary mb-1
+:width: 80%
+:align: center
+```
 
 For the 3D case most of the ideas still hold true. The main difference here is that no intrinsic symmetry was implied by the cartesian choice of formulation. Symmetries were enforced by boundary conditions. That means that computed quantities evaluate to the actual area of the wedge, here covering an angle of $\pi/4$ - what should be clear as it is common to most simulation packages.
 
+
 ## Graphical post-processing
+
 
 ParaView was employed to generate standard animations of temperature evolution in bodies. Below we have the 2D axisymmetric results:
 
-![2D Case](2d/animation/animation.gif)
+```{image} 2d/animation/animation.gif
+:alt: 2d-animation-animation
+:class: bg-primary mb-1
+:width: 80%
+:align: center
+```
 
 The same was done for 3D equivalent case as illustrated next:
 
-![3D Case](3d/animation/animation.gif)
+```{image} 3d/animation/animation.gif
+:alt: 3d-animation-animation
+:class: bg-primary mb-1
+:width: 80%
+:align: center
+```
+
 
 ## Classification
+
 
 #elmer/domain/axisymmetric
 #elmer/domain/transient

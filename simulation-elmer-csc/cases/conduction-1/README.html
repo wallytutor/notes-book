@@ -443,6 +443,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-case-conception">Base case conception</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-case-preparation">Raw case preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-of-equations">Creation of equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-materials">Setting up materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-conditions">Configuring conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-setup">Final setup</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conduction-in-2d">Conduction in 2D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-2d-case">Improved 2D case</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conduction-in-3d">Conduction in 3D</a></li>
@@ -469,29 +477,213 @@ document.write(`
 <li><p>help on how to interpret symmetries and fluxes in Elmer;</p></li>
 <li><p>provide uses of data extraction during calculation.</p></li>
 </ul>
-<p>Before following the discussion below, the reader is invited to check the guided setup of a reference case under <a class="reference internal" href="concept/README.html"><span class="std std-doc">concept</span></a>. This is provided to facilitate the structuring of SIF files. Once the initial SIF file is generated, you can copy it to the <code class="docutils literal notranslate"><span class="pre">2d</span></code> directory, where is continue the discussion.</p>
+<p>It is recommended to follow the content linearly, as the guided setup of a reference case in the next section is a pre-requisite for what comes next. This is provided to facilitate the structuring of SIF files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReadTextData</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mj</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<section id="base-case-conception">
+<h2>Base case conception<a class="headerlink" href="#base-case-conception" title="Link to this heading">#</a></h2>
+<!-- #region -->
+<p>Although the recommended way to deal with Elmer setup is through SIF files, creating them by hand is sort of cumbersome if you do not dispose of a similar case to modify. Here we provide a guided workflow to create a case that we will later modify by hand. This will allow us to quickly produce a working version of the base operating version of SIF file.</p>
+<p>In what follows we assume you have generated the computational grid with <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> under the <code class="docutils literal notranslate"><span class="pre">2d/</span></code> directory. To do so, navigate to that folder in a terminal and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmsh<span class="w"> </span>-<span class="w"> </span>domain.geo
+</pre></div>
+</div>
+<p>A file <code class="docutils literal notranslate"><span class="pre">domain.msh</span></code> in <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> format will be generated. That said, what we will create here is essentially the 2D case since it is conceived with its mesh. In what follows we will perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Create a base case with the referred mesh and add additional tools to the UI.</p></li>
+<li><p>Add a set of equations with all the models associated to the loaded body.</p></li>
+<li><p>Create a material and attribute it to the body.</p></li>
+<li><p>Set initial and boundary conditions.</p></li>
+</ol>
+<!-- #endregion -->
+<section id="raw-case-preparation">
+<h3>Raw case preparation<a class="headerlink" href="#raw-case-preparation" title="Link to this heading">#</a></h3>
+<p>It is important that the non-default solvers be added at this stage, otherwise they will not appear in the model selection tabs (and you might need to delete already configured models to be able to use them). From the <code class="docutils literal notranslate"><span class="pre">File</span></code> menu entry perform the following steps:</p>
+<ul class="simple">
+<li><p>File &gt; Open &gt; <em>select 2D mesh file</em></p></li>
+<li><p>File &gt; Definitions &gt; Append &gt; <em>fluxsolver.xml</em></p></li>
+<li><p>File &gt; Definitions &gt; Append &gt; <em>saveline.xml</em></p></li>
+<li><p>File &gt; Save Project &gt; <em>navigate to concept directory</em></p></li>
+</ul>
+<p>Now on the object tree, expand <code class="docutils literal notranslate"><span class="pre">Body</span></code>, open <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">Property</span> <span class="pre">1</span></code>, rename it <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code>. You can save project again here (and as often as you wish) to keep track of modifications.</p>
+</section>
+<section id="creation-of-equations">
+<h3>Creation of equations<a class="headerlink" href="#creation-of-equations" title="Link to this heading">#</a></h3>
+<p>In Elmer not everything that is called equation represents an actual <em>physical equation</em>. It is important to add all <a class="reference external" href="https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerModelsManual.pdf">models</a> that apply to a body at the same equation, as follows:</p>
+<ul class="simple">
+<li><p>Equation &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Model</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">Active</span></code> in tabs:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flux</span> <span class="pre">and</span> <span class="pre">Gradient</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SaveLine</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>As you may notice, in the above we have actually one physical model (heat equation) and a pair of processing utilities. As in FEM we perform projections to solve for these processed quantities, they need to be extracted at runtime. To get the heat flux at system boundary and extracting solution over a given line during calculation we perform the following configurations.</p>
+<ul class="simple">
+<li><p>Edit Solver Settings in <code class="docutils literal notranslate"><span class="pre">Model</span></code> tab <code class="docutils literal notranslate"><span class="pre">Flux</span> <span class="pre">and</span> <span class="pre">Gradient</span></code>:</p>
+<ul>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Solver</span> <span class="pre">specific</span> <span class="pre">options</span></code>:</p>
+<ul>
+<li><p>Target Variable <code class="docutils literal notranslate"><span class="pre">Temperature</span></code></p></li>
+<li><p>Flux Coefficient <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">Conductivity</span></code></p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">Calculate</span> <span class="pre">Flux</span></code></p></li>
+</ul>
+</li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">General</span></code>:</p>
+<ul>
+<li><p>Execute solver <code class="docutils literal notranslate"><span class="pre">After</span> <span class="pre">timestep</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In steady state simulations the flux is generally computed <em>after all</em> calculations are performed (at converged solution); for transient simulations this is generally done after each time step. Failing to configure this properly may lead to an overhead of useless intermediate computations.</p>
+<ul class="simple">
+<li><p>Edit Solver Settings in <code class="docutils literal notranslate"><span class="pre">Model</span></code> tab <code class="docutils literal notranslate"><span class="pre">SaveLine</span></code>:</p>
+<ul>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Solver</span> <span class="pre">specific</span> <span class="pre">options</span></code>:</p>
+<ul>
+<li><p>Polyline Coordinates <code class="docutils literal notranslate"><span class="pre">Size(2,</span> <span class="pre">2);</span>&#160; <span class="pre">0.005</span> <span class="pre">0.025</span>&#160; <span class="pre">0.100</span> <span class="pre">0.025</span></code></p></li>
+<li><p>Polyline Divisions <code class="docutils literal notranslate"><span class="pre">25</span></code></p></li>
+</ul>
+</li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">General</span></code>:</p>
+<ul>
+<li><p>Execute solver <code class="docutils literal notranslate"><span class="pre">After</span> <span class="pre">simulation</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Saving data could be done on a time basis, but for this case we have decided to extract only a profile of the final solution <em>after simulation</em>.</p>
+</section>
+<section id="setting-up-materials">
+<h3>Setting up materials<a class="headerlink" href="#setting-up-materials" title="Link to this heading">#</a></h3>
+<p>For being able to eventually verify this case against analytical solutions,  the simplest set of material properties are introduced below; everything is held constant.</p>
+<ul class="simple">
+<li><p>Material &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Solid</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Density <code class="docutils literal notranslate"><span class="pre">3000</span></code></p></li>
+<li><p>Heat Capacity <code class="docutils literal notranslate"><span class="pre">1000</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Conductivity <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="configuring-conditions">
+<h3>Configuring conditions<a class="headerlink" href="#configuring-conditions" title="Link to this heading">#</a></h3>
+<p>Next we initialize the body to be at 1000 K:</p>
+<ul class="simple">
+<li><p>Initial condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Temperature</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Temperature <code class="docutils literal notranslate"><span class="pre">1000</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Both the whole (left side) and ends (top/bottom) are set as adiabatic:</p>
+<ul class="simple">
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Hole</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">1</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Flux <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Ends</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">3</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Flux <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Finally a Robin boundary condition is provided for environment (radius/right side):</p>
+<ul class="simple">
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Environment</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">2</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Transfer Coeff. <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+<li><p>External Temperature <code class="docutils literal notranslate"><span class="pre">300</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So far the model is built with the default steady-state solver. This might be useful for testing <em>if it runs</em> towards the trivial solution (equilibrium with external environment), what should be pretty fast. So save, generate, and run the model for testing.</p>
+</section>
+<section id="final-setup">
+<h3>Final setup<a class="headerlink" href="#final-setup" title="Link to this heading">#</a></h3>
+<p>Back to menu <code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">&gt;</span> <span class="pre">Setup...</span></code>, tune a few parameters as follows:</p>
+<ul class="simple">
+<li><p>Results directory <code class="docutils literal notranslate"><span class="pre">results</span></code></p></li>
+<li><p>Coordinate system <code class="docutils literal notranslate"><span class="pre">Axi</span> <span class="pre">Symmetric</span></code></p></li>
+<li><p>Simulation type <code class="docutils literal notranslate"><span class="pre">Transient</span></code></p></li>
+<li><p>Output intervals <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+<li><p>Timestep intervals <code class="docutils literal notranslate"><span class="pre">120</span></code></p></li>
+<li><p>Timestep sizes <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+<p>Now save, generate, and run. It should be up and running as desired by here!</p>
+<p>Once the initial SIF file is generated, you can copy it to the <code class="docutils literal notranslate"><span class="pre">2d</span></code> directory and follow the next section.</p>
+</section>
+</section>
 <section id="conduction-in-2d">
 <h2>Conduction in 2D<a class="headerlink" href="#conduction-in-2d" title="Link to this heading">#</a></h2>
-<p>The case you find here is essentially the same as the one under <a class="reference internal" href="concept/README.html"><span class="std std-doc">concept</span></a>. A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.</p>
+<!-- #region -->
+<p>The case you find here is essentially the same as the one under <code class="docutils literal notranslate"><span class="pre">concept/</span></code> by following the previous section. A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.</p>
 <p>As the script is expected to be manually edited from now on, we added comments (in SIF a comment line starts with a <code class="docutils literal notranslate"><span class="pre">!</span></code> as in Fortran - the main language of Elmer) splitting the case in logical blocks with <em>general</em> content, <em>material and its domain</em>, the <em>solvers</em>, and finally the <em>conditions</em>.</p>
 <p>The location of the mesh was changed from default (the only supported location when using the GUI) to a directory called <code class="docutils literal notranslate"><span class="pre">domain</span></code> (same name of the <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> file) by adding the following line to the <code class="docutils literal notranslate"><span class="pre">Header</span></code> section:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Mesh</span><span class="w"> </span><span class="n">DB</span><span class="w"> </span><span class="s">&quot;domain&quot;</span><span class="w"> </span><span class="s">&quot;.&quot;</span>
 </pre></div>
 </div>
-<p>If you followed the <a class="reference internal" href="concept/README.html"><span class="std std-doc">concept</span></a> setup you should already have a mesh there, otherwise run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gmsh<span class="w"> </span>-<span class="w"> </span>domain.geo
+<p>If you followed the base case setup above you should already have a mesh there, otherwise run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmsh<span class="w"> </span>-<span class="w"> </span>domain.geo
 </pre></div>
 </div>
 <p>This can be converted to Elmer format with <code class="docutils literal notranslate"><span class="pre">ElmerGrid</span></code> by running:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ElmerGrid<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>domain.msh<span class="w"> </span>-autoclean<span class="w"> </span>-merge<span class="w"> </span><span class="m">1</span>.0e-05
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ElmerGrid<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>domain.msh<span class="w"> </span>-autoclean<span class="w"> </span>-merge<span class="w"> </span><span class="m">1</span>.0e-05
 </pre></div>
 </div>
 <p>In this command <code class="docutils literal notranslate"><span class="pre">14</span></code> represents the <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> input format and <code class="docutils literal notranslate"><span class="pre">2</span></code> the <code class="docutils literal notranslate"><span class="pre">ElmerSolver</span></code> file format. For the other options, please check the <a class="reference external" href="https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerGridManual.pdf">documentation</a>.</p>
 <p>For a standard sequential run simple enter:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ElmerSolver
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ElmerSolver
 </pre></div>
 </div>
 <p>It was not illustrated above, but it is important to redirect the output of these commands to log files so that they can be inspected for any errors or warnings. Results are dumped to <code class="docutils literal notranslate"><span class="pre">results/</span></code> directory as defined in the concept phase and can be inspected with ParaView.</p>
+<!-- #endregion -->
 </section>
 <section id="improved-2d-case">
 <h2>Improved 2D case<a class="headerlink" href="#improved-2d-case" title="Link to this heading">#</a></h2>
@@ -556,9 +748,48 @@ document.write(`
 <span class="n">End</span>
 </pre></div>
 </div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Heat flow [W]&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">post_heat_flux_2d</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">sides</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Dimensions of the cylinder:</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mf">0.10</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">0.05</span>
+    
+    <span class="c1"># Parameters of the problem:</span>
+    <span class="n">htc</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="n">Tinf</span> <span class="o">=</span> <span class="mi">300</span>
+    
+    <span class="c1"># Retrieve time series of the heat flux:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">scalars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">scalars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Retrieve the final values of the temperature and heat flux:</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">sides</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">sides</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+    
+    <span class="c1"># Calculate the heat flux from the analytical solution:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">h</span>
+    <span class="n">q_calc</span> <span class="o">=</span> <span class="n">htc</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">Tinf</span><span class="p">)</span>
+    <span class="n">Q_calc</span> <span class="o">=</span> <span class="n">q_calc</span> <span class="o">*</span> <span class="n">A</span>
+
+    <span class="c1"># Start the actual plotting:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">195</span><span class="p">,</span> <span class="mi">215</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;2d/heat-flow.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scalars</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/scalars.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">sides</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/sides.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">plot</span> <span class="o">=</span> <span class="n">post_heat_flux_2d</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">sides</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="conduction-in-3d">
 <h2>Conduction in 3D<a class="headerlink" href="#conduction-in-3d" title="Link to this heading">#</a></h2>
+<!-- #region -->
 <p>Adapting the case for running with a 3D geometry (provided under directory <code class="docutils literal notranslate"><span class="pre">3d</span></code>) is quite simple now. First, we modify the coordinate system under <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> section to cartesian. This is because now we are solving an actual 3D geometry and enforcing specific coordinate systems is no longer required (or formally compatible).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Coordinate</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cartesian</span>
 </pre></div>
@@ -576,14 +807,15 @@ document.write(`
 </pre></div>
 </div>
 <p>To generate the <code class="docutils literal notranslate"><span class="pre">ElmerSolver</span></code> mesh under <code class="docutils literal notranslate"><span class="pre">domain/</span></code> we run the same command as before. Because transient 3D cases are quite computationally intensive, for any practical purposes the simulation must be run in parallel. Domain decomposition is also performed with <code class="docutils literal notranslate"><span class="pre">ElmerGrid</span></code> as follows:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ElmerGrid<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>domain<span class="w"> </span>-partdual<span class="w"> </span>-metiskway<span class="w"> </span><span class="m">16</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ElmerGrid<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>domain<span class="w"> </span>-partdual<span class="w"> </span>-metiskway<span class="w"> </span><span class="m">16</span>
 </pre></div>
 </div>
 <p>In the above command the number <code class="docutils literal notranslate"><span class="pre">16</span></code> represents the number of cores; you might need to adapt for a lower value if running from most laptops (generally with 4 or 6 cores these days). For running in parallel with 16 cores we need to run the command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpiexec<span class="w"> </span>-n<span class="w"> </span><span class="m">16</span><span class="w"> </span>ElmerSolver_mpi
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpiexec<span class="w"> </span>-n<span class="w"> </span><span class="m">16</span><span class="w"> </span>ElmerSolver_mpi
 </pre></div>
 </div>
 <p>The command <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> is how the message passing interface (MPI) runner is called in Windows; for Linux this should be <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> instead.</p>
+<!-- #endregion -->
 </section>
 <section id="understanding-heat-flux">
 <h2>Understanding heat flux<a class="headerlink" href="#understanding-heat-flux" title="Link to this heading">#</a></h2>
@@ -595,15 +827,18 @@ q = U (T - T_{\infty})
 \]</div>
 <p>In this case we have set <span class="math notranslate nohighlight">\(U=10\;W\;m^{-2}\;K^{-1}\)</span> and <span class="math notranslate nohighlight">\(T_{\infty}=300\;K\)</span>. The computed outer radius temperature is <span class="math notranslate nohighlight">\(T\approx{}931.4\;K\)</span>, leading to a computed flux of <span class="math notranslate nohighlight">\(q=6313.9\;W\;m^{-2}\)</span>, which rounds-off to the same value of flux predicted by <code class="docutils literal notranslate"><span class="pre">FluxSolver</span></code>. As expected, we have a value per unit area, the definition of flux.</p>
 <p>To get an integral value we used <code class="docutils literal notranslate"><span class="pre">SaveScalars</span></code>, which is plotted below against time. Since the value of heat flux was integrated over the boundary, it is provided in power units. At the final time we have a value of <span class="math notranslate nohighlight">\(Q\approx{}198.4\;W\)</span>. The segment of cylinder simulated here has an outer radius of <span class="math notranslate nohighlight">\(R=0.10\;m\)</span> and height <span class="math notranslate nohighlight">\(h=0.05\;m\)</span>. With this values in hand it can be shown that the integral quantity is evaluated for <span class="math notranslate nohighlight">\(2\pi\;rad\)</span>, <em>i.e.</em> <span class="math notranslate nohighlight">\(Q=2\pi{}Rhq=Aq\)</span>.</p>
-<p><img alt="2D case" src="../../../_images/heat-flow.png" /></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../../../_images/heat-flow.png"><img alt="2d-heat-flow" class="bg-primary mb-1 align-center" src="../../../_images/heat-flow.png" style="width: 80%;" />
+</a>
 <p>For the 3D case most of the ideas still hold true. The main difference here is that no intrinsic symmetry was implied by the cartesian choice of formulation. Symmetries were enforced by boundary conditions. That means that computed quantities evaluate to the actual area of the wedge, here covering an angle of <span class="math notranslate nohighlight">\(\pi/4\)</span> - what should be clear as it is common to most simulation packages.</p>
 </section>
 <section id="graphical-post-processing">
 <h2>Graphical post-processing<a class="headerlink" href="#graphical-post-processing" title="Link to this heading">#</a></h2>
 <p>ParaView was employed to generate standard animations of temperature evolution in bodies. Below we have the 2D axisymmetric results:</p>
-<p><img alt="2D Case" src="../../../_images/animation.gif" /></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../../../_images/animation.gif"><img alt="2d-animation-animation" class="bg-primary mb-1 align-center" src="../../../_images/animation.gif" style="width: 80%;" />
+</a>
 <p>The same was done for 3D equivalent case as illustrated next:</p>
-<p><img alt="3D Case" src="../../../_images/animation1.gif" /></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../../../_images/animation1.gif"><img alt="3d-animation-animation" class="bg-primary mb-1 align-center" src="../../../_images/animation1.gif" style="width: 80%;" />
+</a>
 </section>
 <section id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
@@ -681,6 +916,14 @@ q = U (T - T_{\infty})
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-case-conception">Base case conception</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-case-preparation">Raw case preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-of-equations">Creation of equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-materials">Setting up materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-conditions">Configuring conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-setup">Final setup</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conduction-in-2d">Conduction in 2D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-2d-case">Improved 2D case</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conduction-in-3d">Conduction in 3D</a></li>
