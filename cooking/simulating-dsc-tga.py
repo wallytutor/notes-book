@@ -1,3 +1,18 @@
+# ---
+# jupyter:
+#   jupytext:
+#     cell_metadata_filter: -all
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.5'
+#       jupytext_version: 1.18.0
+#   kernelspec:
+#     display_name: Python 3 (ipykernel)
+#     language: python
+#     name: python3
+# ---
+
 # %load_ext autoreload
 # %autoreload 2
 
@@ -5,8 +20,6 @@ from majordome import MajordomePlot, bounds
 import cantera as ct
 import majordome as mj
 import numpy as np
-
-ct.add_directory(mj.common.DATA)
 
 
 # +
@@ -47,7 +60,7 @@ def check_species(mineral, data):
 
 # -
 
-species = ct.Species.list_from_file("materials.yaml", "species_minerals")
+species = ct.Species.list_from_file("materials.yaml", "species")
 species
 
 check_species(species[5], [84.22, 20.00e-03, -25.00e+05, -1804000.0, 60.00])
