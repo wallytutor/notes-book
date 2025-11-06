@@ -1,0 +1,408 @@
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PARAMETERS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "domain" "."
+  Include Path "."
+  Results Directory "results"
+End
+
+Constants
+  Stefan Boltzmann = 5.670374419e-08
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PARAMETERS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Initial body temperature:
+! $ T_INI = 2400.0;
+$ T_INI = 2200.0;
+
+! Get data model (path must be relative to case):
+$ source("coded.ini");
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! SIMULATION
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Simulation
+  Max Output Level = 5
+  Solver Input File = case.sif
+
+  ! Cartesian 2D simulation:
+  Coordinate System = Cartesian 2D
+  Coordinate Mapping(3) = 1 2 3
+
+  ! Second order integration method:
+  Simulation Type = Transient
+  Timestepping Method = BDF
+  BDF Order = 2
+
+  ! Timestep sizes and output intervals:
+  ! Time                    60    60  3480  7200
+  Timestep Sizes    (4) =    1    10    60    60
+  Output Intervals  (4) =   60     6    10    10
+  Timestep intervals(4) =   60     6    58   120
+
+  ! Output for calculation restart:
+  Output File = "results/restart.result"
+  Output Variable 1 = Temperature
+  Binary Output = True
+
+  Convergence Monitor = True
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! MATERIAL
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Material 1
+!   Name = "Sample Solid"
+! 
+!   ! Temperature of the stress-free reference state: in this case,\
+!   ! the initial temperature of the simulation, NOT room temperature!
+!   Reference Temperature = $(T_INI)
+! 
+!   ! Indicates in *Enthalpy* the range to handle phase change; notice\
+!   ! that here *Enthalpy = density times latent heat of fusion:*
+!   Phase Change Intervals(2,1) = 2277 2327
+! 
+!   Density = Variable Temperature
+!     Real 
+!         Include "solid/density.dat"
+!     End
+! 
+!   Heat Capacity = Variable Temperature
+!     Real
+!         Include "solid/heat-capacity.dat"
+!     End
+! 
+!   Enthalpy = Variable Temperature
+!     Real
+!         Include "solid/enthalpy-step.dat"
+!     End
+! 
+!   Heat Conductivity = Variable Temperature
+!     Real
+!         Include "solid/heat-conductivity.dat"
+!     End
+! 
+!   Emissivity = Variable Temperature
+!     Real
+!         Include "solid/emissivity.dat"
+!     End
+! 
+!   Youngs Modulus = Variable Temperature
+!     Real MATC "young_modulus(tx)"
+! 
+!   Poisson Ratio = Variable Temperature
+!     Real MATC "poisson_ratio(tx)"
+! 
+!   Heat Expansion Coefficient = Variable Temperature
+!     Real MATC "thermal_expansion_coef(tx)"
+! End
+
+Material 1
+  Name = "Sample Solid"
+
+  ! Temperature of the stress-free reference state: in this case,\
+  ! the initial temperature of the simulation, NOT room temperature!
+  Reference Temperature = $(T_INI)
+
+  ! Indicates in *Enthalpy* the range to handle phase change; notice\
+  ! that here *Enthalpy = density times latent heat of fusion:*
+  Phase Change Intervals(2,1) = 3000 3100
+
+  Density = 4000.0
+
+  Heat Capacity = 1000.0
+
+  Enthalpy = Variable Temperature
+    Real
+        298   0
+        2400  0
+    End
+
+  Heat Conductivity = 10.0
+
+  Emissivity = 0.9
+
+  Youngs Modulus = 400.0e+03
+
+  Poisson Ratio = 0.25
+
+  Heat Expansion Coefficient = 8.0e-06
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! CONDITIONS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Initial Condition 1
+  Name = "Ingot Initial Temperature"
+  Temperature = $(T_INI)
+End
+
+Boundary Condition 1
+  Name = "Adiabatic axis"
+  Target Boundaries(1) = 1
+
+  Heat Flux = 0
+  Displacement 1 = 0.0
+End
+
+Boundary Condition 2
+  Name = "Side"
+  Target Boundaries(1) = 2
+
+  External Temperature = 373.15
+  Heat Transfer Coefficient = 200
+
+  Save Scalars = True
+  Side Mask = Logical True
+  ! Force 1 = 2000000.0
+End
+
+Boundary Condition 3
+  Name = "Top"
+  Target Boundaries(1) = 3
+
+  External Temperature = 373.15
+  Heat Transfer Coefficient = 200
+
+  Save Scalars = True
+  Side Mask = Logical True
+End
+
+Boundary Condition 4
+  Name = "Floor"
+  Target Boundaries(1) = 4
+
+  External Temperature = 373.15
+  Heat Transfer Coefficient = 200
+
+  ! Do not fall in the void:
+  Displacement 2 = 0.0
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! ANALYSES / POSTPROCESSING
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Save materials properties:
+Solver 1
+  Procedure = "SaveData" "SaveMaterials"
+  Equation = SaveMaterials
+  Exec Solver = Before Saving
+
+  Parameter 1 = Density
+  Parameter 2 = Heat Conductivity
+  Parameter 3 = Enthalpy
+  Parameter 4 = Heat Capacity
+  Parameter 5 = Youngs Modulus
+  Parameter 6 = Poisson Ratio
+End
+
+! Flux solver:
+Solver 2
+  Procedure = "FluxSolver" "FluxSolver"
+  Equation = Flux and Gradient
+  Exec Solver = After Timestep
+
+  Target Variable = Temperature
+  Flux Coefficient = Heat Conductivity
+  Calculate Flux = True
+  Calculate Flux Magnitude = False
+
+  Stabilize = True
+  Optimize Bandwidth = True
+  Steady State Convergence Tolerance = 1.0e-5
+  Nonlinear System Convergence Tolerance = 1.0e-7
+  Nonlinear System Max Iterations = 20
+  Nonlinear System Newton After Iterations = 3
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Relaxation Factor = 1
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-10
+  BiCGstabl polynomial degree = 2
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = False
+  Linear System Residual Output = 10
+  Linear System Precondition Recompute = 1
+End
+
+! Save scalar values:
+Solver 3
+  Procedure = "SaveData" "SaveScalars"
+  Equation = SaveScalars
+  Exec Solver = After Timestep
+
+  Filename = "scalars.dat"
+  File Append = False
+
+  Partition Numbering = True
+  Parallel Reduce = True
+
+  Variable 1 = Time
+
+  ! temperature Flux !
+
+  Variable 2 = temperature Flux
+
+  Operator 2 = boundary int
+  Parallel Operator 2 = sum
+
+  Operator 3 = diffusive flux
+  Parallel Operator 3 = sum
+
+  ! Temperature !
+
+  Variable 3 = temperature
+
+  Operator 4 = nonlin converged
+  Parallel Operator 4 = min
+
+  Operator 5 = nonlin change
+  Parallel Operator 5 = max
+
+  Operator 6 = norm
+  Parallel Operator 6 = max
+End
+
+! Save results:
+Solver 4
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  Equation = ResultOutput
+  Exec Solver = Before Saving
+  ! Exec Solver = After Saving
+
+  Output File Name = case
+  Output Format = vtu
+  Binary Output = True
+  Single Precision = False
+  Save Geometry Ids = True
+  ! Vtu Part Collection = True
+  Vtu Time Collection = True
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PHYSICS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Heat equation solver:
+Solver 5
+  Procedure = "HeatSolve" "HeatSolver"
+  Equation = Heat Equation
+  Exec Solver = Always
+
+  Variable = Temperature
+  Stabilize = True
+  Optimize Bandwidth = True
+  Steady State Convergence Tolerance = 1.0e-5
+  Nonlinear System Convergence Tolerance = 1.0e-5
+  Nonlinear System Max Iterations = 100
+  Nonlinear System Newton After Iterations = 3
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Relaxation Factor = 0.3
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-10
+  BiCGstabl polynomial degree = 2
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = False
+  Linear System Residual Output = 10
+  Linear System Precondition Recompute = 1
+End
+
+! Stress solver:
+Solver 6
+  Procedure = "StressSolve" "StressSolver"
+  Equation = Stress Analysis
+  Exec Solver = Always
+
+  Variable = Displacement
+  Variable DOFs = 2
+
+  Displace Mesh = True
+  Calculate Stresses = True
+  Calculate Strains = True
+  Calculate Principal = True
+  Calculate Pangle = False
+
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-10
+  BiCGstabl polynomial degree = 2
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = False
+  Linear System Residual Output = 10
+  Linear System Precondition Recompute = 1
+
+!  Procedure = "ElasticSolve" "ElasticSolver"
+!  Equation = ElasticSolver
+!  Exec Solver = Always
+!
+!  Variable = Displacement
+!  Variable DOFs = 2
+!
+!  Calculate Stresses = True
+!  Calculate Strains = True
+!  Calculate Principal = True
+!  Calculate Pangle = False
+!
+!  Linear System Solver = Iterative
+!  Linear System Iterative Method = "BiCGStab"
+!  Linear System Max Iterations = 500
+!  Linear System Convergence Tolerance = 1.0e-08
+!  Linear System Abort Not Converged = True
+!  Linear System Preconditioning = ILU0
+!  Linear System Residual Output = 1
+!  Steady State Convergence Tolerance = 1.0e-05
+!  Nonlinear System Convergence Tolerance = 1.0e-05
+!  Nonlinear System Max Iterations = 1
+!  Nonlinear System Newton After Iterations = 3
+!  Nonlinear System Newton After Tolerance = 1.0e-02
+!  Nonlinear System Relaxation Factor = 1.0
+!  Adaptive Error Limit = 0.1
+!  Adaptive Remesh = True
+!  Adaptive Max Change = 2
+!  Adaptive Coarsening = Logical True
+!  Time Derivative Order = 2
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! EQUATION
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Equation 1
+  Name = "System"
+  Active Solvers(6) = 1 2 3 4 5 6
+  Phase Change Model = Temporal
+  Check Latent Heat Release = True
+  Plane Stress = False
+  ! Stress Analysis = True
+End
+
+Body 1
+  Name = "Ingot"
+  Target Bodies(1) = 1
+
+  Material = 1
+  Equation = 1
+  Initial condition = 1
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! EOF
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

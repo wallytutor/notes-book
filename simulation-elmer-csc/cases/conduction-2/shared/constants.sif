@@ -1,0 +1,8 @@
+Constants
+  Gravity(4) = 0 -1 0 9.82
+  Stefan Boltzmann = 5.670374419e-08
+  Permittivity of Vacuum = 8.85418781e-12
+  Permeability of Vacuum = 1.25663706e-6
+  Boltzmann Constant = 1.380649e-23
+  Unit Charge = 1.6021766e-19
+End

@@ -58,6 +58,12 @@ parts:
       - file: simulation-elmer-csc/elmer
       - file: simulation-elmer-csc/sif
       - file: simulation-elmer-csc/matc
+    - file: simulation-elmer-csc/cases
+      sections:
+      - file: simulation-elmer-csc/cases/conduction-1/README
+      - file: simulation-elmer-csc/cases/conduction-2/README
+      - file: simulation-elmer-csc/cases/conduction-3/README
+      - file: simulation-elmer-csc/cases/thermomechanical-1/README
 
   - caption: "Coding notes"
     chapters:

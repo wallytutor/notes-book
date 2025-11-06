@@ -1,0 +1,28 @@
+Header
+    CHECK KEYWORDS Warn
+    Mesh DB "." "."
+    Include Path "setup"
+    Results Directory "results"
+End
+
+Simulation
+    Solver Input File = case.sif
+    Max Output Level = 5
+    Convergence Monitor = True
+
+    Coordinate System = Cartesian 2D
+    Coordinate Mapping(3) = 1 2 3
+
+    Simulation Type = Steady state
+    Steady State Max Iterations = 50
+    Output Intervals(1) = 1
+End
+
+Constants
+    Stefan Boltzmann = 5.670374419e-08
+End
+
+Include "setup/materials.sif"
+Include "setup/conditions.sif"
+Include "setup/solution.sif"
+Include "setup/bodies.sif"

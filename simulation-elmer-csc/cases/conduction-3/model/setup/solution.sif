@@ -1,0 +1,73 @@
+Solver 1
+    Procedure = "SaveData" "SaveMaterials"
+    Exec Solver = After Timestep
+    Equation = SaveMaterials
+
+    Parameter 1 = Temperature
+    Parameter 2 = Heat Conductivity
+End
+
+Solver 2
+    Procedure = "SaveData" "SaveLine"
+    Exec Solver = After Timestep
+    Equation = SaveLine
+
+    Polyline Divisions = 500
+    Polyline Coordinates = Size(2, 2);  0.0 0.005   0.3 0.005
+End
+
+Solver 3
+    Procedure = "FluxSolver" "FluxSolver"
+    Exec Solver = After Timestep
+    Equation = Flux and Gradient
+
+    Target Variable = Temperature
+    Flux Coefficient = Heat Conductivity
+
+    Calculate Flux = True
+    Calculate Flux Magnitude = True
+End
+
+Solver 4
+    Procedure = "SaveData" "SaveScalars"
+    Exec Solver = After Timestep
+    Equation = SaveScalars
+
+    Filename = "scalars.dat"
+
+    Variable 1 = temperature Flux
+    Operator 1 = boundary int
+End
+
+Solver 5
+    Procedure = "HeatSolve" "HeatSolver"
+    Exec Solver = Always
+    Equation = Heat Equation
+
+    Variable = Temperature
+    Stabilize = True
+    Optimize Bandwidth = True
+    Steady State Convergence Tolerance = 1.0e-06
+
+    Linear System Solver = Iterative
+    Linear System Iterative Method = BiCGStab
+    Linear System Max Iterations = 500
+    Linear System Convergence Tolerance = 1.0e-10
+    Linear System Preconditioning = ILU0
+    Linear System ILUT Tolerance = 1.0e-03
+    Linear System Abort Not Converged = False
+    Linear System Residual Output = 10
+    Linear System Precondition Recompute = 1
+    BiCGstabl polynomial degree = 2
+
+    Nonlinear System Convergence Tolerance = 1.0e-08
+    Nonlinear System Max Iterations = 50
+    Nonlinear System Newton After Iterations = 3
+    Nonlinear System Newton After Tolerance = 1.0e-03
+    Nonlinear System Relaxation Factor = 1
+End
+
+Equation 1
+    Name = "Heat Equation"
+    Active Solvers(5) = 1 2 3 4 5
+End

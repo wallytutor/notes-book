@@ -1,0 +1,43 @@
+Header
+    CHECK KEYWORDS Warn
+    Mesh DB "../domain" "."
+    Include Path "../shared"
+    Results Directory "results"
+End
+
+Simulation
+    Solver Input File = case.sif
+    Max Output Level = 5
+    Convergence Monitor = True
+
+    Coordinate System = Cartesian 2D
+    Coordinate Mapping(3) = 1 2 3
+
+    Simulation Type = Transient
+    Timestepping Method = BDF
+    BDF Order = 2
+
+    Include "stepping.sif"
+End
+
+Include "constants.sif"
+Include "conditions.sif"
+Include "solver.sif"
+
+Material 1
+    Name = "Material"
+    Heat Conductivity = 1
+    Density = 1000
+    Heat Capacity = 1000
+
+    Enthalpy = Variable Temperature
+        Real
+               0        0
+            2000  2000000
+        End
+End
+
+Equation 1
+    Name = "Model"
+    Active Solvers(6) = 1 2 3 4 5 6
+End

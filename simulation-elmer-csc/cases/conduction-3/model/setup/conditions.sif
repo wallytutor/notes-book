@@ -1,0 +1,32 @@
+Initial Condition 1
+    Name = "Temperature"
+    Temperature = 1873.15
+End
+
+Boundary Condition 1
+    Name = "Internal"
+    Target Boundaries(1) = 1
+
+    Temperature = 1873.15
+End
+
+Boundary Condition 2
+    Name = "External"
+    Target Boundaries(1) = 2
+
+    Radiation = Idealized
+    Heat Transfer Coefficient = 10.5
+    Emissivity = 0.79
+
+    External Temperature = 673.15
+    Radiation External Temperature = 313.15
+
+    Save Scalars = True
+End
+
+Boundary Condition 3
+    Name = "Adiabatic"
+    Target Boundaries(2) = 3 4
+
+    Heat Flux = 0
+End

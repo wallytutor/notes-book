@@ -1,0 +1,93 @@
+Solver 1
+    Procedure = "SaveData" "SaveMaterials"
+    Equation = SaveMaterials
+    Exec Solver = Before Saving
+
+    Parameter 1 = Density
+    Parameter 2 = Heat Conductivity
+    Parameter 3 = Enthalpy
+    Parameter 4 = Heat Capacity
+End
+
+Solver 2
+    Procedure = "SaveData" "SaveLine"
+    Equation = SaveLine
+    Exec Solver = After Simulation
+
+    Polyline Divisions = 100
+    Polyline Coordinates = Size(2, 2);  0.0 0.01  0.1 0.01
+End
+
+Solver 3
+    Procedure = "FluxSolver" "FluxSolver"
+    Equation = Flux and Gradient
+    Exec Solver = After Timestep
+
+    Target Variable = Temperature
+    Flux Coefficient = Heat Conductivity
+    Calculate Flux = True
+    Calculate Flux Magnitude = True
+End
+
+Solver 4
+    Procedure = "ResultOutputSolve" "ResultOutputSolver"
+    Equation = ResultOutput
+    Exec Solver = After Saving
+
+    Output File Name = case
+    Output Format = vtu
+    Binary Output = True
+    Single Precision = False
+    Save Geometry Ids = True
+    Save Elemental Fields = True
+    Vtu Time Collection = True
+End
+
+Solver 5
+    Procedure = "SaveData" "SaveScalars"
+    Equation = SaveScalars
+    Exec Solver = After Timestep
+
+    Filename = "scalars.dat"
+
+    Variable 1 = Time
+    Variable 2 = temperature Flux
+    Operator 2 = boundary int
+End
+
+Solver 6
+    Procedure = "HeatSolve" "HeatSolver"
+    Equation = Heat Equation
+    Exec Solver = Always
+
+    Variable = Temperature
+    Stabilize = True
+    Optimize Bandwidth = True
+    
+    Steady State Convergence Tolerance = 1.0e-5
+    Nonlinear System Convergence Tolerance = 1.0e-7
+    Nonlinear System Max Iterations = 20
+    Nonlinear System Newton After Iterations = 3
+    Nonlinear System Newton After Tolerance = 1.0e-3
+    Nonlinear System Relaxation Factor = 1
+
+    Linear System Solver = Iterative
+    Linear System Iterative Method = BiCGStab
+    Linear System Max Iterations = 500
+    Linear System Convergence Tolerance = 1.0e-10
+    BiCGstabl polynomial degree = 2
+    Linear System Preconditioning = ILU0
+    Linear System ILUT Tolerance = 1.0e-3
+    Linear System Abort Not Converged = False
+    Linear System Residual Output = 10
+    Linear System Precondition Recompute = 1
+End
+
+Body 1
+    Target Bodies(1) = 1
+    Name = "Domain"
+
+    Equation = 1
+    Material = 1
+    Initial condition = 1
+End

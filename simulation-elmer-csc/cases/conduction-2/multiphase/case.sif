@@ -1,0 +1,101 @@
+Header
+    CHECK KEYWORDS Warn
+    Mesh DB "../domain" "."
+    Include Path "../shared"
+    Results Directory "results"
+End
+
+Simulation
+    Solver Input File = case.sif
+    Max Output Level = 5
+    Convergence Monitor = True
+
+    Coordinate System = Cartesian 2D
+    Coordinate Mapping(3) = 1 2 3
+
+    Simulation Type = Transient
+    Timestepping Method = BDF
+    BDF Order = 2
+
+    Include "stepping.sif"
+End
+
+Include "constants.sif"
+Include "conditions.sif"
+Include "solver.sif"
+
+$ RHO = 1000
+
+Material 1
+    Name = "Material"
+    Heat Conductivity = 1
+    Density = $(RHO)
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ! APPROACH 1: heat capacity and enthalpy leap:
+    ! Minor impact over results, does not look like a phase change!
+    ! https://elmerfem.org/forum/viewtopic.php?p=31367 =>> CHECK
+    ! FIX: actually it really needs to be multiplied by the density!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    Heat Capacity = 1000
+
+    Enthalpy = Variable Temperature
+        Real
+               0  $(RHO *       0)
+             980  $(RHO *       0)
+            1000  $(RHO * 1000000)
+            2000  $(RHO * 1000000)
+        End
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ! APPROACH 2: *smeared enthalpy* in heat capacity:
+    ! Results seem to get the right form, probably right!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    ! Heat Capacity = Variable Temperature
+    !     Real
+    !            0     1000
+    !          979     1000
+    !          980    50000
+    !         1000    50000
+    !         1001     1000
+    !         2000     1000
+    !     End
+
+    ! Enthalpy = Variable Temperature
+    !     Real
+    !            0       0
+    !          979   979000
+    !          980  1004500
+    !         1000  2004500
+    !         1001  2030000
+    !         2000  3029000
+    !     End
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ! APPROACH 3: no heat capacity, only enthalpy:
+    ! It cools down instantly to zero, not working!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    ! Enthalpy = Variable Temperature
+    !     Real
+    !            0       0
+    !          979   979000
+    !          980  1004500
+    !         1000  2004500
+    !         1001  2030000
+    !         2000  3029000
+    !     End
+
+    Phase Change Intervals(2,1) = 979 1001
+End
+
+Equation 1
+    Name = "Model"
+    Active Solvers(6) = 1 2 3 4 5 6
+
+    Phase Change Model = Spatial 2
+    ! Phase Change Model = Temporal
+    Check Latent Heat Release = True
+End

@@ -1,0 +1,27 @@
+Material 1
+    Name = "Material 1"
+    Density = 1000
+    Heat Capacity = 1000
+    Heat Conductivity = 4
+End
+
+Material 2
+    Name = "Material 2"
+    Density = 1000
+    Heat Capacity = 1000
+    Heat Conductivity = 2
+End
+
+Material 3
+    Name = "Material 3"
+    Density = 1000
+    Heat Capacity = 1000
+    Heat Conductivity = 0.2
+End
+
+Material 4
+    Name = "Material 4"
+    Density = 1000
+    Heat Capacity = 1000
+    Heat Conductivity = 9
+End
