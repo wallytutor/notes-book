@@ -156,7 +156,7 @@ For postprocessing the recommended way is by using external tools as [ParaView](
 
 - Creating a new scalar
 
-The keyword set of materials is actually not fixed; one can, for instance, create composition field in different units with MATC, as illustrated below (case [here](https://github.com/wallytutor/WallyToolbox.jl/tree/main/apps/Elmer/diffusion_solids/carburizing_slycke_gui)):
+The keyword set of materials is actually not fixed; one can, for instance, create composition field in different units with MATC, as illustrated below (case [here](cases/diffusion-1/carburizing_slycke_gui)):
 
 ```
 MoleFraction = Variable Concentration
@@ -175,7 +175,7 @@ Solver 1
 End
 ```
 
-Another situation that can be frequently found is unit conversion for temperature. It was chosen to implement it in [this case](https://github.com/wallytutor/WallyToolbox.jl/tree/main/apps/Elmer/conduction_refractory/transient_parallel) because it is multi-material; that is a reminder that in such cases the new variable needs to be created for all materials (as this is a tweak, since the temperature is not a material property, but a global field). If forgotten in one material, an error will show up in ParaView telling you that the field is not available in some regions.
+Another situation that can be frequently found is unit conversion for temperature. It was chosen to implement it in [this case](cases/conduction-4/transient_parallel) because it is multi-material; that is a reminder that in such cases the new variable needs to be created for all materials (as this is a tweak, since the temperature is not a material property, but a global field). If forgotten in one material, an error will show up in ParaView telling you that the field is not available in some regions.
 
 ## User-defined functions
 
