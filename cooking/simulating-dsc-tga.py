@@ -25,10 +25,7 @@ import numpy as np
 # +
 
 def specific_heat_cantera(T, M, s):
-    @np.vectorize
-    def evaluate(T):
-        return s.thermo.cp(T) / M
-    return evaluate(T)
+
 
 def sample_temperature(species):
     T_lims = species.input_data["thermo"]["temperature-ranges"]
@@ -61,8 +58,6 @@ species = ct.Species.list_from_file("materials.yaml", "species")
 species
 
 check_species(species[5], [84.22, 20.00e-03, -25.00e+05, -1804000.0, 60.00])
-
-check_species(species[1], [11.22, 8.20e-03, -2.70e+05, -209900.0, 10.06])
 
 water = species = ct.Species.list_from_file("materials.yaml", "species_water")
 check_species(species[1], [7.17, 2.56e-03, 0.08e+05, -57800.0, 45.13])

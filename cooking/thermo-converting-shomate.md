@@ -47,7 +47,7 @@ data = """\
 - name: AL2O3_GAMMA
   composition: {Al: 2, O: 3}
   data: [16.37, 11.10e-03, 0.0, -395000.0, 12.20]
-    
+
 - name: SIO2_QUARTZ_ALPHA
   composition: {Si: 1, O: 2}
   data: [11.22, 8.20e-03, -2.70e+05, -209900.0, 10.06]
@@ -84,17 +84,15 @@ data = """\
   composition: {H: 2, O: 1}
   data: [7.17, 2.56e-03, 0.08e+05, -57800.0, 45.13]
 """
-
-data = yaml.safe_load(data)
 ```
 
 ## Data model
 
 ```{code-cell} ipython3
-class Species:
+class SchieltzSpecies:
     """ Simple species representation to load data from Schieltz, 1964. """
     __slots__ = ("_name", "_mass", "_coef", "_Tref")
-    
+
     def __init__(self, data: dict, Tref: float = 298.15) -> None:
         self._name = data["name"]
         self._mass = self.molecular_weight(data["composition"])
@@ -105,33 +103,46 @@ class Species:
         """ Unique representation of species. """
         return f"<Species {self._name}>"
 
+    def _c(self, T: float) -> float:
+        """ Evaluation by definition. """
+        a, b, c = self._coef[:3]
+        return a + b * T + c / T**2
+
+    def _h(self, T: float) -> float:
+        """ Evaluation by definition. """
+        a, b, c = self._coef[:3]
+        return a * T + (b / 2) * T**2 - c / T
+
+    def _s(self, T: float) -> float:
+        """ Evaluation by definition. """
+        a, b, c = self._coef[:3]
+        return a * np.log(T) + b * T - c / (2 * T**2)
+
     def _enthalpy_change(self, T: float) -> float:
         """ Maier-Kelley specific enthalpy change [J/mol]. """
-        (a, b, c), Tref = self._coef[:3], self._Tref
-        return a * (T - Tref) + (b/2) * (T**2 - Tref**2) - c * (1/T - 1/Tref)
+        return self._h(T) - self._h(self._Tref)
 
     def _entropy_change(self, T: float) -> float:
         """ Maier-Kelley specific entropy change [J/(mol.K)]. """
-        (a, b, c), Tref = self._coef[:3], self._Tref
-        return a * np.log(T/Tref) + b * (T - Tref) - (c/2) * (1/T**2 - 1/Tref**2)
+        return self._s(T) - self._s(self._Tref)
 
     @staticmethod
     def molecular_weight(composition: dict[str, int]) -> float:
         """ Evaluate molecular weight of species [kg/kmol]. """
         return sum(n * ct.Element(e).weight for e, n in composition.items())
-        
+
     def specific_heat(self, T: float) -> float:
         """ Maier-Kelley specific heat [J/(mol.K)]. """
-        return self._coef[0] + self._coef[1] * T + self._coef[2] * pow(T, -2)
+        return self._c(T)
 
-    def specific_enthalpy(self, T: float, T_ref: float = 298.15) -> float:
+    def specific_enthalpy(self, T: float) -> float:
         """ Maier-Kelley specific enthalpy [J/mol]. """
         return self.reference_specific_enthalpy + self._enthalpy_change(T)
 
-    def specific_entropy(self, T: float, T_ref: float = 298.15) -> float:
+    def specific_entropy(self, T: float) -> float:
         """ Maier-Kelley specific entropy [J/(mol.K)]. """
         return self.reference_specific_entropy + self._entropy_change(T)
-    
+
     @property
     def reference_specific_enthalpy(self) -> float:
         """ Reference state formation enthalpy [J/mol]. """
@@ -162,8 +173,41 @@ class Species:
 ```
 
 ```{code-cell} ipython3
-database = [Species(d) for d in data]
-database
+class CanteraSpecies:
+    """ Simple wrapper to compute vectorized properties of species. """
+    __slots__ = ("_species", "_c", "_h", "_s", "_trng")
+
+    def __init__(self, species: ct.thermo.Species) -> None:
+        self._species = species
+
+        # XXX: notice that properties are in *kmol* basis in Cantera
+        # https://cantera.org/stable/python/thermo.html#cantera.SpeciesThermo
+        self._c = np.vectorize(lambda t: 0.001 * species.thermo.cp(t))
+        self._h = np.vectorize(lambda t: 0.001 * species.thermo.h(t))
+        self._s = np.vectorize(lambda t: 0.001 * species.thermo.s(t))
+        self._trng = species.input_data["thermo"]["temperature-ranges"]
+
+    def specific_heat(self, T: float) -> float:
+        """ Cantera species specific heat [J/(mol.K)]. """
+        return self._c(T)
+
+    def specific_enthalpy(self, T: float) -> float:
+        """ Cantera species specific enthalpy [J/mol]. """
+        return self._h(T)
+
+    def specific_entropy(self, T: float) -> float:
+        """ Cantera species specific entropy [J/(mol.K)]. """
+        return self._s(T)
+
+    @property
+    def temperature_ranges(self) -> list[float]:
+        """ Temperature ranges for data set [K]. """
+        return self._trng
+```
+
+```{code-cell} ipython3
+database = [SchieltzSpecies(d) for d in yaml.safe_load(data)]
+species  = {s.name: CanteraSpecies(s) for s in ct.Species.list_from_file("materials.yaml", "species")}
 ```
 
 ## Validation of calculator
@@ -173,16 +217,13 @@ database
 Here we verify the calculations meet results published at [NIST](https://webbook.nist.gov/cgi/cbook.cgi?ID=C14808607&Units=SI&Mask=2&Type=JANAFS&Table=on#JANAFS) for quartz.
 
 ```{code-cell} ipython3
-species = {s.name: s for s in ct.Species.list_from_file("materials.yaml", "species")}
+spec_ref = species["SIO2_QUARTZ"]
+T_ranges = spec_ref.temperature_ranges
 
-reference = species["SIO2_QUARTZ"]
-T_ranges = reference.input_data["thermo"]["temperature-ranges"]
-```
-
-```{code-cell} ipython3
 sio2_alpha = database[4]
 sio2_beta  = database[5]
 
+h0 = sio2_alpha.reference_specific_enthalpy
 T_alpha = np.linspace(*T_ranges[:2], 100)
 T_beta  = np.linspace(*T_ranges[1:], 100)
 
@@ -193,7 +234,42 @@ df = pd.concat([df_alpha, df_beta])
 ```
 
 ```{code-cell} ipython3
+@MajordomePlot.new(
+    shape  = (2, 2),
+    size   = (12, 8),
+    xlabel = "Temperature [K]",
+    ylabel=[r"$c_p$", r"$s^\circ$", r"-$(G^\circ-H^\circ)/T$", r"$H-H^\circ$"]
+)
+def plot_properties(spec_ref, h0, df, plot=None):
+    data = df.iloc[:, :].to_numpy().T
+    _, ax = plot.subplots()
 
+    T = data[0]
+    c = spec_ref.specific_heat(T)
+    h = spec_ref.specific_enthalpy(T)
+    s = spec_ref.specific_entropy(T)
+    g = (h + T * s - h0) / T
+
+    ax[0].plot(T, data[1], label="Schieltz (1964)")
+    ax[0].plot(T, c, label="Cantera")
+
+    ax[1].plot(T, data[2], label="Schieltz (1964)")
+    ax[1].plot(T, s, label="Cantera")
+
+    ax[2].plot(T, data[3], label="Schieltz (1964)")
+    ax[2].plot(T, g, label="Cantera")
+
+    # ax[3].plot(T, data[4], label="Schieltz (1964)")
+    ax[3].plot(T, h - h0, label="Cantera")
+
+    ax[0].legend(loc=4)
+    ax[1].legend(loc=4)
+    ax[2].legend(loc=4)
+    ax[3].legend(loc=4)
+```
+
+```{code-cell} ipython3
+plot = plot_properties(spec_ref, h0, df)
 ```
 
 ## Evaluation for fitting
