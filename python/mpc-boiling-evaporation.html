@@ -1,0 +1,1138 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>How to model an evaporation/boiling process? &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc-boiling-evaporation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DAE multiple shooting solution" href="mpc-multiple-shooting.html" />
+    <link rel="prev" title="Wrapping up" href="mpc-kinetics-part-c.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../scientific-computing/introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-ssh.html">SSH key generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-selection.html">Selection of tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-portable.html">Portable toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-linux.html">Working on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/programming.html">Scientific programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/general-tips.html">General Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/services.html">Deploying services</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/mpc-boiling-evaporation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python/mpc-boiling-evaporation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>How to model an evaporation/boiling process?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-evaporation-rate-model">Simple evaporation rate model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boiling-pot">Boiling pot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drying-of-solids">Drying of solids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-consistency-only">Energy consistency only</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="how-to-model-an-evaporation-boiling-process">
+<h1>How to model an evaporation/boiling process?<a class="headerlink" href="#how-to-model-an-evaporation-boiling-process" title="Link to this heading">#</a></h1>
+<p>This notebook summarizes the key ideas of modeling evaporation and/or boiling in simplified systems.</p>
+<p>The goal of the approach is to be energetically consistent but not really physically formal (at least for now).</p>
+<p>We start by importing the required tools.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">SX</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">jacobian</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casadi</span><span class="w"> </span><span class="kn">import</span> <span class="n">sign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">cumulative_trapezoid</span> <span class="k">as</span> <span class="n">cumtrapz</span><span class="p">,</span>
+    <span class="n">solve_ivp</span>
+<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cantera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="simple-evaporation-rate-model">
+<h2>Simple evaporation rate model<a class="headerlink" href="#simple-evaporation-rate-model" title="Link to this heading">#</a></h2>
+<p>Increasing temperature should increase vapor pressure of water till a saturation is reached.</p>
+<p>Under given external conditions, this could be parametrized in terms of a sigmoid function as:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{m}_{evap} = \frac{\dot{m}_{max}}{1 + \exp\left[-k\left(T-T_{b}\right)\right]}\qquad\left[{kg}\cdotp{m}^{-2}\cdotp{s}^{-1}\right]
+\]</div>
+<p>Parameter <span class="math notranslate nohighlight">\(T_b\)</span> is not boiling point, but a value below that so that saturation is reached at boiling and the breadth of the dispersion is given by <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>In code that means:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaporation_rate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">Tb</span><span class="o">=</span><span class="mf">368.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Hypotethical evaporation rate [kg/(m².s)]. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">scale</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">Tb</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The plot below displays the curve above with default parameters for better understanding.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_evaporation_rate</span><span class="p">(</span><span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Wrap the plotting ot `evaporation_rate`. &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">340</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">evaporation_rate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Evaporation rate [kg/(m².K)]&quot;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_evaporation_rate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3ac2b6b0cfb7a1ba287fb13a8c40781cead70003f95b1a772e8792f5b91dd51f.png" src="../_images/3ac2b6b0cfb7a1ba287fb13a8c40781cead70003f95b1a772e8792f5b91dd51f.png" />
+</div>
+</div>
+</section>
+<section id="boiling-pot">
+<h2>Boiling pot<a class="headerlink" href="#boiling-pot" title="Link to this heading">#</a></h2>
+<p>Consider a system of variable size representing the water in a pot (not the whole volume inside the pot).</p>
+<p>Its change in total enthalpy in time depends on heat inputs and losses.</p>
+<p>Say a heat source <span class="math notranslate nohighlight">\(\dot{q}_{in}\)</span> is place below the pot and its walls and water free surface are adiabatic (hard to believe).</p>
+<p>Thus one can write <span class="math notranslate nohighlight">\(\dot{H}=\dot{q}_{in}\)</span> as the energy balance, but <span class="math notranslate nohighlight">\(H=mh\)</span>, with <span class="math notranslate nohighlight">\(h\)</span> the specific enthalpy, thus</p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{dH}{dt}=\dfrac{d(mh)}{dt}=m\dfrac{dh}{dt}+\dfrac{dm}{dt}h=m\dfrac{dh}{dt}-\dot{m}_{evap}h=\dot{q}_{in}
+\]</div>
+<p>because the only source of mass change is evaporation, then the mass derivative equals minus the evaporation rate, <span class="math notranslate nohighlight">\(\dot{m}=-\dot{m}_{evap}\)</span>.</p>
+<p>We also have at constant pressure <span class="math notranslate nohighlight">\(dh=c_{p}dT\)</span> and the latent enthalpy of evaporation is <span class="math notranslate nohighlight">\(L\)</span>, so it can be rewritten</p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{dT}{dt}=\dfrac{\dot{q}_{in}+\dot{m}L}{mc_{P}}
+\]</div>
+<p>Once boiling start there should be no temperature change, so all the heat must be used for evaporation.</p>
+<p>Under that circumstance the total boiling rate must be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{m}_{evap}=\dfrac{\dot{q}_{in}}{L}
+\]</div>
+<p>To wrap-up we still need the properties of water, given below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Water specific heat [J/(kg.K)].</span>
+<span class="n">cp_w</span> <span class="o">=</span> <span class="mf">4180.0</span>
+
+<span class="c1"># Water specific latent enthalpy of evaporation [J/kg].</span>
+<span class="n">L_w</span> <span class="o">=</span> <span class="mf">2257166.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s put the system of ODE’s in form of code (for an area of 1 m²).</p>
+<p>The Heaviside approximation given by <code class="docutils literal notranslate"><span class="pre">active</span></code> simply avoid some overflows during model evaluation near the end.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Model for testing the approach. &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack solution variables.</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="c1"># Right-hand side of problem.</span>
+    <span class="n">mdot</span> <span class="o">=</span> <span class="o">-</span><span class="n">evaporation_rate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">q_in</span> <span class="o">/</span> <span class="n">L_w</span><span class="p">)</span>
+    <span class="n">Tdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">q_in</span> <span class="o">+</span> <span class="n">mdot</span> <span class="o">*</span> <span class="n">L_w</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">cp_w</span><span class="p">)</span>
+
+    <span class="c1"># Water left (within tolerance) to evaporate?</span>
+    <span class="n">active</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">mtol</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">active</span> <span class="o">*</span> <span class="n">mdot</span><span class="p">,</span> <span class="n">active</span> <span class="o">*</span> <span class="n">Tdot</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because simulating this system for negative masses has no meaning, we add a stop criteria.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">stop_criteria_mT</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Stop simulation when evaporation finishes. &quot;&quot;&quot;</span>
+    <span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns negative when mass is around zero. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">mtol</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A function for plotting the integration of the model is also provided.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pot_boiling</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot results from pot boiling experiment. &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mass [kg]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the cell below you can play with heat input and initial conditions to investigate their effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tolerance for mass [kg].</span>
+<span class="n">mtol</span> <span class="o">=</span> <span class="mf">1.0e-06</span>
+
+<span class="c1"># Heat input in the container [W].</span>
+<span class="n">q_in</span> <span class="o">=</span> <span class="mf">200.0</span>
+
+<span class="c1"># Initial state [kg, K].</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">]</span>
+
+<span class="c1"># Time-span of calculations and evaluation points [s].</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">3600</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Problem is stiff, use an appropriate solver.</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;LSODA&quot;</span><span class="p">,</span>
+                    <span class="n">events</span><span class="o">=</span><span class="n">stop_criteria_mT</span><span class="p">())</span>
+
+<span class="c1"># Unpack solution.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">t</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># Did it converge?</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">plot_pot_boiling</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/82b0764788fcaf935a2e5f665de0d0f4d9c921c9243070bbecda13518caceb66.png" src="../_images/82b0764788fcaf935a2e5f665de0d0f4d9c921c9243070bbecda13518caceb66.png" />
+</div>
+</div>
+</section>
+<section id="drying-of-solids">
+<h2>Drying of solids<a class="headerlink" href="#drying-of-solids" title="Link to this heading">#</a></h2>
+<p>The previous model can be generalized for the evaporation of fluids from solids.</p>
+<p>Next we generalize the system for including a mass fraction of fluids in a solid to be dried.</p>
+<p>The simple model is proposed as a set of mass, species, and energy equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\dfrac{dm}{dt}&amp;=-\dot{m}_{evap}\\[6pt]
+\dfrac{dY}{dt}&amp;=\dfrac{\dot{m}}{m}\\[6pt]
+\dfrac{dT}{dt}&amp;=\dfrac{\dot{q}_{in}+\dot{m}L}{mc_{P}}
+\end{align}
+\end{split}\]</div>
+<p>where the consitutive laws for mass averaged specific heat is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+c_{p}&amp;=Yc_{p,w} + (1-Y)c_{p,b}\\[6pt]
+\end{align}
+\end{split}\]</div>
+<p>Notice that we could solve only 2 equations by making a transformation in mass equation definition, but that would shadow the generality of the model for any number of species.</p>
+<p>Now we only need the specific heat of the solid, here <span class="math notranslate nohighlight">\(SiO_2\)</span> and we are ready to go.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Silica specific heat [J/(kg/k)].</span>
+<span class="n">cp_b</span> <span class="o">=</span> <span class="mf">742.34</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In what follows the <code class="docutils literal notranslate"><span class="pre">active</span></code> takes the actual meaning it should (not only the auxiliary role in previous example): stop mass loss once the mass fraction of water falls to zero.</p>
+<p>Also notice that we are clipping the bounds of <code class="docutils literal notranslate"><span class="pre">Y</span></code> so that the solver does not try anything unphysical.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Model for testing the approach. &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack solution variables.</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="c1"># Bound mass fraction [solver doesn&#39;t know that!].</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Mass fraction averaged specific heat [J/(kg.K)].</span>
+    <span class="n">cp</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">*</span> <span class="n">cp_w</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span> <span class="o">*</span> <span class="n">cp_b</span>
+
+    <span class="c1"># Water current evaporation rate [kg/(s)].</span>
+    <span class="n">wdot</span> <span class="o">=</span> <span class="n">evaporation_rate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">q_in</span> <span class="o">/</span> <span class="n">L_w</span><span class="p">)</span>
+
+    <span class="c1"># Water left (within tolerance) to evaporate?</span>
+    <span class="n">active</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">mtol</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="c1"># Right-hand side of problem.</span>
+    <span class="n">mdot</span> <span class="o">=</span> <span class="o">-</span><span class="n">active</span> <span class="o">*</span> <span class="n">wdot</span>
+    <span class="n">Ydot</span> <span class="o">=</span> <span class="n">mdot</span> <span class="o">/</span> <span class="n">m</span>
+    <span class="n">Tdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">q_in</span> <span class="o">+</span> <span class="n">mdot</span> <span class="o">*</span> <span class="n">L_w</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">cp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">mdot</span><span class="p">,</span> <span class="n">Ydot</span><span class="p">,</span> <span class="n">Tdot</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to stop the simulation, now that must be done with mass fraction instead of mass.</p>
+<p>This will be disabled by default in the example the follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">stop_criteria_mYT</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Stop simulation when evaporation finishes. &quot;&quot;&quot;</span>
+    <span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="o">=</span> <span class="n">disable</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns negative when mass fraction is around zero. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="k">else</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">mtol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again we provide a helper plotting function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_drying_solids</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot results from solids drying experiment. &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mass fraction [-]&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mass [kg]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And finally the simulation can be run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tolerance for mass [kg].</span>
+<span class="n">mtol</span> <span class="o">=</span> <span class="mf">1.0e-06</span>
+
+<span class="c1"># Heat input in the container [W].</span>
+<span class="n">q_in</span> <span class="o">=</span> <span class="mf">500.0</span>
+
+<span class="c1"># Initial state [kg, K].</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">]</span>
+
+<span class="c1"># Time-span of calculations and evaluation points [s].</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Problem is stiff, use an appropriate solver.</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q_in</span><span class="p">,</span> <span class="n">mtol</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;LSODA&quot;</span><span class="p">,</span>
+                    <span class="n">events</span><span class="o">=</span><span class="n">stop_criteria_mYT</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="c1"># Unpack solution.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">t</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># Did it converge?</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">plot_drying_solids</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b82da08d0665031ca4ecb0ff68b214e764cc86f78914a63378b8cc4dd81feee3.png" src="../_images/b82da08d0665031ca4ecb0ff68b214e764cc86f78914a63378b8cc4dd81feee3.png" />
+</div>
+</div>
+</section>
+<section id="energy-consistency-only">
+<h2>Energy consistency only<a class="headerlink" href="#energy-consistency-only" title="Link to this heading">#</a></h2>
+<p>In some cases we don’t need to compute mass conservation but are only interested in energy consistency.</p>
+<p>What follows present some tricks for reaching that by playing with the expression for specific heat.</p>
+<p>For the illustration purposes we use a <code class="docutils literal notranslate"><span class="pre">ct.Water</span></code> object in a <code class="docutils literal notranslate"><span class="pre">ct.SolutionArray</span></code> for computing properties.</p>
+<p>A temperature range representative of water from room temperature to gas is considered here.</p>
+<p>All the properties in what follow are assumed to be at constant pressure, so it is omitted in the names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span> <span class="o">+</span> <span class="mf">273.16</span>
+
+<span class="n">liq</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Water</span><span class="p">()</span>
+<span class="n">liq</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="s2">&quot;mass&quot;</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">SolutionArray</span><span class="p">(</span><span class="n">liq</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">TP</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Prior to any computations we recover the quantities of interest, specific heat <code class="docutils literal notranslate"><span class="pre">cp</span></code> and specific enthalpy <code class="docutils literal notranslate"><span class="pre">hm</span></code>.</p>
+<p>Notice that given the <code class="docutils literal notranslate"><span class="pre">mass</span></code> basis declared before these quantities are per mass unit [kg].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp_ref</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">cp</span>
+<span class="n">hm_ref</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">ct.Water</span></code> has no latent heat attribute and this value is recovered by filtering the array.</p>
+<p>Enthalpy change is computed and one may check this value is as reported in the literature.</p>
+<p><strong>Note:</strong> do not use equality here because you might get a zero depending on how <code class="docutils literal notranslate"><span class="pre">T</span></code> was constructed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tb</span> <span class="o">=</span> <span class="mf">373.15</span>
+
+<span class="n">hb</span> <span class="o">=</span> <span class="n">hm_ref</span><span class="p">[(</span><span class="n">T</span> <span class="o">&lt;</span> <span class="n">Tb</span><span class="p">)][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ha</span> <span class="o">=</span> <span class="n">hm_ref</span><span class="p">[(</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">Tb</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dh</span> <span class="o">=</span> <span class="n">ha</span> <span class="o">-</span> <span class="n">hb</span>
+
+<span class="n">dh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2257166.191140862)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next step is to compute a <em>modified</em> specific heat by incorporating a smeared latent heat contribution around the boiling point.</p>
+<p>It must be emphasized that the breadth of the smearing depends on how you intend to integrate the equations later.</p>
+<p>It is funny and reconforting to see that the ration on the r.h.s. here is the definition of specific heat at the limit <span class="math notranslate nohighlight">\(\Delta{}T\rightarrow{}0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dT</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">cp_mod</span> <span class="o">=</span> <span class="n">cp_ref</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">cp_mod</span><span class="p">[(</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">Tb</span><span class="o">-</span><span class="n">dT</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">T</span> <span class="o">&lt;</span> <span class="n">Tb</span><span class="o">+</span><span class="n">dT</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">dh</span> <span class="o">/</span> <span class="n">dT</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the definition of enthalpy change computed from a reference temperature we have:</p>
+<div class="math notranslate nohighlight">
+\[
+H(T) = \Delta^{f}H(T_{ref}) + \int_{T_{ref}}^{T}c_{P}(T)dT
+\]</div>
+<p>Thus we perform this integration numerically and check against a relative tolerance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rtol</span> <span class="o">=</span> <span class="mf">5.0e-04</span>
+
+<span class="n">hm_mod</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">cp_mod</span><span class="p">,</span> <span class="n">T</span><span class="p">)]</span>
+<span class="n">hm_mod</span> <span class="o">=</span> <span class="n">hm_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hm_mod</span><span class="p">)</span>
+
+<span class="n">dh_ref</span> <span class="o">=</span> <span class="n">hm_ref</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">hm_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dh_mod</span> <span class="o">=</span> <span class="n">hm_mod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">hm_mod</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">dh_mod</span> <span class="o">-</span> <span class="n">dh_ref</span><span class="p">)</span> <span class="o">/</span> <span class="n">dh_ref</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">&lt;</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">error</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.True_, np.float64(0.0002506557315553776))
+</pre></div>
+</div>
+</div>
+</div>
+<p>From that we see that total enthalpy change is conserved to within approximately 0.02%, what is good for our purposes.</p>
+<p>Finally we display a comparison plot of the reference curves and their modified version.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Reference&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modified&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Specific enthalpy [J/kg]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">cp_ref</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Reference&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">cp_mod</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modified&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Specific heat capacity [kJ/kg/K]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;majordome.plotting.MajordomePlot at 0x2375f259580&gt;
+</pre></div>
+</div>
+<img alt="../_images/fbdc2aacb41ad1b53b545b2f3f06ded992549fbf20db3a7f1f16fa3dd93e7a58.png" src="../_images/fbdc2aacb41ad1b53b545b2f3f06ded992549fbf20db3a7f1f16fa3dd93e7a58.png" />
+</div>
+</div>
+<p>Results so far are numerically good but the steps in the functions are not analytical and can be a problem with automatic differentiation (AD).</p>
+<p>In what follows we work towards a <em>discontinuous differentiable</em> function (that makes no mathematical sense, but works when dealing with AD)!</p>
+<p>A Heaviside function can be implemented with the <code class="docutils literal notranslate"><span class="pre">sign</span></code> function as</p>
+<div class="math notranslate nohighlight">
+\[
+H(x, x_0) = \frac{1 + sign(x-x_0)}{2}
+\]</div>
+<p>which evaluates to 1 when <span class="math notranslate nohighlight">\(x&gt;x_0\)</span> and 0 when <span class="math notranslate nohighlight">\(x&lt;x_0\)</span> (the value at the equality is implementation dependent, often set to 0.5).</p>
+<p>Below we illustrate the computation of a square hump around zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_step</span><span class="p">(</span><span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">g0</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mf">0.5</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">g1</span> <span class="o">-</span> <span class="n">g0</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Independent variable&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Activation step&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_step</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c7f26dd7ad43dade9562f7d92c6a13124eee93841d0c03216f7d2cf72e5c2520.png" src="../_images/c7f26dd7ad43dade9562f7d92c6a13124eee93841d0c03216f7d2cf72e5c2520.png" />
+</div>
+</div>
+<p>Now we define the change temperatures <code class="docutils literal notranslate"><span class="pre">tc</span></code> and the increments <code class="docutils literal notranslate"><span class="pre">dxy</span></code> for the steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc0</span> <span class="o">=</span> <span class="n">Tb</span> <span class="o">-</span> <span class="n">dT</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">tc1</span> <span class="o">=</span> <span class="n">Tb</span>
+<span class="n">tc2</span> <span class="o">=</span> <span class="n">Tb</span> <span class="o">+</span> <span class="n">dT</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">c0</span> <span class="o">=</span> <span class="n">cp_mod</span><span class="p">[(</span><span class="n">T</span> <span class="o">&lt;</span> <span class="n">tc0</span><span class="p">)]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">cp_mod</span><span class="p">[(</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">tc0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">T</span> <span class="o">&lt;=</span> <span class="n">tc1</span><span class="p">)]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">cp_mod</span><span class="p">[(</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">tc1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">T</span> <span class="o">&lt;=</span> <span class="n">tc2</span><span class="p">)]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">cp_mod</span><span class="p">[(</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">tc2</span><span class="p">)]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">d01</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">-</span> <span class="n">c0</span>
+<span class="n">d12</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">-</span> <span class="n">c1</span>
+<span class="n">d23</span> <span class="o">=</span> <span class="n">c3</span> <span class="o">-</span> <span class="n">c2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using a sequence of stepwise functions we reconstruct the original specific heat function.</p>
+<p>By incremental changes one also find some <em>analytical</em> enthalpy function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_ref</span> <span class="o">=</span> <span class="mf">273.16</span>
+
+<span class="n">Ts</span> <span class="o">=</span> <span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s2">&quot;Ts&quot;</span><span class="p">)</span>
+<span class="n">g0</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc2</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">+</span> <span class="n">d01</span> <span class="o">*</span> <span class="n">g0</span> <span class="o">+</span> <span class="n">d12</span> <span class="o">*</span> <span class="n">g1</span> <span class="o">+</span> <span class="n">d23</span> <span class="o">*</span> <span class="n">g2</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">*</span> <span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">T_ref</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">+=</span> <span class="n">g0</span> <span class="o">*</span> <span class="p">(</span><span class="n">c1</span> <span class="o">-</span> <span class="n">c0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc0</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">+=</span> <span class="n">g1</span> <span class="o">*</span> <span class="p">(</span><span class="n">c2</span> <span class="o">-</span> <span class="n">c1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc1</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">+=</span> <span class="n">g2</span> <span class="o">*</span> <span class="p">(</span><span class="n">c3</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">tc2</span><span class="p">)</span>
+
+<span class="n">cp_w</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;cp_w&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Ts</span><span class="p">],</span> <span class="p">[</span><span class="n">c</span><span class="p">])</span>
+<span class="n">hm_w</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;hm_w&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Ts</span><span class="p">],</span> <span class="p">[</span><span class="n">h</span><span class="p">])</span>
+
+<span class="n">cp_int</span> <span class="o">=</span> <span class="n">cp_w</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="n">hm_int</span> <span class="o">=</span> <span class="n">hm_w</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">full</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">+</span> <span class="n">hm_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Energy conservation in this simplified approach - we are piecewise neglecting <span class="math notranslate nohighlight">\(c_P=c_P(T)\)</span> - we find it is about 10 times better!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dh_ref</span> <span class="o">=</span> <span class="n">hm_ref</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">hm_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dh_int</span> <span class="o">=</span> <span class="n">hm_int</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">hm_int</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">dh_int</span> <span class="o">-</span> <span class="n">dh_ref</span><span class="p">)</span> <span class="o">/</span> <span class="n">dh_ref</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">&lt;</span> <span class="n">rtol</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">error</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.True_, np.float64(4.6647226319527534e-05))
+</pre></div>
+</div>
+</div>
+</div>
+<p>A graphic displays all the curves superimposed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_results</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">,</span> <span class="n">hm_int</span><span class="p">,</span> <span class="n">cp_int</span><span class="p">,</span> <span class="n">cp_mod</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_int</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Symbolic&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modified&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Reference&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Specific enthalpy [J/kg]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">cp_int</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Symbolic&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">cp_mod</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modified&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Specific heat capacity [kJ/kg/K]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">hm_ref</span><span class="p">,</span> <span class="n">hm_mod</span><span class="p">,</span> <span class="n">hm_int</span><span class="p">,</span> <span class="n">cp_int</span><span class="p">,</span> <span class="n">cp_mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/759e412850e8bed75e209c4c5a4e4e3c30e81c71ce7f8dfb0f3e3cfcd155424a.png" src="../_images/759e412850e8bed75e209c4c5a4e4e3c30e81c71ce7f8dfb0f3e3cfcd155424a.png" />
+</div>
+</div>
+<p>Hope this was convincing enough to validate the approach!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mpc-kinetics-part-c.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Wrapping up</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mpc-multiple-shooting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DAE multiple shooting solution</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-evaporation-rate-model">Simple evaporation rate model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boiling-pot">Boiling pot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drying-of-solids">Drying of solids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-consistency-only">Energy consistency only</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

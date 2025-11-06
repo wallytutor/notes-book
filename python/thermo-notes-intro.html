@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fundamentals of MPC &#8212; Notes Book</title>
+    <title>Thermodynamics and kinetics &#8212; Notes Book</title>
   
   
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc-kinetics-intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/thermo-notes-intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basics" href="mpc-kinetics-part-a.html" />
-    <link rel="prev" title="Deploying services" href="../scientific-computing/services.html" />
+    <link rel="next" title="Converting data to Shomate format" href="thermo-converting-shomate.html" />
+    <link rel="prev" title="DAE multiple shooting solution" href="mpc-multiple-shooting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,7 +199,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Fundamentals of MPC</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
@@ -207,8 +207,12 @@
 <li class="toctree-l2"><a class="reference internal" href="mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Thermodynamics and kinetics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -300,7 +304,7 @@
       
       
       
-      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/mpc-kinetics-intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/thermo-notes-intro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -330,7 +334,7 @@
       
       
       
-      <li><a href="../_sources/python/mpc-kinetics-intro.md" target="_blank"
+      <li><a href="../_sources/python/thermo-notes-intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,7 +418,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fundamentals of MPC</h1>
+    <h1>Thermodynamics and kinetics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -424,7 +428,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpc-tutorials">MPC tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-materials">Supplementary materials</a></li>
 </ul>
             </nav>
@@ -437,21 +441,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fundamentals-of-mpc">
-<h1>Fundamentals of MPC<a class="headerlink" href="#fundamentals-of-mpc" title="Link to this heading">#</a></h1>
-<p>Let’s break down our introduction to model predictive control (MPC) into simpler blocks where we will study a parfect stirred reactor (PSR) model in transient mode.</p>
-<section id="mpc-tutorials">
-<h2>MPC tutorials<a class="headerlink" href="#mpc-tutorials" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="thermodynamics-and-kinetics">
+<h1>Thermodynamics and kinetics<a class="headerlink" href="#thermodynamics-and-kinetics" title="Link to this heading">#</a></h1>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="mpc-kinetics-part-a.html"><span class="std std-doc">Basics</span></a></p></li>
-<li><p><a class="reference internal" href="mpc-kinetics-part-b.html"><span class="std std-doc">Refactoring</span></a></p></li>
-<li><p><a class="reference internal" href="mpc-kinetics-part-c.html"><span class="std std-doc">Wrapping up</span></a></p></li>
+<li><p><a class="reference internal" href="thermo-converting-shomate.html"><span class="std std-doc">Converting Shomate data</span></a></p></li>
+<li><p><a class="reference internal" href="thermo-calphad-nitrides.html"><span class="std std-doc">Gibbs energy from JANAF</span></a></p></li>
 </ul>
 </section>
 <section id="supplementary-materials">
 <h2>Supplementary materials<a class="headerlink" href="#supplementary-materials" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="mpc-multiple-shooting.html"><span class="std std-doc">Multiple shooting method</span></a></p></li>
 <li><p><a class="reference internal" href="mpc-boiling-evaporation.html"><span class="std std-doc">Modeling boiling/evaporation</span></a></p></li>
 </ul>
 </section>
@@ -490,20 +491,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../scientific-computing/services.html"
+       href="mpc-multiple-shooting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Deploying services</p>
+        <p class="prev-next-title">DAE multiple shooting solution</p>
       </div>
     </a>
     <a class="right-next"
-       href="mpc-kinetics-part-a.html"
+       href="thermo-converting-shomate.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basics</p>
+        <p class="prev-next-title">Converting data to Shomate format</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -523,7 +524,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpc-tutorials">MPC tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-materials">Supplementary materials</a></li>
 </ul>
   </nav></div>
