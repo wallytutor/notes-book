@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Concept with GUI &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'simulation-elmer-csc/cases/conduction-1/concept/README';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../scientific-computing/introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/tools-ssh.html">SSH key generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/tools-selection.html">Selection of tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/tools-portable.html">Portable toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/system-linux.html">Working on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/programming.html">Scientific programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/general-tips.html">General Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../scientific-computing/services.html">Deploying services</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/image-notes-intro.html">Image analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/image-porosity-measurement.html">Porosity quantification</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fsimulation-elmer-csc/cases/conduction-1/concept/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/simulation-elmer-csc/cases/conduction-1/concept/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Concept with GUI</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-case-preparation">Raw case preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-equations">Creation equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-material">Setting up material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-conditions">Configuring conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-setup">Final setup</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="concept-with-gui">
+<h1>Concept with GUI<a class="headerlink" href="#concept-with-gui" title="Link to this heading">#</a></h1>
+<p>Although the recommended way to deal with Elmer setup is through <a class="reference internal" href="#../../../README.md"><span class="xref myst">SIF</span></a> files, creating them by hand is sort of cumbersome if you do not dispose of a similar case to modify. Here we provide a guided workflow to create a case that we will later modify by hand. This will allow us to quickly produce a working version of the base operating version of SIF file.</p>
+<p>In what follows we assume you have generated the computational grid with <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> under the <a class="reference internal" href="#../2d/README.md"><span class="xref myst">2d</span></a> directory. To do so, navigate to that folder in a terminal and run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gmsh<span class="w"> </span>-<span class="w"> </span>domain.geo
+</pre></div>
+</div>
+<p>A file <code class="docutils literal notranslate"><span class="pre">domain.msh</span></code> in <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> format will be generated. That said, what we will create here is essentially the 2D case since it is conceived with its mesh. In what follows we will perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Create a base case with the referred mesh and add additional tools to the UI.</p></li>
+<li><p>Add a set of equations with all the models associated to the loaded body.</p></li>
+<li><p>Create a material and attribute it to the body.</p></li>
+<li><p>Set initial and boundary conditions.</p></li>
+</ol>
+<section id="raw-case-preparation">
+<h2>Raw case preparation<a class="headerlink" href="#raw-case-preparation" title="Link to this heading">#</a></h2>
+<p>It is important that the non-default solvers be added at this stage, otherwise they will not appear in the model selection tabs (and you might need to delete already configured models to be able to use them). From the <code class="docutils literal notranslate"><span class="pre">File</span></code> menu entry perform the following steps:</p>
+<ul class="simple">
+<li><p>File &gt; Open &gt; <em>select 2D mesh file</em></p></li>
+<li><p>File &gt; Definitions &gt; Append &gt; <em>fluxsolver.xml</em></p></li>
+<li><p>File &gt; Definitions &gt; Append &gt; <em>saveline.xml</em></p></li>
+<li><p>File &gt; Save Project &gt; <em>navigate to concept directory</em></p></li>
+</ul>
+<p>Now on the object tree, expand <code class="docutils literal notranslate"><span class="pre">Body</span></code>, open <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">Property</span> <span class="pre">1</span></code>, rename it <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code>. You can save project again here (and as often as you wish) to keep track of modifications.</p>
+</section>
+<section id="creation-equations">
+<h2>Creation equations<a class="headerlink" href="#creation-equations" title="Link to this heading">#</a></h2>
+<p>In Elmer not everything that is called equation represents an actual <em>physical equation</em>. It is important to add all <a class="reference external" href="https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerModelsManual.pdf">models</a> that apply to a body at the same equation, as follows:</p>
+<ul class="simple">
+<li><p>Equation &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Model</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">Active</span></code> in tabs:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flux</span> <span class="pre">and</span> <span class="pre">Gradient</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SaveLine</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>As you may notice, in the above we have actually one physical model (heat equation) and a pair of processing utilities. As in FEM we perform projections to solve for these processed quantities, they need to be extracted at runtime. To get the heat flux at system boundary and extracting solution over a given line during calculation we perform the following configurations.</p>
+<ul class="simple">
+<li><p>Edit Solver Settings in <code class="docutils literal notranslate"><span class="pre">Model</span></code> tab <code class="docutils literal notranslate"><span class="pre">Flux</span> <span class="pre">and</span> <span class="pre">Gradient</span></code>:</p>
+<ul>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Solver</span> <span class="pre">specific</span> <span class="pre">options</span></code>:</p>
+<ul>
+<li><p>Target Variable <code class="docutils literal notranslate"><span class="pre">Temperature</span></code></p></li>
+<li><p>Flux Coefficient <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">Conductivity</span></code></p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">Calculate</span> <span class="pre">Flux</span></code></p></li>
+</ul>
+</li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">General</span></code>:</p>
+<ul>
+<li><p>Execute solver <code class="docutils literal notranslate"><span class="pre">After</span> <span class="pre">timestep</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In steady state simulations the flux is generally computed <em>after all</em> calculations are performed (at converged solution); for transient simulations this is generally done after each time step. Failing to configure this properly may lead to an overhead of useless intermediate computations.</p>
+<ul class="simple">
+<li><p>Edit Solver Settings in <code class="docutils literal notranslate"><span class="pre">Model</span></code> tab <code class="docutils literal notranslate"><span class="pre">SaveLine</span></code>:</p>
+<ul>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Solver</span> <span class="pre">specific</span> <span class="pre">options</span></code>:</p>
+<ul>
+<li><p>Polyline Coordinates <code class="docutils literal notranslate"><span class="pre">Size(2,</span> <span class="pre">2);</span>&#160; <span class="pre">0.005</span> <span class="pre">0.025</span>&#160; <span class="pre">0.100</span> <span class="pre">0.025</span></code></p></li>
+<li><p>Polyline Divisions <code class="docutils literal notranslate"><span class="pre">25</span></code></p></li>
+</ul>
+</li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">General</span></code>:</p>
+<ul>
+<li><p>Execute solver <code class="docutils literal notranslate"><span class="pre">After</span> <span class="pre">simulation</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Saving data could be done on a time basis, but for this case we have decided to extract only a profile of the final solution <em>after simulation</em>.</p>
+</section>
+<section id="setting-up-material">
+<h2>Setting up material<a class="headerlink" href="#setting-up-material" title="Link to this heading">#</a></h2>
+<p>For being able to eventually verify this case against analytical solutions,  the simplest set of material properties are introduced below; everything is held constant.</p>
+<ul class="simple">
+<li><p>Material &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Solid</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Density <code class="docutils literal notranslate"><span class="pre">3000</span></code></p></li>
+<li><p>Heat Capacity <code class="docutils literal notranslate"><span class="pre">1000</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Conductivity <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="configuring-conditions">
+<h2>Configuring conditions<a class="headerlink" href="#configuring-conditions" title="Link to this heading">#</a></h2>
+<p>Next we initialize the body to be at 1000 K:</p>
+<ul class="simple">
+<li><p>Initial condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Temperature</span></code></p></li>
+<li><p>Apply to bodies: check <code class="docutils literal notranslate"><span class="pre">Hollow</span> <span class="pre">Cylinder</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Temperature <code class="docutils literal notranslate"><span class="pre">1000</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Both the whole (left side) and ends (top/bottom) are set as adiabatic:</p>
+<ul class="simple">
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Hole</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">1</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Flux <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Ends</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">3</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Flux <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Finally a Robin boundary condition is provided for environment (radius/right side):</p>
+<ul class="simple">
+<li><p>Boundary condition &gt; [Add…]:</p>
+<ul>
+<li><p>Rename it <code class="docutils literal notranslate"><span class="pre">Environment</span></code></p></li>
+<li><p>Apply to boundaries: check <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">2</span></code></p></li>
+<li><p>Tab <code class="docutils literal notranslate"><span class="pre">Heat</span> <span class="pre">equation</span></code>:</p>
+<ul>
+<li><p>Heat Transfer Coeff. <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+<li><p>External Temperature <code class="docutils literal notranslate"><span class="pre">300</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So far the model is built with the default steady-state solver. This might be useful for testing <em>if it runs</em> towards the trivial solution (equilibrium with external environment), what should be pretty fast. So save, generate, and run the model for testing.</p>
+</section>
+<section id="final-setup">
+<h2>Final setup<a class="headerlink" href="#final-setup" title="Link to this heading">#</a></h2>
+<p>Back to menu <code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">&gt;</span> <span class="pre">Setup...</span></code>, tune a few parameters as follows:</p>
+<ul class="simple">
+<li><p>Results directory <code class="docutils literal notranslate"><span class="pre">results</span></code></p></li>
+<li><p>Coordinate system <code class="docutils literal notranslate"><span class="pre">Axi</span> <span class="pre">Symmetric</span></code></p></li>
+<li><p>Simulation type <code class="docutils literal notranslate"><span class="pre">Transient</span></code></p></li>
+<li><p>Output intervals <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+<li><p>Timestep intervals <code class="docutils literal notranslate"><span class="pre">120</span></code></p></li>
+<li><p>Timestep sizes <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+<p>Now save, generate, and run. It should be up and running as desired by here!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./simulation-elmer-csc\cases\conduction-1\concept"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-case-preparation">Raw case preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creation-equations">Creation equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-material">Setting up material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-conditions">Configuring conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-setup">Final setup</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

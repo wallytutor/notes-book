@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Elmer verification &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'simulation-elmer-csc/cases/conduction-3/README';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Thermomechanical simulation" href="../thermomechanical-1/README.html" />
+    <link rel="prev" title="Pseudo-solidification formulation" href="../conduction-2/README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../scientific-computing/introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/tools-ssh.html">SSH key generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/tools-selection.html">Selection of tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/tools-portable.html">Portable toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/system-linux.html">Working on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/programming.html">Scientific programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/general-tips.html">General Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scientific-computing/services.html">Deploying services</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/image-notes-intro.html">Image analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/image-porosity-measurement.html">Porosity quantification</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../cases.html">Elmer cases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fsimulation-elmer-csc/cases/conduction-3/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/simulation-elmer-csc/cases/conduction-3/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Elmer verification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-description">Model description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-strategy">Solution strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-elmer">Running Elmer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-model">Reference model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="elmer-verification">
+<h1>Elmer verification<a class="headerlink" href="#elmer-verification" title="Link to this heading">#</a></h1>
+<p>In this note we focus on the analysis of steady heat transfer across a multi-layer body composed of different materials. For evaluating the effect of temperature-dependence of thermal conductivity, each material region may be discretized into several slices. Since the radius of the system (~5m) is large compared to the wall thickness (~0.3m) a planar approximation is adopted here to simplify the base computations.</p>
+<p><strong>NOTE:</strong> this notebook assumes you have both <a class="reference external" href="https://github.com/wallytutor/AuChimiste.jl">AuChimiste.jl</a> and <a class="reference external" href="https://github.com/wallytutor/Taskforce.jl">Taskforce.jl</a> packages available. You can clone and locally install them from their repositories or use a <a class="reference external" href="https://github.com/wallytutor/Kompanion">Kompanion</a> environment, which makes them automatically available in Julia. Module <code class="docutils literal notranslate"><span class="pre">SteadyHeatConduction</span></code> is found under this same <a class="reference external" href="https://github.com/wallytutor/learning-by-teaching/tree/main/software/elmer/samples/conduction-3">directory</a>.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">push!</span><span class="p">(</span><span class="nb">LOAD_PATH</span><span class="p">,</span><span class="w"> </span><span class="nd">@__DIR__</span><span class="p">)</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SteadyHeatConduction</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Taskforce</span><span class="o">.</span><span class="n">Elmer</span>
+</pre></div>
+</div>
+<section id="model-description">
+<h2>Model description<a class="headerlink" href="#model-description" title="Link to this heading">#</a></h2>
+<p>In what follows we describe a procedure to solve the steady-state heat equation <span class="math notranslate nohighlight">\(\nabla\cdotp{}q^{\prime}=0\)</span> with <span class="math notranslate nohighlight">\(q^{\prime}\)</span> given by Fourier’s law <span class="math notranslate nohighlight">\(q^{\prime}=-k\nabla{}T\)</span>. Its goal is to treat numerically the problem with temperature-dependent coefficients, <em>i.e.</em> <span class="math notranslate nohighlight">\(k\equiv{}k(T)\)</span>.</p>
+<p>For simplicity, let’s consider a domain of points equally spaced by a distance <span class="math notranslate nohighlight">\(\delta\)</span> in 1-D space <span class="math notranslate nohighlight">\(z\in[0;L]\)</span>. In the left side of the domain we have a Dirichlet boundary condition given by <span class="math notranslate nohighlight">\(T(z=0)=T_1\)</span>. In the absence of source terms, the heat flux at the first two internodal interfaces can be writen as</p>
+<div class="math notranslate nohighlight">
+\[
+q^{\prime}=-k_{1,2}\dfrac{T_2-T_1}{\delta}=-k_{2,3}\dfrac{T_3-T_2}{\delta}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{i,j}\)</span> is defined as the harmonic mean of <span class="math notranslate nohighlight">\(k_i\)</span> and <span class="math notranslate nohighlight">\(k_j\)</span>, a requirement for continuity as demonstrated, <em>e.g</em>, in <a class="reference external" href="https://doi.org/10.1201/9781482234213">Patankar (1980)</a>. Introducing the coefficients <span class="math notranslate nohighlight">\(\alpha_{i,j}=-k_{i,j}\delta^{-1}\)</span> we rearrange this equality as follows; since <span class="math notranslate nohighlight">\(T_1\)</span> is know, it is placed on the right-hand side, closing the first equation of the problem with boundary condition included:</p>
+<div class="math notranslate nohighlight">
+\[
+\left(\alpha_{1,2}+\alpha_{2,3}\right)T_2 - \alpha_{2,3}T_3 = \alpha_{1,2}T_1
+\]</div>
+<p>Applying the same approach to the next set of nodes leads to the next equation which applies generically for any triplet of nodes inside the domain:</p>
+<div class="math notranslate nohighlight">
+\[
+-\alpha_{2,3}T_2 +
+\left(\alpha_{2,3}+\alpha_{3,4}\right)T_3
+-\alpha_{3,4}T_4 = 0
+\]</div>
+<p>On the right size the system is submitted to a general Robin boundary condition given by the heat flux <span class="math notranslate nohighlight">\(q^{\prime}(z=L)\)</span> specified in terms of convection and radiation terms; this includes the convective heat transfer coefficient <span class="math notranslate nohighlight">\(h\)</span> and surface emissivity <span class="math notranslate nohighlight">\(\varepsilon\)</span> to the model parameters.</p>
+<p><em>Note:</em> for simplicity of notation and for writing the whole set of equations below, we assume the system is discretized into 5 nodes.</p>
+<div class="math notranslate nohighlight">
+\[
+q^{\prime}=-k_{4,5}\dfrac{T_5-T_4}{\delta}=
+h\left(T_5-T_{\infty,c}\right)
++\sigma\varepsilon\left(T_5^4-T_{\infty,r}^4\right)
+\]</div>
+<p>Because of the term expressed as the fourth power of the temperature in the last node, this equation makes the system nonlinear. Notice that this expression considers different temperatures for convection and radiation, <span class="math notranslate nohighlight">\(T_{\infty,c}\)</span> and <span class="math notranslate nohighlight">\(T_{\infty,r}\)</span>, respectively. Below we include a term depending on <span class="math notranslate nohighlight">\(T_{\infty,r}\)</span> to the convective heat flux <span class="math notranslate nohighlight">\(q_c^{\prime}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+q_c^{\prime}=
+h\left(T_5-T_{\infty,c}\right)=
+h\left(T_5-T_{\infty,r}\right)
++h\left(T_{\infty,r}-T_{\infty,c}\right)
+\]</div>
+<p>which allows the last equation of the system to be reformulated as</p>
+<div class="math notranslate nohighlight">
+\[
+-\alpha_{4,5}T_4+\alpha_{4,5}T_5=
+h\left(T_{\infty,r}-T_{\infty,c}\right)+
+U\left(T_5-T_{\infty,r}\right)
+\]</div>
+<p>where the global heat transfer coefficient <span class="math notranslate nohighlight">\(U\equiv{}U(T_5)\)</span> is introduced; to deal with the nonlinearity we make use of a relation <span class="math notranslate nohighlight">\(\tau_5\mapsto{}T_5\)</span> to evaluate the coefficient accross iterations, where <span class="math notranslate nohighlight">\(\tau_5\)</span> is the last known approximation of <span class="math notranslate nohighlight">\(T_5\)</span> (starting with an initial guess).</p>
+<div class="math notranslate nohighlight">
+\[
+U = h + \sigma\varepsilon
+\left(\tau_5+T_{\infty,r}\right)
+\left(\tau_5^2+T_{\infty,r}^2\right)
+\]</div>
+<p>Reorganizing the equation leads to</p>
+<div class="math notranslate nohighlight">
+\[
+-\alpha_{4,5}T_4+(\alpha_{4,5}-U)T_5=
+(h-U)T_{\infty,r}-hT_{\infty,c}=
+f(\tau_5)
+\]</div>
+<p>Putting it all together leads to the following matrix problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+  (\alpha_{1,2}+\alpha_{2,3})
+&amp; -\alpha_{2,3}
+&amp; 0
+&amp; 0
+\\
+%%%%%%%%
+  -\alpha_{2,3}
+&amp; (\alpha_{2,3}+\alpha_{3,4})
+&amp; -\alpha_{3,4}
+&amp; 0
+\\
+%%%%%%%%
+  0
+&amp; -\alpha_{3,4}
+&amp; (\alpha_{3,4}+\alpha_{4,5})
+&amp; -\alpha_{4,5}
+\\
+%%%%%%%%
+0
+&amp; 0
+&amp; -\alpha_{4,5}
+&amp; (\alpha_{4,5}-U)
+\end{bmatrix}
+\begin{bmatrix}
+	T_2  \\
+	T_3  \\
+	T_4  \\
+	T_5
+\end{bmatrix}
+%
+=
+%
+\begin{bmatrix}
+	\alpha_{1,2}T_1 \\
+	0               \\
+	0               \\
+	f(\tau_{5})
+\end{bmatrix}
+\end{split}\]</div>
+<p>In summary this shows that for <span class="math notranslate nohighlight">\(N\)</span> temperatures, there is a <span class="math notranslate nohighlight">\(N-1\)</span> problem to be solved (as <span class="math notranslate nohighlight">\(T_1\)</span> is known) and also <span class="math notranslate nohighlight">\(N-1\)</span> interface coefficients <span class="math notranslate nohighlight">\(\alpha_{i,j}\)</span>.</p>
+</section>
+<section id="solution-strategy">
+<h2>Solution strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading">#</a></h2>
+<p>Since the left-hand side matrix depends on the solution itself, solving the model is an intrinsically iterative task; the following steps are proposed:</p>
+<ol class="arabic simple">
+<li><p>An initial guess <span class="math notranslate nohighlight">\(\tau\)</span> of solution is provided</p></li>
+<li><p>The matrix coefficients and <span class="math notranslate nohighlight">\(f(\tau_n)\)</span> are evaluated</p></li>
+<li><p>Problem is solved to update the solution <span class="math notranslate nohighlight">\(\tau\)</span></p></li>
+<li><p>If for iterations <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(k-1\)</span> all <span class="math notranslate nohighlight">\(\vert\tau^{(k)}-\tau^{(k-1)}\vert&lt;\epsilon\)</span>, solution is converged, otherwise repeat from the second step until convergence of maximum iterations is reached</p></li>
+</ol>
+</section>
+<section id="running-elmer">
+<h2>Running Elmer<a class="headerlink" href="#running-elmer" title="Link to this heading">#</a></h2>
+<p>Under the model directory one finds a <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> file that can be converted into a <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> grid with the following command (run from the project root directory):</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(</span><span class="sb">`gmsh - domain.geo`</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;log.gmsh&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>You can also launch <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> user interface and verify the 1D mesh that must look like the following:</p>
+<p><img alt="Generated  grid" src="../../../_images/gmsh-domain.png" /></p>
+<p>Because Elmer uses its own mesh format, we need to provide a conversion as follows:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(</span><span class="sb">`ElmerGrid 14 2 mdomain.msh -autoclean -merge 1.0e-05`</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;log.elmergrid&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Finally, running the model and recording the logs is done with:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">run</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(</span><span class="sb">`ElmerSolver`</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;log.elmersolver&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="reference-model">
+<h2>Reference model<a class="headerlink" href="#reference-model" title="Link to this heading">#</a></h2>
+<p>Below we create an instance of the reference model using the same layered structure (thicknesses and thermal conductivities) and boundary conditions as the provided Elmer case.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span><span class="mf">0.200</span><span class="p">,</span><span class="w"> </span><span class="n">make_thermal_conductivity</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)),</span>
+<span class="w">    </span><span class="p">(</span><span class="mf">0.050</span><span class="p">,</span><span class="w"> </span><span class="n">make_thermal_conductivity</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)),</span>
+<span class="w">    </span><span class="p">(</span><span class="mf">0.010</span><span class="p">,</span><span class="w"> </span><span class="n">make_thermal_conductivity</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)),</span>
+<span class="w">    </span><span class="p">(</span><span class="mf">0.040</span><span class="p">,</span><span class="w"> </span><span class="n">make_thermal_conductivity</span><span class="p">(</span><span class="mf">9.0</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">let</span>
+<span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SteadyHeatConduction1D</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span><span class="w"> </span><span class="mf">1873.15</span><span class="p">,</span><span class="w"> </span><span class="mf">673.15</span><span class="p">,</span><span class="w"> </span><span class="mf">313.15</span><span class="p">;</span>
+<span class="w">                                   </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.5</span><span class="p">,</span><span class="w"> </span><span class="n">ε</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.79</span><span class="p">,</span><span class="w"> </span><span class="n">ρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">;</span><span class="w"> </span><span class="n">β</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="o">=</span><span class="mf">1.0e-12</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Above we verify a total heat loss of 9.217 kW under the specified conditions; the following cell evaluates the analogous value evaluated with Elmer can be retrieved as provided below. Notice the <code class="docutils literal notranslate"><span class="pre">10</span></code> correction factor: the mesh created in <code class="docutils literal notranslate"><span class="pre">domain.geo</span></code> is 0.1 m height, and the provided integral value computed by Elmer is thus 0.1 m², so scale correction is needed. The result validates the quantity computed by Elmer.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_saveline_table</span><span class="p">(</span><span class="s">&quot;model/results&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;scalars.dat&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">table</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;boundary int: temperature flux over bc 2&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nd">@info</span><span class="p">(</span><span class="s">&quot;Heat loss evaluated by Elmer .... </span><span class="si">$</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">power</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span><span class="s"> kW/m²&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Below we provide a verification of the implemented solution (black line) against Elmer (blue dots). This closes the validation of the solution.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># You might check the convergence report to make sure everything is fine.</span>
+<span class="c"># get_convergence_history(&quot;model&quot;; fname = &quot;convergence.dat&quot;)</span>
+
+<span class="k">let</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_saveline_table</span><span class="p">(</span><span class="s">&quot;model/results&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sides.dat&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coordinate 1&quot;</span><span class="p">][</span><span class="k">begin</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;temperature&quot;</span><span class="p">][</span><span class="k">begin</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="w"> </span><span class="n">ax</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_temperature</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">layers</span><span class="p">)</span>
+<span class="w">        </span><span class="n">scatter!</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">;</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:blue</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">        </span><span class="n">save</span><span class="p">(</span><span class="s">&quot;media/solution-reference.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fig</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><img alt="Verification against implemented solution" src="../../../_images/solution-reference.png" /></p>
+</section>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
+<p>#elmer/domain/cartesian
+#elmer/domain/steady
+#elmer/models/save-materials
+#elmer/models/save-line
+#elmer/models/flux-solver
+#elmer/models/heat-equation</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./simulation-elmer-csc\cases\conduction-3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../conduction-2/README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pseudo-solidification formulation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../thermomechanical-1/README.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Thermomechanical simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-description">Model description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-strategy">Solution strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-elmer">Running Elmer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-model">Reference model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
