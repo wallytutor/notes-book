@@ -23,9 +23,6 @@ import numpy as np
 
 
 # +
-def specific_heat_maier_kelley(T, M, a):
-    """ Truncated 3-coefficients specific heat [J/(kg.K)]"""
-    return (a[0] + a[1] * T + a[2] * pow(T, -2)) / M
 
 def specific_heat_cantera(T, M, s):
     @np.vectorize
