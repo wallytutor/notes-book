@@ -6,7 +6,11 @@ if (Test-Path $varMsh) {
     Write-Host "Mesh already created..."
 } else {
     gmsh - $varGeo
-    ElmerGrid 14 2 $varMsh -autoclean -merge 1.0e-05 -out $name
+    $arguments = @("14", "2", $varMsh, "-autoclean",
+                   "-merge", "1.0e-05", "-out", $name)
+
+    Start-Process -FilePath "ElmerGrid.exe" -ArgumentList $arguments `
+        -NoNewWindow -Wait
 }
 
 Write-Host "Running case 'monophase'..."
