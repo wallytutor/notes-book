@@ -121,7 +121,7 @@ Using a cut-off lower threshold we can capture the pores.
 You need to manually edit parameter `img_lo`, which should be close to -1 because image intensity has been scaled to $I\in[-1,1]$.
 
 ```{code-cell} ipython3
-img_lo = -0.80
+img_lo = -0.4
 
 img3 = np.ones_like(img2)
 img3[img2 < img_lo] = 0
@@ -165,10 +165,10 @@ ax[0].imshow(img0, cmap="gray")
 ax[1].imshow(img0, cmap="gray")
 
 for c in cmanu:
-    ax[0].plot(c[:, 1], c[:, 0], color="r", linewidth=1)
+    ax[0].plot(c[:, 1], c[:, 0], color="r", linewidth=0.5)
 
 for c in cauto:
-    ax[1].plot(c[:, 1], c[:, 0], color="r", linewidth=1)
+    ax[1].plot(c[:, 1], c[:, 0], color="r", linewidth=0.5)
 
 ax[0].axis("off")
 ax[1].axis("off")
@@ -291,4 +291,11 @@ table = regions_workflow(fname)
 
 ```{code-cell} ipython3
 table.head().T
+```
+
+For post-processing, now you can think about anything, such as creating bins for classification:
+
+```{code-cell} ipython3
+table["classes"] = pd.cut(table["area"], bins=4)
+table.groupby("classes", observed=True).agg(("count", "mean", "std")).T.head(6)
 ```
