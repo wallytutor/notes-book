@@ -249,6 +249,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../coding-notes/haskell.html">Minimal Haskell</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../montagne/carto.html">Cartographie</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -478,15 +483,18 @@ document.write(`
 <li><p>provide uses of data extraction during calculation.</p></li>
 </ul>
 <p>It is recommended to follow the content linearly, as the guided setup of a reference case in the next section is a pre-requisite for what comes next. This is provided to facilitate the structuring of SIF files.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReadTextData</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mj</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
+</div>
+</div>
 <section id="base-case-conception">
 <h2>Base case conception<a class="headerlink" href="#base-case-conception" title="Link to this heading">#</a></h2>
-<!-- #region -->
 <p>Although the recommended way to deal with Elmer setup is through SIF files, creating them by hand is sort of cumbersome if you do not dispose of a similar case to modify. Here we provide a guided workflow to create a case that we will later modify by hand. This will allow us to quickly produce a working version of the base operating version of SIF file.</p>
 <p>In what follows we assume you have generated the computational grid with <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> under the <code class="docutils literal notranslate"><span class="pre">2d/</span></code> directory. To do so, navigate to that folder in a terminal and run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmsh<span class="w"> </span>-<span class="w"> </span>domain.geo
@@ -499,7 +507,6 @@ document.write(`
 <li><p>Create a material and attribute it to the body.</p></li>
 <li><p>Set initial and boundary conditions.</p></li>
 </ol>
-<!-- #endregion -->
 <section id="raw-case-preparation">
 <h3>Raw case preparation<a class="headerlink" href="#raw-case-preparation" title="Link to this heading">#</a></h3>
 <p>It is important that the non-default solvers be added at this stage, otherwise they will not appear in the model selection tabs (and you might need to delete already configured models to be able to use them). From the <code class="docutils literal notranslate"><span class="pre">File</span></code> menu entry perform the following steps:</p>
@@ -662,7 +669,6 @@ document.write(`
 </section>
 <section id="conduction-in-2d">
 <h2>Conduction in 2D<a class="headerlink" href="#conduction-in-2d" title="Link to this heading">#</a></h2>
-<!-- #region -->
 <p>The case you find here is essentially the same as the one under <code class="docutils literal notranslate"><span class="pre">concept/</span></code> by following the previous section. A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.</p>
 <p>As the script is expected to be manually edited from now on, we added comments (in SIF a comment line starts with a <code class="docutils literal notranslate"><span class="pre">!</span></code> as in Fortran - the main language of Elmer) splitting the case in logical blocks with <em>general</em> content, <em>material and its domain</em>, the <em>solvers</em>, and finally the <em>conditions</em>.</p>
 <p>The location of the mesh was changed from default (the only supported location when using the GUI) to a directory called <code class="docutils literal notranslate"><span class="pre">domain</span></code> (same name of the <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> file) by adding the following line to the <code class="docutils literal notranslate"><span class="pre">Header</span></code> section:</p>
@@ -683,7 +689,6 @@ document.write(`
 </pre></div>
 </div>
 <p>It was not illustrated above, but it is important to redirect the output of these commands to log files so that they can be inspected for any errors or warnings. Results are dumped to <code class="docutils literal notranslate"><span class="pre">results/</span></code> directory as defined in the concept phase and can be inspected with ParaView.</p>
-<!-- #endregion -->
 </section>
 <section id="improved-2d-case">
 <h2>Improved 2D case<a class="headerlink" href="#improved-2d-case" title="Link to this heading">#</a></h2>
@@ -748,24 +753,29 @@ document.write(`
 <span class="n">End</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Heat flow [W]&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">post_heat_flux_2d</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">sides</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@MajordomePlot</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time [s]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Heat flow [W]&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">post_heat_flux_2d</span><span class="p">(</span><span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">scalars</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/scalars.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">sides</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/sides.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
     <span class="c1"># Dimensions of the cylinder:</span>
     <span class="n">R</span> <span class="o">=</span> <span class="mf">0.10</span>
     <span class="n">h</span> <span class="o">=</span> <span class="mf">0.05</span>
-    
+
     <span class="c1"># Parameters of the problem:</span>
     <span class="n">htc</span> <span class="o">=</span> <span class="mf">10.0</span>
     <span class="n">Tinf</span> <span class="o">=</span> <span class="mi">300</span>
-    
+
     <span class="c1"># Retrieve time series of the heat flux:</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">scalars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">Q</span> <span class="o">=</span> <span class="n">scalars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    
+
     <span class="c1"># Retrieve the final values of the temperature and heat flux:</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">sides</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">sides</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-    
+
     <span class="c1"># Calculate the heat flux from the analytical solution:</span>
     <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">h</span>
     <span class="n">q_calc</span> <span class="o">=</span> <span class="n">htc</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">Tinf</span><span class="p">)</span>
@@ -780,16 +790,21 @@ document.write(`
     <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;2d/heat-flow.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scalars</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/scalars.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">sides</span> <span class="o">=</span> <span class="n">ReadTextData</span><span class="o">.</span><span class="n">read_sep</span><span class="p">(</span><span class="s2">&quot;2d/results/sides.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-<span class="n">plot</span> <span class="o">=</span> <span class="n">post_heat_flux_2d</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">sides</span><span class="p">)</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">post_heat_flux_2d</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/7d13fa58659371c519e91ce333d62d4416b861e405804cfb4cc23c95321001b4.png" src="../../../_images/7d13fa58659371c519e91ce333d62d4416b861e405804cfb4cc23c95321001b4.png" />
+</div>
 </div>
 </section>
 <section id="conduction-in-3d">
 <h2>Conduction in 3D<a class="headerlink" href="#conduction-in-3d" title="Link to this heading">#</a></h2>
-<!-- #region -->
 <p>Adapting the case for running with a 3D geometry (provided under directory <code class="docutils literal notranslate"><span class="pre">3d</span></code>) is quite simple now. First, we modify the coordinate system under <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> section to cartesian. This is because now we are solving an actual 3D geometry and enforcing specific coordinate systems is no longer required (or formally compatible).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Coordinate</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cartesian</span>
 </pre></div>
@@ -815,7 +830,6 @@ document.write(`
 </pre></div>
 </div>
 <p>The command <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> is how the message passing interface (MPI) runner is called in Windows; for Linux this should be <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> instead.</p>
-<!-- #endregion -->
 </section>
 <section id="understanding-heat-flux">
 <h2>Understanding heat flux<a class="headerlink" href="#understanding-heat-flux" title="Link to this heading">#</a></h2>

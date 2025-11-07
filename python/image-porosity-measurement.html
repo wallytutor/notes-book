@@ -231,11 +231,28 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-3/README.html">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../montagne/carto.html">Cartographie</a></li>
 </ul>
 
     </div>
@@ -581,7 +598,7 @@ document.write(`
 <p>You need to manually edit parameter <code class="docutils literal notranslate"><span class="pre">img_lo</span></code>, which should be close to -1 because image intensity has been scaled to <span class="math notranslate nohighlight">\(I\in[-1,1]\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_lo</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.80</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_lo</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
 
 <span class="n">img3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span>
 <span class="n">img3</span><span class="p">[</span><span class="n">img2</span> <span class="o">&lt;</span> <span class="n">img_lo</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -591,7 +608,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/395b576c76f0ddd93886cf3730a845c91e3a36b60fa1cd22cb85718c05023b16.png" src="../_images/395b576c76f0ddd93886cf3730a845c91e3a36b60fa1cd22cb85718c05023b16.png" />
+<img alt="../_images/03fb7fccee146d797382a7757441051b66f16e72cba75bd344bddf38439af6ba.png" src="../_images/03fb7fccee146d797382a7757441051b66f16e72cba75bd344bddf38439af6ba.png" />
 </div>
 </div>
 </section>
@@ -632,10 +649,10 @@ document.write(`
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cmanu</span><span class="p">:</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cauto</span><span class="p">:</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
@@ -645,7 +662,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90762ee38e4e5bc7351152619b38b8710e143972d0c0a696b282873533f25c91.png" src="../_images/90762ee38e4e5bc7351152619b38b8710e143972d0c0a696b282873533f25c91.png" />
+<img alt="../_images/4dad03739d1efc6e7954ea579a74cd424ae7c9ff6a05c36fff820680858ca651.png" src="../_images/4dad03739d1efc6e7954ea579a74cd424ae7c9ff6a05c36fff820680858ca651.png" />
 </div>
 </div>
 </section>
@@ -907,6 +924,82 @@ document.write(`
       <td>6504.701132</td>
       <td>582.424248</td>
       <td>963.971525</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For post-processing, now you can think about anything, such as creating bins for classification:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;classes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;classes&quot;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">((</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>classes</th>
+      <th>(-1694.008, 424255.0]</th>
+      <th>(424255.0, 848507.0]</th>
+      <th>(1272759.0, 1697011.0]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">area</th>
+      <th>count</th>
+      <td>74.000000</td>
+      <td>7.000000</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>54913.635135</td>
+      <td>604669.142857</td>
+      <td>1.697011e+06</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>80866.246036</td>
+      <td>137960.255980</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">axis_major_length</th>
+      <th>count</th>
+      <td>74.000000</td>
+      <td>7.000000</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>259.567942</td>
+      <td>1544.173949</td>
+      <td>3.048717e+03</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>281.790113</td>
+      <td>293.199681</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>

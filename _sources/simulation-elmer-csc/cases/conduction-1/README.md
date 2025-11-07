@@ -1,5 +1,21 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.18.1
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
 # Heat conduction in Elmer
 
++++
 
 The goals of this set of cases is to:
 
@@ -10,7 +26,7 @@ The goals of this set of cases is to:
 
 It is recommended to follow the content linearly, as the guided setup of a reference case in the next section is a pre-requisite for what comes next. This is provided to facilitate the structuring of SIF files.
 
-```python
+```{code-cell} ipython3
 from majordome import MajordomePlot
 from majordome import ReadTextData
 import majordome as mj
@@ -19,7 +35,8 @@ import numpy as np
 
 ## Base case conception
 
-<!-- #region -->
++++
+
 Although the recommended way to deal with Elmer setup is through SIF files, creating them by hand is sort of cumbersome if you do not dispose of a similar case to modify. Here we provide a guided workflow to create a case that we will later modify by hand. This will allow us to quickly produce a working version of the base operating version of SIF file.
 
 In what follows we assume you have generated the computational grid with `gmsh` under the `2d/` directory. To do so, navigate to that folder in a terminal and run:
@@ -34,10 +51,12 @@ A file `domain.msh` in `gmsh` format will be generated. That said, what we will 
 2. Add a set of equations with all the models associated to the loaded body.
 3. Create a material and attribute it to the body.
 4. Set initial and boundary conditions.
-<!-- #endregion -->
+
++++
 
 ### Raw case preparation
 
++++
 
 It is important that the non-default solvers be added at this stage, otherwise they will not appear in the model selection tabs (and you might need to delete already configured models to be able to use them). From the `File` menu entry perform the following steps:
 
@@ -48,9 +67,11 @@ It is important that the non-default solvers be added at this stage, otherwise t
 
 Now on the object tree, expand `Body`, open `Body Property 1`, rename it `Hollow Cylinder`. You can save project again here (and as often as you wish) to keep track of modifications.
 
++++
 
 ### Creation of equations
 
++++
 
 In Elmer not everything that is called equation represents an actual *physical equation*. It is important to add all [models](https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerModelsManual.pdf) that apply to a body at the same equation, as follows:
 
@@ -72,7 +93,7 @@ As you may notice, in the above we have actually one physical model (heat equati
     - Tab `General`:
         - Execute solver `After timestep`
 
-In steady state simulations the flux is generally computed *after all* calculations are performed (at converged solution); for transient simulations this is generally done after each time step. Failing to configure this properly may lead to an overhead of useless intermediate computations. 
+In steady state simulations the flux is generally computed *after all* calculations are performed (at converged solution); for transient simulations this is generally done after each time step. Failing to configure this properly may lead to an overhead of useless intermediate computations.
 
 - Edit Solver Settings in `Model` tab `SaveLine`:
     - Tab `Solver specific options`:
@@ -83,9 +104,11 @@ In steady state simulations the flux is generally computed *after all* calculati
 
 Saving data could be done on a time basis, but for this case we have decided to extract only a profile of the final solution *after simulation*.
 
++++
 
 ### Setting up materials
 
++++
 
 For being able to eventually verify this case against analytical solutions,  the simplest set of material properties are introduced below; everything is held constant.
 
@@ -97,9 +120,11 @@ For being able to eventually verify this case against analytical solutions,  the
     - Tab `Heat equation`:
         - Heat Conductivity `10`
 
++++
 
 ### Configuring conditions
 
++++
 
 Next we initialize the body to be at 1000 K:
 
@@ -134,9 +159,11 @@ Finally a Robin boundary condition is provided for environment (radius/right sid
 
 So far the model is built with the default steady-state solver. This might be useful for testing *if it runs* towards the trivial solution (equilibrium with external environment), what should be pretty fast. So save, generate, and run the model for testing.
 
++++
 
 ### Final setup
 
++++
 
 Back to menu `Model > Setup...`, tune a few parameters as follows:
 
@@ -151,10 +178,12 @@ Now save, generate, and run. It should be up and running as desired by here!
 
 Once the initial SIF file is generated, you can copy it to the `2d` directory and follow the next section.
 
++++
 
 ## Conduction in 2D
 
-<!-- #region -->
++++
+
 The case you find here is essentially the same as the one under `concept/` by following the previous section. A few editions to the SIF file were performed so that we get ready to reuse it in 3D and run reproducibly with script automation.
 
 As the script is expected to be manually edited from now on, we added comments (in SIF a comment line starts with a `!` as in Fortran - the main language of Elmer) splitting the case in logical blocks with *general* content, *material and its domain*, the *solvers*, and finally the *conditions*.
@@ -186,10 +215,12 @@ ElmerSolver
 ```
 
 It was not illustrated above, but it is important to redirect the output of these commands to log files so that they can be inspected for any errors or warnings. Results are dumped to `results/` directory as defined in the concept phase and can be inspected with ParaView.
-<!-- #endregion -->
+
++++
 
 ## Improved 2D case
 
++++
 
 After the initial run, a few manual additions were performed. Since they are always present and for better clarity, the following keywords are placed on top of each solver:
 
@@ -262,25 +293,28 @@ Equation 1
 End
 ```
 
-```python
+```{code-cell} ipython3
 @MajordomePlot.new(size=(6, 5), xlabel="Time [s]", ylabel="Heat flow [W]")
-def post_heat_flux_2d(scalars, sides, plot=None):
+def post_heat_flux_2d(plot=None):
+    scalars = ReadTextData.read_sep("2d/results/scalars.dat", header=None)
+    sides = ReadTextData.read_sep("2d/results/sides.dat", header=None)
+
     # Dimensions of the cylinder:
     R = 0.10
     h = 0.05
-    
+
     # Parameters of the problem:
     htc = 10.0
     Tinf = 300
-    
+
     # Retrieve time series of the heat flux:
     t = scalars[0]
     Q = scalars[1]
-    
+
     # Retrieve the final values of the temperature and heat flux:
     T = sides.iloc[-1, 7]
     q = sides.iloc[-1, 8]
-    
+
     # Calculate the heat flux from the analytical solution:
     A = 2 * np.pi * R * h
     q_calc = htc * (T - Tinf)
@@ -295,16 +329,14 @@ def post_heat_flux_2d(scalars, sides, plot=None):
     fig.savefig("2d/heat-flow.png", dpi=150)
 ```
 
-```python
-scalars = ReadTextData.read_sep("2d/results/scalars.dat", header=None)
-sides = ReadTextData.read_sep("2d/results/sides.dat", header=None)
-
-plot = post_heat_flux_2d(scalars, sides)
+```{code-cell} ipython3
+plot = post_heat_flux_2d()
 ```
 
 ## Conduction in 3D
 
-<!-- #region -->
++++
+
 Adapting the case for running with a 3D geometry (provided under directory `3d`) is quite simple now. First, we modify the coordinate system under `Simulation` section to cartesian. This is because now we are solving an actual 3D geometry and enforcing specific coordinate systems is no longer required (or formally compatible).
 
 ```c
@@ -340,10 +372,12 @@ mpiexec -n 16 ElmerSolver_mpi
 ```
 
 The command `mpiexec` is how the message passing interface (MPI) runner is called in Windows; for Linux this should be `mpirun` instead.
-<!-- #endregion -->
+
++++
 
 ## Understanding heat flux
 
++++
 
 Depending on problem dimension it might be tricky to understand what the reported values of heat flux correspond to. That is specially tricky when dealing with axisymmetric cases.
 
@@ -366,9 +400,11 @@ To get an integral value we used `SaveScalars`, which is plotted below against t
 
 For the 3D case most of the ideas still hold true. The main difference here is that no intrinsic symmetry was implied by the cartesian choice of formulation. Symmetries were enforced by boundary conditions. That means that computed quantities evaluate to the actual area of the wedge, here covering an angle of $\pi/4$ - what should be clear as it is common to most simulation packages.
 
++++
 
 ## Graphical post-processing
 
++++
 
 ParaView was employed to generate standard animations of temperature evolution in bodies. Below we have the 2D axisymmetric results:
 
@@ -388,9 +424,11 @@ The same was done for 3D equivalent case as illustrated next:
 :align: center
 ```
 
++++
 
 ## Classification
 
++++
 
 #elmer/domain/axisymmetric
 #elmer/domain/transient

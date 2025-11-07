@@ -247,6 +247,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../coding-notes/haskell.html">Minimal Haskell</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../montagne/carto.html">Cartographie</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -456,6 +461,58 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="pseudo-solidification-formulation">
 <h1>Pseudo-solidification formulation<a class="headerlink" href="#pseudo-solidification-formulation" title="Link to this heading">#</a></h1>
 <p><strong>TODO:</strong> sorry, I still need to document this case!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajordomePlot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReadTextData</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">majordome</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mj</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # -*- coding: utf-8 -*-</span>
+<span class="c1"># using CairoMakie</span>
+<span class="c1"># using DelimitedFiles</span>
+<span class="c1"># using DataFrames</span>
+<span class="c1"># using Taskforce.Elmer</span>
+
+
+<span class="c1"># function workflow()</span>
+<span class="c1">#     data1 = load_saveline_table(&quot;monophase/results&quot;)</span>
+<span class="c1">#     data2 = load_saveline_table(&quot;multiphase/results&quot;)</span>
+
+<span class="c1">#     x1 = 1000data1[:, &quot;coordinate 1&quot;]</span>
+<span class="c1">#     x2 = 1000data2[:, &quot;coordinate 1&quot;]</span>
+
+<span class="c1">#     y1 = data1[:, &quot;temperature&quot;]</span>
+<span class="c1">#     y2 = data2[:, &quot;temperature&quot;]</span>
+
+<span class="c1">#     with_theme() do</span>
+<span class="c1">#         f = Figure()</span>
+<span class="c1">#         ax = Axis(f[1, 1])</span>
+
+<span class="c1">#         lines!(ax, x1, y1; color = :black, label = &quot;Reference&quot;)</span>
+<span class="c1">#         lines!(ax, x2, y2; color = :red,   label = &quot;Phase change&quot;)</span>
+
+<span class="c1">#         ax.xlabel = &quot;Position [mm]&quot;</span>
+<span class="c1">#         ax.ylabel = &quot;Temperature [K]&quot;</span>
+
+<span class="c1">#         ax.xticks = 0:10:100</span>
+<span class="c1">#         # ax.yticks = 0:10:100</span>
+
+<span class="c1">#         xlims!(ax, extrema(ax.xticks.val))</span>
+<span class="c1">#         # ylims!(ax, extrema(ax.yticks.val))</span>
+
+<span class="c1">#         f</span>
+<span class="c1">#     end</span>
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
 <p>#elmer/domain/cartesian
