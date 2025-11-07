@@ -68,3 +68,8 @@ parts:
   - caption: "Coding notes"
     chapters:
     - file: coding-notes/haskell
+
+  - caption: "Montagne"
+    chapters:
+    - file: montagne/liens
+    - file: montagne/carto
