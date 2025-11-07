@@ -9,6 +9,7 @@
 - [Sports de Nature](https://www.sportsdenature.gouv.fr/)
 
 
+
 ## Cartographie
 
 
@@ -40,11 +41,13 @@ Other sites:
 - [MyOSMatic](https://print.get-map.org/)
 - [MapRoulette](https://maproulette.org/)
 
+
 ## Mobilité douce
 
 
 - [Partir Ici](https://partir-ici.fr/envies/sport-nature/)
 - [SNCF Rhône Alpes - Réservation vélo](https://www.ter.sncf.com/auvergne-rhone-alpes/services-contacts/voyager-avec-velo/embarquement-velo)
+
 
 
 ## Cyclisme
@@ -61,13 +64,18 @@ Vélo de montagne:
 Vélo de route:
 
 - [Cols-Cyclisme](https://www.cols-cyclisme.com/)
+- [Inforoutes FR](https://www.inforoutefrance.fr/)
+- [Inforoutes 04](https://www.inforoute04.fr/)
+- [Inforoutes 06](https://www.inforoutes06.fr/)
 
 
-## Trail
+
+## Trail running
 
 
 - [Finishers](https://www.finishers.com/courses)
 - [Premier Marathon](https://premier-marathon.com/)
+
 
 
 ## Neige et glace
