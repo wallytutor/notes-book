@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting image metadata &#8212; Notes Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/image-metadata-extraction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Julia" href="../julia/intro.html" />
+    <link rel="prev" title="Porosity quantification" href="image-porosity-measurement.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Notes Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Notes Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Notes Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../scientific-computing/introduction.html">Scientific computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-git.html">Git version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-ssh.html">SSH key generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-containers.html">Using containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-selection.html">Selection of tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/tools-portable.html">Portable toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-windows.html">Working on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/system-linux.html">Working on Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/programming.html">Scientific programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/general-tips.html">General Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scientific-computing/services.html">Deploying services</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="mpc-kinetics-intro.html">Fundamentals of MPC</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="image-notes-intro.html">Image analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="image-porosity-measurement.html">Porosity quantification</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Getting image metadata</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../julia/intro.html">Introduction to Julia</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia101.html">Julia 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../julia/julia-tips.html">Julia tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ansys Fluent</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation-ansys-fluent/tui.html">Text user interface (TUI)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-3/README.html">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../montagne/carto.html">Cartographie</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wallytutor/notes-book/issues/new?title=Issue%20on%20page%20%2Fpython/image-metadata-extraction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python/image-metadata-extraction.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting image metadata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pil-image-not-recommended">Using PIL.Image (not recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-exifread-recommended">Using exifread (recommended)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-image-metadata">
+<h1>Getting image metadata<a class="headerlink" href="#getting-image-metadata" title="Link to this heading">#</a></h1>
+<p>In this brief notebook we explore how to get image metadata, more specifically EXIF (Exchangeable image file format) data from a file. More about the format can be found on <a class="reference external" href="https://en.wikipedia.org/wiki/Exif">Wikipedia</a> and the implementation is based on <a class="reference external" href="https://stackoverflow.com/questions/4764932">this answer</a>. So let’s use some pictures on my personal database to see what sort of information we may extract.</p>
+<p>To follow this notebook you will need <code class="docutils literal notranslate"><span class="pre">pillow==12.0.0</span></code>, <code class="docutils literal notranslate"><span class="pre">ExifRead==3.5.1</span></code>, and <code class="docutils literal notranslate"><span class="pre">folium==0.20.0</span></code>. Other versions might work, but since I am not making a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> for this notebook it is better to keep track of the versions it worked with. Methods for extracting data with be explained for both <code class="docutils literal notranslate"><span class="pre">PIL</span></code> and <a class="reference external" href="https://github.com/ianare/exif-py"><code class="docutils literal notranslate"><span class="pre">exifread</span></code></a>, <code class="docutils literal notranslate"><span class="pre">folium</span></code> is there to do something actually usefull with the data. So let’s import the packages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">exifread</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I put some images from my trip in 2018 to play with under the folder listed below. Here we make use of Python <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> to get all images matching the extension <code class="docutils literal notranslate"><span class="pre">jpg</span></code> in a list. We will use a single image here but in the end you can change index of the list and check the others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">media</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;media&quot;</span> <span class="o">/</span> <span class="s2">&quot;samples-metadata&quot;</span>
+<span class="n">media</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+
+<span class="n">file_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">media</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jpg&quot;</span><span class="p">))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we select one image from the list. If you want to see it you can uncomment <code class="docutils literal notranslate"><span class="pre">Image.open(selected)</span></code> below. I keep it commented to keep the file size of this notebook small (since the images are already in the repository).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected</span> <span class="o">=</span>  <span class="n">file_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Image.open(selected)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="using-pil-image-not-recommended">
+<h2>Using PIL.Image (not recommended)<a class="headerlink" href="#using-pil-image-not-recommended" title="Link to this heading">#</a></h2>
+<p>Using the well-known <code class="docutils literal notranslate"><span class="pre">PIL.Image</span></code> is not the recommended way and we choose to present it first so that we can explore further the recommended way. The image object has a method <code class="docutils literal notranslate"><span class="pre">getexif</span></code> (commented line) that provides (i) little data and in (ii) a nonsense format. Using the private method (you should not to do so) <code class="docutils literal notranslate"><span class="pre">_getexif</span></code> gets more data, but good luck making any proper use of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exif_data = Image.open(selected).getexif().items()</span>
+<span class="n">exif_data</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="n">exif_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">exif_data</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">37500</span><span class="p">}</span>
+<span class="n">exif_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{34853: {0: b&#39;\x02\x02\x00\x00&#39;,
+  1: &#39;N&#39;,
+  2: (45.0, 20.0, 53.0),
+  3: &#39;E&#39;,
+  4: (14.0, 3.0, 4.0),
+  5: b&#39;\x00&#39;,
+  6: 397.0,
+  7: (12.0, 5.0, 34.0),
+  29: &#39;2018:05:22&#39;},
+ 296: 2,
+ 34665: 214,
+ 271: &#39;samsung&#39;,
+ 272: &#39;SM-G955F&#39;,
+ 305: &#39;G955FXXU1CRD7&#39;,
+ 274: 6,
+ 306: &#39;2018:05:22 14:05:36&#39;,
+ 531: 1,
+ 282: 72.0,
+ 283: 72.0,
+ 36864: b&#39;0220&#39;,
+ 37121: b&#39;\x01\x02\x03\x00&#39;,
+ 37377: 9.78,
+ 36867: &#39;2018:05:22 14:05:36&#39;,
+ 36868: &#39;2018:05:22 14:05:36&#39;,
+ 37378: 1.53,
+ 37379: 7.61,
+ 37380: 0.0,
+ 37381: 1.53,
+ 37383: 5,
+ 37385: 0,
+ 37386: 4.2,
+ 37510: b&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39;,
+ 40961: 1,
+ 40962: 4032,
+ 41990: 0,
+ 37520: &#39;0546&#39;,
+ 37521: &#39;0546&#39;,
+ 37522: &#39;0546&#39;,
+ 40963: 3024,
+ 33434: 0.001141552511415525,
+ 40965: 852,
+ 33437: 1.7,
+ 42016: &#39;F12LLJA00VM F12LLKL01GM\n&#39;,
+ 34850: 2,
+ 34855: 40,
+ 41986: 0,
+ 40960: b&#39;0100&#39;,
+ 41987: 0,
+ 41989: 26}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-exifread-recommended">
+<h2>Using exifread (recommended)<a class="headerlink" href="#using-exifread-recommended" title="Link to this heading">#</a></h2>
+<p>This small and embedable package <a class="reference external" href="https://github.com/ianare/exif-py">exifread</a> provides what it takes to get EXIF data from an image in a well formated dictionary. The following snippet illustrates how to do so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="n">exif_data</span> <span class="o">=</span> <span class="n">exifread</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="n">exif_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">exif_data</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;JPEGThumbnail&quot;</span><span class="p">}</span>
+
+<span class="n">exif_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Image Make&#39;: (0x010F) ASCII=samsung @ 162,
+ &#39;Image Model&#39;: (0x0110) ASCII=SM-G955F @ 170,
+ &#39;Image Orientation&#39;: (0x0112) Short=Rotated 90 CW @ 42,
+ &#39;Image XResolution&#39;: (0x011A) Ratio=72 @ 146,
+ &#39;Image YResolution&#39;: (0x011B) Ratio=72 @ 154,
+ &#39;Image ResolutionUnit&#39;: (0x0128) Short=Pixels/Inch @ 78,
+ &#39;Image Software&#39;: (0x0131) ASCII=G955FXXU1CRD7 @ 180,
+ &#39;Image DateTime&#39;: (0x0132) ASCII=2018:05:22 14:05:36 @ 194,
+ &#39;Image YCbCrPositioning&#39;: (0x0213) Short=Centered @ 114,
+ &#39;Image ExifOffset&#39;: (0x8769) Long=214 @ 126,
+ &#39;GPS GPSVersionID&#39;: (0x0000) Byte=[2, 2, 0, 0] @ 892,
+ &#39;GPS GPSLatitudeRef&#39;: (0x0001) ASCII=N @ 904,
+ &#39;GPS GPSLatitude&#39;: (0x0002) Ratio=[45, 20, 53] @ 996,
+ &#39;GPS GPSLongitudeRef&#39;: (0x0003) ASCII=E @ 928,
+ &#39;GPS GPSLongitude&#39;: (0x0004) Ratio=[14, 3, 4] @ 1020,
+ &#39;GPS GPSAltitudeRef&#39;: (0x0005) Byte=0 @ 952,
+ &#39;GPS GPSAltitude&#39;: (0x0006) Ratio=397 @ 1044,
+ &#39;GPS GPSTimeStamp&#39;: (0x0007) Ratio=[12, 5, 34] @ 1064,
+ &#39;GPS GPSDate&#39;: (0x001D) ASCII=2018:05:22 @ 1052,
+ &#39;Image GPSInfo&#39;: (0x8825) Long=882 @ 138,
+ &#39;Thumbnail ImageWidth&#39;: (0x0100) Long=504 @ 1098,
+ &#39;Thumbnail ImageLength&#39;: (0x0101) Long=376 @ 1110,
+ &#39;Thumbnail Compression&#39;: (0x0103) Short=JPEG (old-style) @ 1122,
+ &#39;Thumbnail Orientation&#39;: (0x0112) Short=Rotated 90 CW @ 1134,
+ &#39;Thumbnail XResolution&#39;: (0x011A) Ratio=72 @ 1202,
+ &#39;Thumbnail YResolution&#39;: (0x011B) Ratio=72 @ 1210,
+ &#39;Thumbnail ResolutionUnit&#39;: (0x0128) Short=Pixels/Inch @ 1170,
+ &#39;Thumbnail JPEGInterchangeFormat&#39;: (0x0201) Long=1218 @ 1182,
+ &#39;Thumbnail JPEGInterchangeFormatLength&#39;: (0x0202) Long=29581 @ 1194,
+ &#39;EXIF ExposureTime&#39;: (0x829A) Ratio=1/876 @ 592,
+ &#39;EXIF FNumber&#39;: (0x829D) Ratio=17/10 @ 600,
+ &#39;EXIF ExposureProgram&#39;: (0x8822) Short=Program Normal @ 248,
+ &#39;EXIF ISOSpeedRatings&#39;: (0x8827) Short=40 @ 260,
+ &#39;EXIF ExifVersion&#39;: (0x9000) Undefined=0220 @ 272,
+ &#39;EXIF DateTimeOriginal&#39;: (0x9003) ASCII=2018:05:22 14:05:36 @ 608,
+ &#39;EXIF DateTimeDigitized&#39;: (0x9004) ASCII=2018:05:22 14:05:36 @ 628,
+ &#39;EXIF ComponentsConfiguration&#39;: (0x9101) Undefined=YCbCr @ 308,
+ &#39;EXIF ShutterSpeedValue&#39;: (0x9201) Signed Ratio=489/50 @ 648,
+ &#39;EXIF ApertureValue&#39;: (0x9202) Ratio=153/100 @ 656,
+ &#39;EXIF BrightnessValue&#39;: (0x9203) Signed Ratio=761/100 @ 664,
+ &#39;EXIF ExposureBiasValue&#39;: (0x9204) Signed Ratio=0 @ 672,
+ &#39;EXIF MaxApertureValue&#39;: (0x9205) Ratio=153/100 @ 680,
+ &#39;EXIF MeteringMode&#39;: (0x9207) Short=Pattern @ 380,
+ &#39;EXIF Flash&#39;: (0x9209) Short=Flash did not fire @ 392,
+ &#39;EXIF FocalLength&#39;: (0x920A) Ratio=21/5 @ 688,
+ &#39;EXIF MakerNote&#39;: (0x927C) Undefined=[7, 0, 1, 0, 7, 0, 4, 0, 0, 0, 48, 49, 48, 48, 2, 0, 4, 0, 1, 0, ... ] @ 754,
+ &#39;EXIF UserComment&#39;: (0x9286) Undefined= @ 714,
+ &#39;EXIF SubSecTime&#39;: (0x9290) ASCII=0546 @ 696,
+ &#39;EXIF SubSecTimeOriginal&#39;: (0x9291) ASCII=0546 @ 702,
+ &#39;EXIF SubSecTimeDigitized&#39;: (0x9292) ASCII=0546 @ 708,
+ &#39;EXIF FlashPixVersion&#39;: (0xA000) Undefined=0100 @ 476,
+ &#39;EXIF ColorSpace&#39;: (0xA001) Short=sRGB @ 488,
+ &#39;EXIF ExifImageWidth&#39;: (0xA002) Long=4032 @ 500,
+ &#39;EXIF ExifImageLength&#39;: (0xA003) Long=3024 @ 512,
+ &#39;Interoperability InteroperabilityIndex&#39;: (0x0001) ASCII=R98 @ 862,
+ &#39;Interoperability InteroperabilityVersion&#39;: (0x0002) Undefined=[48, 49, 48, 48] @ 874,
+ &#39;EXIF InteroperabilityOffset&#39;: (0xA005) Long=852 @ 524,
+ &#39;EXIF ExposureMode&#39;: (0xA402) Short=Auto Exposure @ 536,
+ &#39;EXIF WhiteBalance&#39;: (0xA403) Short=Auto @ 548,
+ &#39;EXIF FocalLengthIn35mmFilm&#39;: (0xA405) Short=26 @ 560,
+ &#39;EXIF SceneCaptureType&#39;: (0xA406) Short=Standard @ 572,
+ &#39;EXIF ImageUniqueID&#39;: (0xA420) ASCII=F12LLJA00VM F12LLKL01GM
+  @ 728}
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is a bunch of information above, but let’s imagine here you forgot where a picture was taken. Well, if your camera or cellphone has a GPS embedded you get find out with the extracted metadata. The following function extracts the latitude and logitude from the format exported by <code class="docutils literal notranslate"><span class="pre">exifread</span></code> for you and provides the results in degrees.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_exif_location</span><span class="p">(</span><span class="n">exif_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the latitude and longitude from exif data.</span>
+
+<span class="sd">    Based on https://gist.github.com/snakeye/fdc372dbf11370fe29eb which</span>
+<span class="sd">    by its way is based on https://gist.github.com/erans/983821.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_degress</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Convert the GPS coordinates stored in the EXIF to degrees. &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">num</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">den</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">num</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">den</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">num</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">den</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span> <span class="o">+</span> <span class="n">m</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">3600</span>
+
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">gps_lat_val</span> <span class="o">=</span> <span class="n">exif_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GPS GPSLatitude&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">gps_lat_ref</span> <span class="o">=</span> <span class="n">exif_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GPS GPSLatitudeRef&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">gps_lon_val</span> <span class="o">=</span> <span class="n">exif_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GPS GPSLongitude&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">gps_lon_ref</span> <span class="o">=</span> <span class="n">exif_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GPS GPSLongitudeRef&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gps_lat_val</span> <span class="ow">and</span> <span class="n">gps_lat_ref</span> <span class="ow">and</span> <span class="n">gps_lon_val</span> <span class="ow">and</span> <span class="n">gps_lon_ref</span><span class="p">:</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">to_degress</span><span class="p">(</span><span class="n">gps_lat_val</span><span class="p">)</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">to_degress</span><span class="p">(</span><span class="n">gps_lon_val</span><span class="p">)</span>
+
+        <span class="n">lat</span> <span class="o">=</span> <span class="o">-</span><span class="n">lat</span> <span class="k">if</span> <span class="n">gps_lat_ref</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;N&quot;</span> <span class="k">else</span> <span class="n">lat</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="o">-</span><span class="n">lon</span> <span class="k">if</span> <span class="n">gps_lon_ref</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;E&quot;</span> <span class="k">else</span> <span class="n">lon</span>
+
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So here we go, we get the coordinates from the image and with help of <code class="docutils literal notranslate"><span class="pre">folium</span></code> we check on the map where it was taken.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">get_exif_location</span><span class="p">(</span><span class="n">exif_data</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">coordinates</span><span class="p">)</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_0e431b8c17fe8770fd23d121f6de7087 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+
+            &lt;style&gt;html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            &lt;/style&gt;
+
+            &lt;style&gt;#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            &lt;/style&gt;
+
+            &lt;script&gt;
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            &lt;/script&gt;
+
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_0e431b8c17fe8770fd23d121f6de7087&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_0e431b8c17fe8770fd23d121f6de7087 = L.map(
+                &quot;map_0e431b8c17fe8770fd23d121f6de7087&quot;,
+                {
+                    center: [45.34805555555556, 14.051111111111112],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 10,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5c515fccf814e6de0767cfa3b1d03b60 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_5c515fccf814e6de0767cfa3b1d03b60.addTo(map_0e431b8c17fe8770fd23d121f6de7087);
+        
+    
+            var marker_fc1a95cd373965675e9b63c277d5ff10 = L.marker(
+                [45.34805555555556, 14.051111111111112],
+                {
+}
+            ).addTo(map_0e431b8c17fe8770fd23d121f6de7087);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<p>This is not forensics level but can be pretty useful. For instance, some microscopes store all the setup under which a picture was taken. If that is the case, you don’t need to keep taking all those boring notes while doing your analysis, and leave image labeling for some automated post-processing in Python.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="image-porosity-measurement.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Porosity quantification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../julia/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Julia</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pil-image-not-recommended">Using PIL.Image (not recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-exifread-recommended">Using exifread (recommended)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Walter Dal'Maz Silva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
