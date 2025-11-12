@@ -9,6 +9,8 @@ mystmd
 # Scientific dependencies
 cantera
 casadi
+exifread
+folium
 matplotlib
 numba
 numpy

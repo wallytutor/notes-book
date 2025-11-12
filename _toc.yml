@@ -5,6 +5,11 @@ format: jb-book
 root: index
 
 parts:
+
+  # -------------------------------------------------------------------
+  # Scientific computing
+  # -------------------------------------------------------------------
+
   - caption: "Scientific computing"
     chapters:
     - file: scientific-computing/introduction
@@ -19,6 +24,10 @@ parts:
       - file: scientific-computing/programming
       - file: scientific-computing/general-tips
       - file: scientific-computing/services
+
+  # -------------------------------------------------------------------
+  # Python tutorials
+  # -------------------------------------------------------------------
 
   - caption: "Python tutorials"
     chapters:
@@ -39,6 +48,11 @@ parts:
     - file: python/image-notes-intro
       sections:
       - file: python/image-porosity-measurement
+      - file: python/image-metadata-extraction
+
+  # -------------------------------------------------------------------
+  # Julia tutorials
+  # -------------------------------------------------------------------
 
   - caption: "Julia tutorials"
     chapters:
@@ -47,9 +61,17 @@ parts:
       - file: julia/julia101
       - file: julia/julia-tips
 
+  # -------------------------------------------------------------------
+  # Ansys Fluent
+  # -------------------------------------------------------------------
+
   - caption: "Ansys Fluent"
     chapters:
     - file: simulation-ansys-fluent/tui
+
+  # -------------------------------------------------------------------
+  # Elmer CSC
+  # -------------------------------------------------------------------
 
   - caption: "Elmer CSC"
     chapters:
@@ -65,9 +87,17 @@ parts:
       - file: simulation-elmer-csc/cases/conduction-3/README
       - file: simulation-elmer-csc/cases/thermomechanical-1/README
 
+  # -------------------------------------------------------------------
+  # Coding notes
+  # -------------------------------------------------------------------
+
   - caption: "Coding notes"
     chapters:
     - file: coding-notes/haskell
+
+  # -------------------------------------------------------------------
+  # Montagne
+  # -------------------------------------------------------------------
 
   - caption: "Montagne"
     chapters:
