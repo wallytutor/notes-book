@@ -6,11 +6,17 @@ nbconvert
 ghp-import
 mystmd
 
+# Web scraping and database
+beautifulsoup4
+tinydb
+
+# General purpose dependencies
+exifread
+folium
+
 # Scientific dependencies
 cantera
 casadi
-exifread
-folium
 matplotlib
 numba
 numpy

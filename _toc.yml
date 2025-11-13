@@ -44,6 +44,7 @@ parts:
       sections:
       - file: python/thermo-converting-shomate
       - file: python/thermo-calphad-nitrides
+      - file: python/thermo-scraper-minerals
 
     - file: python/image-notes-intro
       sections:
