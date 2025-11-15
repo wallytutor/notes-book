@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.18.0
+    jupytext_version: 1.18.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -41,6 +41,25 @@ import pandas as pd
 import requests
 ```
 
+The following provides a workaround for warnings and certificate verification:
+
+```{code-cell} ipython3
+from urllib3.exceptions import InsecureRequestWarning
+import urllib3
+
+urllib3.disable_warnings(InsecureRequestWarning)
+```
+
+```{code-cell} ipython3
+def get(url, **kw):
+    """ Wrap requests.get without SSL. """
+    return requests.get(url, verify=False, **kw)
+```
+
+```{code-cell} ipython3
+FORCE = False
+```
+
 ## Data paths
 
 ```{code-cell} ipython3
@@ -63,7 +82,7 @@ QUERY = "/data/minerals?page={n}"
 ```{code-cell} ipython3
 def get_number_of_pages() -> int:
     """ Find number of pages in database. """
-    page = requests.get(f"{URL}{QUERY.format(n=0)}")
+    page = get(f"{URL}{QUERY.format(n=0)}")
 
     soup = BeautifulSoup(page.content, "html.parser")
     pager = soup.find("ul", class_="pager")
@@ -121,7 +140,7 @@ def retrieve_all_paths(verbose: bool = False) -> list[str]:
         if verbose and not n % 2:
             print(f"Working on page {n:02}/{n_pages}")
 
-        page = requests.get(f"{URL}{QUERY.format(n=n)}")
+        page = get(f"{URL}{QUERY.format(n=n)}")
         rows = retrieve_navigation_table(page)
         paths.extend(extract_species_paths(rows))
 
@@ -147,7 +166,7 @@ def get_thermo_row(tag: Tag) -> list[str]:
 ```{code-cell} ipython3
 def get_thermo_species(species_path: str) -> dict[str, Any]:
     """ Retrieve data from a single species URL. """
-    page = requests.get(f"{URL}{species_path}")
+    page = get(f"{URL}{species_path}")
 
     if page.status_code != 200:
         raise RuntimeError(f"Unable to retrieve data from {page.url}!")
@@ -182,7 +201,7 @@ def get_thermo_species(species_path: str) -> dict[str, Any]:
 ```{code-cell} ipython3
 def create_raw_database(dbname: str) -> TinyDB:
     """ Manage all required requests to construct a species database. """
-    if Path(dbname).exists():
+    if Path(dbname).exists() and not FORCE:
         return TinyDB(dbname)
 
     t0 = perf_counter()
@@ -302,6 +321,10 @@ main()
 db = TinyDB(db_processed)
 data = db.table("data")
 refs = db.table("references")
+```
+
+```{code-cell} ipython3
+data
 ```
 
 ```{code-cell} ipython3
