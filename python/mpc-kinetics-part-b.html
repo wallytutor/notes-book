@@ -201,10 +201,21 @@
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Refactoring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-scraper-minerals.html">Data recovery from THERMODDEM webpage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="image-notes-intro.html">Image analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="image-porosity-measurement.html">Porosity quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image-metadata-extraction.html">Getting image metadata</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -220,11 +231,28 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-3/README.html">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../montagne/carto.html">Cartographie</a></li>
 </ul>
 
     </div>
@@ -781,14 +809,14 @@ Number of inequality constraint evaluations          = 0
 Number of equality constraint Jacobian evaluations   = 0
 Number of inequality constraint Jacobian evaluations = 0
 Number of Lagrangian Hessian evaluations             = 14
-Total seconds in IPOPT                               = 0.058
+Total seconds in IPOPT                               = 0.049
 
 EXIT: Optimal Solution Found.
       solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
-       nlp_f  |        0 (       0) 220.00us ( 14.67us)        15
-  nlp_grad_f  |        0 (       0) 368.00us ( 23.00us)        16
-  nlp_hess_l  |  20.00ms (  1.43ms)  18.07ms (  1.29ms)        14
-       total  |  58.00ms ( 58.00ms)  58.98ms ( 58.98ms)         1
+       nlp_f  |        0 (       0) 173.00us ( 11.53us)        15
+  nlp_grad_f  |        0 (       0) 294.00us ( 18.37us)        16
+  nlp_hess_l  |  30.00ms (  2.14ms)  15.04ms (  1.07ms)        14
+       total  |  51.00ms ( 51.00ms)  49.68ms ( 49.68ms)         1
 </pre></div>
 </div>
 </div>

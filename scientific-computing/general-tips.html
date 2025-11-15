@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -201,10 +201,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../python/mpc-kinetics-part-a.html">Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python/mpc-kinetics-part-b.html">Refactoring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python/mpc-kinetics-part-c.html">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../python/porosity-measurement.html">Workflow for porosity quantification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../python/thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo-scraper-minerals.html">Data recovery from THERMODDEM webpage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/image-notes-intro.html">Image analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/image-porosity-measurement.html">Porosity quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/image-metadata-extraction.html">Getting image metadata</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -220,11 +231,28 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-3/README.html">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../montagne/carto.html">Cartographie</a></li>
 </ul>
 
     </div>
@@ -423,7 +451,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-jupyterlab-from-a-server">Running Jupyterlab from a server</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-from-youtube">Downloading from YouTube</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-packages-behind-proxy">Installing Python packages behind proxy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-text-from-pdf">Extracting text from PDF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions">Regular expressions</a></li>
 </ul>
             </nav>
@@ -488,46 +515,6 @@ pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </s
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--trusted-host<span class="w"> </span>pypi.org<span class="w"> </span>--trusted-host<span class="w"> </span>files.pythonhosted.org<span class="w"> </span>&lt;pkg&gt;
 </pre></div>
 </div>
-</section>
-<section id="extracting-text-from-pdf">
-<h2>Extracting text from PDF<a class="headerlink" href="#extracting-text-from-pdf" title="Link to this heading">#</a></h2>
-<p>Provides reference text exported from PDF files.</p>
-<p>The engine uses a combination of <a class="reference external" href="https://github.com/tesseract-ocr/tesseract">tesseract</a> and <a class="reference external" href="https://github.com/mstamy2/PyPDF2">PyPDF2</a> to perform the data extraction. Nonetheless, human curation of extracted texts is still required if readability is a requirement. If quality of automated extractions is often poor for a specific language, you might want to search the web how to <em>train tesseract</em>, that topic is not covered here.</p>
-<p>Besides Python you will need:</p>
-<ul class="simple">
-<li><p>Tesseract (and a language pack) for extracting text from PDF.</p></li>
-<li><p>ImageMagick for image conversion.</p></li>
-<li><p>Poppler utils for PDF conversion</p></li>
-</ul>
-<p>Install dependencies on Ubuntu 22.04:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w">  </span><span class="se">\</span>
-<span class="w">    </span>tesseract-ocr<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>imagemagick<span class="w">   </span><span class="se">\</span>
-<span class="w">    </span>poppler-utils
-</pre></div>
-</div>
-<p>In case of Rocky Linux 9:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w">           </span><span class="se">\</span>
-<span class="w">    </span>tesseract<span class="w">              </span><span class="se">\</span>
-<span class="w">    </span>tesseract-langpack-eng<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ImageMagick<span class="w">            </span><span class="se">\</span>
-<span class="w">    </span>poppler-utils
-</pre></div>
-</div>
-<p>For Windows you will need to manually download both <code class="docutils literal notranslate"><span class="pre">tesseract</span></code> and <code class="docutils literal notranslate"><span class="pre">poppler</span></code> and place them somewhere in your computer. The full paths to these libraries and/or programs is provided by the optional arguments <code class="docutils literal notranslate"><span class="pre">tesseract_cmd</span></code> and <code class="docutils literal notranslate"><span class="pre">poppler_path</span></code> of <code class="docutils literal notranslate"><span class="pre">Convert.pdf2txt</span></code>.</p>
-<p>Create a local environment, activate it, and install required packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
-
-<span class="nb">source</span><span class="w"> </span>venv/bin/activate
-
-pip<span class="w"> </span>install<span class="w">              </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;pdf2image==1.17.0&quot;</span><span class="w">  </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;pillow==11.0.0&quot;</span><span class="w">     </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;PyPDF2==3.0.1&quot;</span><span class="w">      </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;pytesseract==0.3.13&quot;</span>
-</pre></div>
-</div>
-<p>Now you can use the basic module <a class="reference external" href="https://github.com/wallytutor/python-majordome/blob/main/script/pdf_convert.py"><code class="docutils literal notranslate"><span class="pre">pdf_convert</span></code></a> provided here.</p>
 </section>
 <section id="regular-expressions">
 <h2>Regular expressions<a class="headerlink" href="#regular-expressions" title="Link to this heading">#</a></h2>
@@ -610,7 +597,6 @@ pip<span class="w"> </span>install<span class="w">              </span><span cla
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-jupyterlab-from-a-server">Running Jupyterlab from a server</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-from-youtube">Downloading from YouTube</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-python-packages-behind-proxy">Installing Python packages behind proxy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-text-from-pdf">Extracting text from PDF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions">Regular expressions</a></li>
 </ul>
   </nav></div>

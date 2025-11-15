@@ -28,29 +28,204 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from pathlib import Path
-from time import perf_counter
-from typing import Any
-from bs4 import BeautifulSoup
-from bs4.element import Tag, ResultSet
-from requests.models import Response
-from tinydb.database import TinyDB
-from tinydb.queries import Query
-from tinydb.table import Table
-import re
-import pandas as pd
-import requests
+main()
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 7[39m
-[32m      5[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mbs4[39;00m[34;01m.[39;00m[34;01melement[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Tag, ResultSet
-[32m      6[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mrequests[39;00m[34;01m.[39;00m[34;01mmodels[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Response
-[32m----> [39m[32m7[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtinydb[39;00m[34;01m.[39;00m[34;01mdatabase[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m TinyDB
-[32m      8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtinydb[39;00m[34;01m.[39;00m[34;01mqueries[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Query
-[32m      9[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtinydb[39;00m[34;01m.[39;00m[34;01mtable[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Table
+[31mSSLCertVerificationError[39m                  Traceback (most recent call last)
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\connectionpool.py:716[39m, in [36mHTTPConnectionPool.urlopen[39m[34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)[39m
+[32m    715[39m [38;5;66;03m# Make the request on the httplib connection object.[39;00m
+[32m--> [39m[32m716[39m httplib_response = [38;5;28;43mself[39;49m[43m.[49m[43m_make_request[49m[43m([49m
+[32m    717[39m [43m    [49m[43mconn[49m[43m,[49m
+[32m    718[39m [43m    [49m[43mmethod[49m[43m,[49m
+[32m    719[39m [43m    [49m[43murl[49m[43m,[49m
+[32m    720[39m [43m    [49m[43mtimeout[49m[43m=[49m[43mtimeout_obj[49m[43m,[49m
+[32m    721[39m [43m    [49m[43mbody[49m[43m=[49m[43mbody[49m[43m,[49m
+[32m    722[39m [43m    [49m[43mheaders[49m[43m=[49m[43mheaders[49m[43m,[49m
+[32m    723[39m [43m    [49m[43mchunked[49m[43m=[49m[43mchunked[49m[43m,[49m
+[32m    724[39m [43m[49m[43m)[49m
+[32m    726[39m [38;5;66;03m# If we're going to release the connection in ``finally:``, then[39;00m
+[32m    727[39m [38;5;66;03m# the response doesn't need to know about the connection. Otherwise[39;00m
+[32m    728[39m [38;5;66;03m# it will also try to release it and we'll have a double-release[39;00m
+[32m    729[39m [38;5;66;03m# mess.[39;00m
 
-[31mModuleNotFoundError[39m: No module named 'tinydb'
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\connectionpool.py:404[39m, in [36mHTTPConnectionPool._make_request[39m[34m(self, conn, method, url, timeout, chunked, **httplib_request_kw)[39m
+[32m    403[39m [38;5;28;01mtry[39;00m:
+[32m--> [39m[32m404[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_validate_conn[49m[43m([49m[43mconn[49m[43m)[49m
+[32m    405[39m [38;5;28;01mexcept[39;00m (SocketTimeout, BaseSSLError) [38;5;28;01mas[39;00m e:
+[32m    406[39m     [38;5;66;03m# Py2 raises this as a BaseSSLError, Py3 raises it as socket timeout.[39;00m
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\connectionpool.py:1061[39m, in [36mHTTPSConnectionPool._validate_conn[39m[34m(self, conn)[39m
+[32m   1060[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mgetattr[39m(conn, [33m"[39m[33msock[39m[33m"[39m, [38;5;28;01mNone[39;00m):  [38;5;66;03m# AppEngine might not have  `.sock`[39;00m
+[32m-> [39m[32m1061[39m     [43mconn[49m[43m.[49m[43mconnect[49m[43m([49m[43m)[49m
+[32m   1063[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m conn.is_verified:
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\connection.py:419[39m, in [36mHTTPSConnection.connect[39m[34m(self)[39m
+[32m    417[39m     context.load_default_certs()
+[32m--> [39m[32m419[39m [38;5;28mself[39m.sock = [43mssl_wrap_socket[49m[43m([49m
+[32m    420[39m [43m    [49m[43msock[49m[43m=[49m[43mconn[49m[43m,[49m
+[32m    421[39m [43m    [49m[43mkeyfile[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mkey_file[49m[43m,[49m
+[32m    422[39m [43m    [49m[43mcertfile[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mcert_file[49m[43m,[49m
+[32m    423[39m [43m    [49m[43mkey_password[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mkey_password[49m[43m,[49m
+[32m    424[39m [43m    [49m[43mca_certs[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mca_certs[49m[43m,[49m
+[32m    425[39m [43m    [49m[43mca_cert_dir[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mca_cert_dir[49m[43m,[49m
+[32m    426[39m [43m    [49m[43mca_cert_data[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mca_cert_data[49m[43m,[49m
+[32m    427[39m [43m    [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m[43m,[49m
+[32m    428[39m [43m    [49m[43mssl_context[49m[43m=[49m[43mcontext[49m[43m,[49m
+[32m    429[39m [43m    [49m[43mtls_in_tls[49m[43m=[49m[43mtls_in_tls[49m[43m,[49m
+[32m    430[39m [43m[49m[43m)[49m
+[32m    432[39m [38;5;66;03m# If we're using all defaults and the connection[39;00m
+[32m    433[39m [38;5;66;03m# is TLSv1 or TLSv1.1 we throw a DeprecationWarning[39;00m
+[32m    434[39m [38;5;66;03m# for the host.[39;00m
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\util\ssl_.py:458[39m, in [36mssl_wrap_socket[39m[34m(sock, keyfile, certfile, cert_reqs, ca_certs, server_hostname, ssl_version, ciphers, ssl_context, ca_cert_dir, key_password, ca_cert_data, tls_in_tls)[39m
+[32m    457[39m [38;5;28;01mif[39;00m send_sni:
+[32m--> [39m[32m458[39m     ssl_sock = [43m_ssl_wrap_socket_impl[49m[43m([49m
+[32m    459[39m [43m        [49m[43msock[49m[43m,[49m[43m [49m[43mcontext[49m[43m,[49m[43m [49m[43mtls_in_tls[49m[43m,[49m[43m [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m
+[32m    460[39m [43m    [49m[43m)[49m
+[32m    461[39m [38;5;28;01melse[39;00m:
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\util\ssl_.py:502[39m, in [36m_ssl_wrap_socket_impl[39m[34m(sock, ssl_context, tls_in_tls, server_hostname)[39m
+[32m    501[39m [38;5;28;01mif[39;00m server_hostname:
+[32m--> [39m[32m502[39m     [38;5;28;01mreturn[39;00m [43mssl_context[49m[43m.[49m[43mwrap_socket[49m[43m([49m[43msock[49m[43m,[49m[43m [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m[43m)[49m
+[32m    503[39m [38;5;28;01melse[39;00m:
+
+[36mFile [39m[32m~\Repositories\python-majordome\local\bin\python\WPy64-31380\python\Lib\ssl.py:455[39m, in [36mSSLContext.wrap_socket[39m[34m(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)[39m
+[32m    449[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mwrap_socket[39m([38;5;28mself[39m, sock, server_side=[38;5;28;01mFalse[39;00m,
+[32m    450[39m                 do_handshake_on_connect=[38;5;28;01mTrue[39;00m,
+[32m    451[39m                 suppress_ragged_eofs=[38;5;28;01mTrue[39;00m,
+[32m    452[39m                 server_hostname=[38;5;28;01mNone[39;00m, session=[38;5;28;01mNone[39;00m):
+[32m    453[39m     [38;5;66;03m# SSLSocket class handles server_hostname encoding before it calls[39;00m
+[32m    454[39m     [38;5;66;03m# ctx._wrap_socket()[39;00m
+[32m--> [39m[32m455[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43msslsocket_class[49m[43m.[49m[43m_create[49m[43m([49m
+[32m    456[39m [43m        [49m[43msock[49m[43m=[49m[43msock[49m[43m,[49m
+[32m    457[39m [43m        [49m[43mserver_side[49m[43m=[49m[43mserver_side[49m[43m,[49m
+[32m    458[39m [43m        [49m[43mdo_handshake_on_connect[49m[43m=[49m[43mdo_handshake_on_connect[49m[43m,[49m
+[32m    459[39m [43m        [49m[43msuppress_ragged_eofs[49m[43m=[49m[43msuppress_ragged_eofs[49m[43m,[49m
+[32m    460[39m [43m        [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m[43m,[49m
+[32m    461[39m [43m        [49m[43mcontext[49m[43m=[49m[38;5;28;43mself[39;49m[43m,[49m
+[32m    462[39m [43m        [49m[43msession[49m[43m=[49m[43msession[49m
+[32m    463[39m [43m    [49m[43m)[49m
+
+[36mFile [39m[32m~\Repositories\python-majordome\local\bin\python\WPy64-31380\python\Lib\ssl.py:1076[39m, in [36mSSLSocket._create[39m[34m(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)[39m
+[32m   1075[39m                 [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([33m"[39m[33mdo_handshake_on_connect should not be specified for non-blocking sockets[39m[33m"[39m)
+[32m-> [39m[32m1076[39m             [38;5;28;43mself[39;49m[43m.[49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[32m   1077[39m [38;5;28;01mexcept[39;00m:
+
+[36mFile [39m[32m~\Repositories\python-majordome\local\bin\python\WPy64-31380\python\Lib\ssl.py:1372[39m, in [36mSSLSocket.do_handshake[39m[34m(self, block)[39m
+[32m   1371[39m         [38;5;28mself[39m.settimeout([38;5;28;01mNone[39;00m)
+[32m-> [39m[32m1372[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_sslobj[49m[43m.[49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[32m   1373[39m [38;5;28;01mfinally[39;00m:
+
+[31mSSLCertVerificationError[39m: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1032)
+
+During handling of the above exception, another exception occurred:
+
+[31mMaxRetryError[39m                             Traceback (most recent call last)
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\adapters.py:644[39m, in [36mHTTPAdapter.send[39m[34m(self, request, stream, timeout, verify, cert, proxies)[39m
+[32m    643[39m [38;5;28;01mtry[39;00m:
+[32m--> [39m[32m644[39m     resp = [43mconn[49m[43m.[49m[43murlopen[49m[43m([49m
+[32m    645[39m [43m        [49m[43mmethod[49m[43m=[49m[43mrequest[49m[43m.[49m[43mmethod[49m[43m,[49m
+[32m    646[39m [43m        [49m[43murl[49m[43m=[49m[43murl[49m[43m,[49m
+[32m    647[39m [43m        [49m[43mbody[49m[43m=[49m[43mrequest[49m[43m.[49m[43mbody[49m[43m,[49m
+[32m    648[39m [43m        [49m[43mheaders[49m[43m=[49m[43mrequest[49m[43m.[49m[43mheaders[49m[43m,[49m
+[32m    649[39m [43m        [49m[43mredirect[49m[43m=[49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[32m    650[39m [43m        [49m[43massert_same_host[49m[43m=[49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[32m    651[39m [43m        [49m[43mpreload_content[49m[43m=[49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[32m    652[39m [43m        [49m[43mdecode_content[49m[43m=[49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[32m    653[39m [43m        [49m[43mretries[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43mmax_retries[49m[43m,[49m
+[32m    654[39m [43m        [49m[43mtimeout[49m[43m=[49m[43mtimeout[49m[43m,[49m
+[32m    655[39m [43m        [49m[43mchunked[49m[43m=[49m[43mchunked[49m[43m,[49m
+[32m    656[39m [43m    [49m[43m)[49m
+[32m    658[39m [38;5;28;01mexcept[39;00m (ProtocolError, [38;5;167;01mOSError[39;00m) [38;5;28;01mas[39;00m err:
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\connectionpool.py:802[39m, in [36mHTTPConnectionPool.urlopen[39m[34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)[39m
+[32m    800[39m     e = ProtocolError([33m"[39m[33mConnection aborted.[39m[33m"[39m, e)
+[32m--> [39m[32m802[39m retries = [43mretries[49m[43m.[49m[43mincrement[49m[43m([49m
+[32m    803[39m [43m    [49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43merror[49m[43m=[49m[43me[49m[43m,[49m[43m [49m[43m_pool[49m[43m=[49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m_stacktrace[49m[43m=[49m[43msys[49m[43m.[49m[43mexc_info[49m[43m([49m[43m)[49m[43m[[49m[32;43m2[39;49m[43m][49m
+[32m    804[39m [43m[49m[43m)[49m
+[32m    805[39m retries.sleep()
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\urllib3\util\retry.py:594[39m, in [36mRetry.increment[39m[34m(self, method, url, response, error, _pool, _stacktrace)[39m
+[32m    593[39m [38;5;28;01mif[39;00m new_retry.is_exhausted():
+[32m--> [39m[32m594[39m     [38;5;28;01mraise[39;00m MaxRetryError(_pool, url, error [38;5;129;01mor[39;00m ResponseError(cause))
+[32m    596[39m log.debug([33m"[39m[33mIncremented Retry for (url=[39m[33m'[39m[38;5;132;01m%s[39;00m[33m'[39m[33m): [39m[38;5;132;01m%r[39;00m[33m"[39m, url, new_retry)
+
+[31mMaxRetryError[39m: HTTPSConnectionPool(host='thermoddem.brgm.fr', port=443): Max retries exceeded with url: /data/minerals?page=0 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1032)')))
+
+During handling of the above exception, another exception occurred:
+
+[31mSSLError[39m                                  Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[16][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m [43mmain[49m[43m([49m[43m)[49m
+
+[36mCell[39m[36m [39m[32mIn[15][39m[32m, line 3[39m, in [36mmain[39m[34m()[39m
+[32m      1[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mmain[39m():
+[32m      2[39m [38;5;250m    [39m[33;03m""" Main application workflow. """[39;00m
+[32m----> [39m[32m3[39m     raw = [43mcreate_raw_database[49m[43m([49m[43mdb_recovered[49m[43m)[49m
+[32m      5[39m     db = TinyDB(db_processed)
+[32m      6[39m     data = db.table([33m"[39m[33mdata[39m[33m"[39m)
+
+[36mCell[39m[36m [39m[32mIn[11][39m[32m, line 7[39m, in [36mcreate_raw_database[39m[34m(dbname)[39m
+[32m      4[39m     [38;5;28;01mreturn[39;00m TinyDB(dbname)
+[32m      6[39m t0 = perf_counter()
+[32m----> [39m[32m7[39m paths = [43mretrieve_all_paths[49m[43m([49m[43m)[49m
+[32m      8[39m db = TinyDB(dbname)
+[32m     10[39m species = db.table([33m"[39m[33mspecies[39m[33m"[39m, cache_size=[38;5;28mlen[39m(paths))
+
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 2[39m, in [36mretrieve_all_paths[39m[34m(verbose)[39m
+[32m      1[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mretrieve_all_paths[39m(verbose: [38;5;28mbool[39m = [38;5;28;01mFalse[39;00m) -> [38;5;28mlist[39m[[38;5;28mstr[39m]:
+[32m----> [39m[32m2[39m     n_pages = [43mget_number_of_pages[49m[43m([49m[43m)[49m
+[32m      3[39m     paths = []
+[32m      5[39m     [38;5;28;01mfor[39;00m n [38;5;129;01min[39;00m [38;5;28mrange[39m(n_pages + [32m1[39m):
+
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 3[39m, in [36mget_number_of_pages[39m[34m()[39m
+[32m      1[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mget_number_of_pages[39m() -> [38;5;28mint[39m:
+[32m      2[39m [38;5;250m    [39m[33;03m""" Find number of pages in database. """[39;00m
+[32m----> [39m[32m3[39m     page = [43mrequests[49m[43m.[49m[43mget[49m[43m([49m[33;43mf[39;49m[33;43m"[39;49m[38;5;132;43;01m{[39;49;00m[43mURL[49m[38;5;132;43;01m}[39;49;00m[38;5;132;43;01m{[39;49;00m[43mQUERY[49m[43m.[49m[43mformat[49m[43m([49m[43mn[49m[43m=[49m[32;43m0[39;49m[43m)[49m[38;5;132;43;01m}[39;49;00m[33;43m"[39;49m[43m)[49m
+[32m      5[39m     soup = BeautifulSoup(page.content, [33m"[39m[33mhtml.parser[39m[33m"[39m)
+[32m      6[39m     pager = soup.find([33m"[39m[33mul[39m[33m"[39m, class_=[33m"[39m[33mpager[39m[33m"[39m)
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\api.py:73[39m, in [36mget[39m[34m(url, params, **kwargs)[39m
+[32m     62[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mget[39m(url, params=[38;5;28;01mNone[39;00m, **kwargs):
+[32m     63[39m [38;5;250m    [39m[33mr[39m[33;03m"""Sends a GET request.[39;00m
+[32m     64[39m 
+[32m     65[39m [33;03m    :param url: URL for the new :class:`Request` object.[39;00m
+[32m   (...)[39m[32m     70[39m [33;03m    :rtype: requests.Response[39;00m
+[32m     71[39m [33;03m    """[39;00m
+[32m---> [39m[32m73[39m     [38;5;28;01mreturn[39;00m [43mrequest[49m[43m([49m[33;43m"[39;49m[33;43mget[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mparams[49m[43m=[49m[43mparams[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\api.py:59[39m, in [36mrequest[39m[34m(method, url, **kwargs)[39m
+[32m     55[39m [38;5;66;03m# By using the 'with' statement we are sure the session is closed, thus we[39;00m
+[32m     56[39m [38;5;66;03m# avoid leaving sockets open which can trigger a ResourceWarning in some[39;00m
+[32m     57[39m [38;5;66;03m# cases, and look like a memory leak in others.[39;00m
+[32m     58[39m [38;5;28;01mwith[39;00m sessions.Session() [38;5;28;01mas[39;00m session:
+[32m---> [39m[32m59[39m     [38;5;28;01mreturn[39;00m [43msession[49m[43m.[49m[43mrequest[49m[43m([49m[43mmethod[49m[43m=[49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m=[49m[43murl[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\sessions.py:589[39m, in [36mSession.request[39m[34m(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)[39m
+[32m    584[39m send_kwargs = {
+[32m    585[39m     [33m"[39m[33mtimeout[39m[33m"[39m: timeout,
+[32m    586[39m     [33m"[39m[33mallow_redirects[39m[33m"[39m: allow_redirects,
+[32m    587[39m }
+[32m    588[39m send_kwargs.update(settings)
+[32m--> [39m[32m589[39m resp = [38;5;28;43mself[39;49m[43m.[49m[43msend[49m[43m([49m[43mprep[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43msend_kwargs[49m[43m)[49m
+[32m    591[39m [38;5;28;01mreturn[39;00m resp
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\sessions.py:703[39m, in [36mSession.send[39m[34m(self, request, **kwargs)[39m
+[32m    700[39m start = preferred_clock()
+[32m    702[39m [38;5;66;03m# Send the request[39;00m
+[32m--> [39m[32m703[39m r = [43madapter[49m[43m.[49m[43msend[49m[43m([49m[43mrequest[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+[32m    705[39m [38;5;66;03m# Total elapsed time of the request (approximately)[39;00m
+[32m    706[39m elapsed = preferred_clock() - start
+
+[36mFile [39m[32m~\Repositories\python-majordome\notes\.venv\Lib\site-packages\requests\adapters.py:675[39m, in [36mHTTPAdapter.send[39m[34m(self, request, stream, timeout, verify, cert, proxies)[39m
+[32m    671[39m         [38;5;28;01mraise[39;00m ProxyError(e, request=request)
+[32m    673[39m     [38;5;28;01mif[39;00m [38;5;28misinstance[39m(e.reason, _SSLError):
+[32m    674[39m         [38;5;66;03m# This branch is for urllib3 v1.22 and later.[39;00m
+[32m--> [39m[32m675[39m         [38;5;28;01mraise[39;00m SSLError(e, request=request)
+[32m    677[39m     [38;5;28;01mraise[39;00m [38;5;167;01mConnectionError[39;00m(e, request=request)
+[32m    679[39m [38;5;28;01mexcept[39;00m ClosedPoolError [38;5;28;01mas[39;00m e:
+
+[31mSSLError[39m: HTTPSConnectionPool(host='thermoddem.brgm.fr', port=443): Max retries exceeded with url: /data/minerals?page=0 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1032)')))
 

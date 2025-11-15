@@ -66,55 +66,6 @@ To install a package behind a proxy requiring SSL one can enforce trusted hosts 
 pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org <pkg>
 ```
 
-## Extracting text from PDF
-
-Provides reference text exported from PDF files.
-
-The engine uses a combination of [tesseract](https://github.com/tesseract-ocr/tesseract) and [PyPDF2](https://github.com/mstamy2/PyPDF2) to perform the data extraction. Nonetheless, human curation of extracted texts is still required if readability is a requirement. If quality of automated extractions is often poor for a specific language, you might want to search the web how to *train tesseract*, that topic is not covered here.
-
-Besides Python you will need:
-
-- Tesseract (and a language pack) for extracting text from PDF.
-- ImageMagick for image conversion.
-- Poppler utils for PDF conversion
-
-Install dependencies on Ubuntu 22.04:
-
-```bash
-sudo apt install  \
-    tesseract-ocr \
-    imagemagick   \
-    poppler-utils
-```
-
-In case of Rocky Linux 9:
-
-```bash
-sudo dnf install           \
-    tesseract              \
-    tesseract-langpack-eng \
-    ImageMagick            \
-    poppler-utils
-```
-
-For Windows you will need to manually download both `tesseract` and `poppler` and place them somewhere in your computer. The full paths to these libraries and/or programs is provided by the optional arguments `tesseract_cmd` and `poppler_path` of `Convert.pdf2txt`.
-
-Create a local environment, activate it, and install required packages:
-
-```bash
-python3 -m venv venv
-
-source venv/bin/activate
-
-pip install              \
-    "pdf2image==1.17.0"  \
-    "pillow==11.0.0"     \
-    "PyPDF2==3.0.1"      \
-    "pytesseract==0.3.13"
-```
-
-Now you can use the basic module [`pdf_convert`](https://github.com/wallytutor/python-majordome/blob/main/script/pdf_convert.py) provided here.
-
 ## Regular expressions
 
 Regular expressions (or simply *regex*) processing is a must-have skill for anyone doing scientific computing. Most programs produce results or logs in plain text and do not support specific data extraction from those. There *regex* becomes your best friend. Unfortunately during the years many flavors of regex appeared, each claiming to offer advantages or to be more formal than its predecessors. Due to this, learning regex is often language-specific (most of the time you create and process regex from your favorite language) and sometimes even package-specific. Needless to say, regex may be more difficult to master than assembly programming.

@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'python/mpc-kinetics-part-c';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Workflow for porosity quantification" href="porosity-measurement.html" />
+    <link rel="next" title="How to model an evaporation/boiling process?" href="mpc-boiling-evaporation.html" />
     <link rel="prev" title="Refactoring" href="mpc-kinetics-part-b.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -201,10 +201,21 @@
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-a.html">Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc-kinetics-part-b.html">Refactoring</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Wrapping up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-boiling-evaporation.html">How to model an evaporation/boiling process?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc-multiple-shooting.html">DAE multiple shooting solution</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="porosity-measurement.html">Workflow for porosity quantification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="thermo-notes-intro.html">Thermodynamics and kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="thermo-converting-shomate.html">Converting data to Shomate format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-calphad-nitrides.html">Gibbs energy analysis of <span class="math notranslate nohighlight">\(Si_3N_4\)</span> and <span class="math notranslate nohighlight">\(MnSiN_2\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo-scraper-minerals.html">Data recovery from THERMODDEM webpage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="image-notes-intro.html">Image analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="image-porosity-measurement.html">Porosity quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image-metadata-extraction.html">Getting image metadata</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Julia tutorials</span></p>
 <ul class="nav bd-sidenav">
@@ -220,11 +231,28 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elmer CSC</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Multiphysics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/intro.html">Elmer Multiphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/elmer.html">Elmer Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/sif.html">Solver Input Files (SIF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/matc.html">MATC</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulation-elmer-csc/cases.html">Elmer cases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-1/README.html">Heat conduction in Elmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-2/README.html">Pseudo-solidification formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/conduction-3/README.html">Elmer verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation-elmer-csc/cases/thermomechanical-1/README.html">Thermomechanical simulation</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../coding-notes/haskell.html">Minimal Haskell</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Montagne</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../montagne/liens.html">Liens utiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../montagne/carto.html">Cartographie</a></li>
 </ul>
 
     </div>
@@ -749,16 +777,16 @@ Number of inequality constraint evaluations          = 0
 Number of equality constraint Jacobian evaluations   = 15
 Number of inequality constraint Jacobian evaluations = 0
 Number of Lagrangian Hessian evaluations             = 14
-Total seconds in IPOPT                               = 0.055
+Total seconds in IPOPT                               = 0.047
 
 EXIT: Optimal Solution Found.
       solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
-       nlp_f  |        0 (       0) 169.00us ( 11.27us)        15
-       nlp_g  |        0 (       0)  23.00us (  1.53us)        15
-  nlp_grad_f  |        0 (       0) 329.00us ( 20.56us)        16
-  nlp_hess_l  |   2.00ms (142.86us)  16.69ms (  1.19ms)        14
-   nlp_jac_g  |        0 (       0)  11.00us (687.50ns)        16
-       total  |  48.00ms ( 48.00ms)  55.71ms ( 55.71ms)         1
+       nlp_f  |        0 (       0) 147.00us (  9.80us)        15
+       nlp_g  |        0 (       0)  19.00us (  1.27us)        15
+  nlp_grad_f  |        0 (       0) 286.00us ( 17.87us)        16
+  nlp_hess_l  |  33.00ms (  2.36ms)  14.32ms (  1.02ms)        14
+   nlp_jac_g  |        0 (       0)   4.00us (250.00ns)        16
+       total  |  37.00ms ( 37.00ms)  47.74ms ( 47.74ms)         1
 </pre></div>
 </div>
 </div>
@@ -851,11 +879,11 @@ EXIT: Optimal Solution Found.
       </div>
     </a>
     <a class="right-next"
-       href="porosity-measurement.html"
+       href="mpc-boiling-evaporation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Workflow for porosity quantification</p>
+        <p class="prev-next-title">How to model an evaporation/boiling process?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
