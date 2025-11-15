@@ -110,7 +110,7 @@ function New-DevEnvironment() {
     Start-PipInstall @("-r", "pinned.txt")
 
     try {
-        Start-PipInstall @("-e", "..\")
+        Start-PipInstall @("-e", "..[pdftools,extras]")
     }
     catch {
         Write-Error "Not working under Majordome."
